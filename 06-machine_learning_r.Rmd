@@ -1,0 +1,132 @@
+# See one, do one, teach one! Machine Learning in R
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+```
+
+## Lernziele
+
+1. Verschiedene Machine Learning Algorithmen in R nutzen
+2. Daten in Training- und Testdaten unterteilen
+3. Trainierte Modelle auf neue Daten anwenden
+4. Klassifikationsgüte berechnen
+
+## Das Iris Dataset
+
+In vielen Beipsielen wird online auf das sogenannte [Iris Dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) Bezug genommen. Der Datensatz hat deshalb einige Berühmtheit erlangt, der Einfachheit halber verwenden wir ihn deshalb auch für dieses Webinar.
+
+```{r}
+data("iris")
+str(iris)
+```
+
+## Explorative Datenvisualisierung
+
+```{r}
+iris %>% 
+  pivot_longer(-Species, names_to = "variable") %>% 
+  ggplot(aes(x = Species, y = value, color = Species)) +
+    geom_point() +
+    facet_wrap(vars(variable))
+```
+
+## Praktische Pakete für Machine Learning
+
+Für die meisten Anwedungen und Algorithmen existieren mehrere Pakete, mit vergleichbarer Funktionalität. In diesem Webinar haben wir die folgenden benutzt.
+
+- [`broom`](https://github.com/tidymodels/broom) enthält etliche praktische Funktionen, um mit Modellen zu interagieren
+- [`caret`](http://caret.r-forge.r-project.org) bietet Funktionen zum Präprozessieren und Aufteilen von Daten
+- [`e1071`](https://www.rdocumentation.org/packages/e1071/versions/1.7-3) nutzen wir für das Training einer Support Vector Machine
+- [`randomForest`](https://www.rdocumentation.org/packages/randomForest/) nutzen wir für das Training eines Random Forest
+- [`class`](https://www.rdocumentation.org/packages/class) nutzen wir für das Training eines k-Nearest Neighbour Classifiers
+- [`pROC`](https://web.expasy.org/pROC/) ist ein Paket mit Funktionen um ROC-Analysen durchzuführen
+
+```{r message=FALSE, warning=FALSE}
+library(broom)
+library(caret)
+library(e1071)
+library(randomForest)
+library(class)
+library(pROC)
+```
+
+## "Formeln in R"
+
+Mit Formeln werden in R nicht übliche Formeln in der Art `f(x) = mx + b` bezeichnet, sondern bei der Definition von Modellen ein Ausdruck, der beschreibt welche Zielvariable durch welche Einflussvariablen erklärt werden soll. Formeln können auch als Variable gespeichert werden.
+
+```{r}
+# Die Zielvariable befindet sich dabei stets auf der linken Seite,
+# die Einflussvariablen rechts.
+my.formula <- Petal.Width ~ Petal.Length + Sepal.Length + Sepal.Width
+
+# zur Vereinfachung kann ein Punkt genutzt werden, der alle Variblen eines
+# Dataframes mit Ausnahme der links definierten Zielvariable referenziert
+my.formula <- Petal.Width ~ .
+```
+
+## Lineare Regression
+
+[Lineare Regressionen](https://de.wikipedia.org/wiki/Lineare_Regression) versuchen eine abhängige Variable von einer oder mehrere unabhängigen Variablen zu berechnen. Üblicherweise wird dabei ein Zahlenwert ausgegeben. In unserem Fall `my.formula <- Petal.Width ~ .` würden wir versuchen die Blütenblatt-Breite aus der Länge und Breite der Kelchblätter, der Länge der Blütenblätter zu berechnen und der Spezies zu berechnen (der `.` referenziert alle Variablen des Dataframes außer der Zielvariablen).
+
+```{r}
+fit <- lm(formula = my.formula, data = iris)
+summary(fit)
+```
+
+## Logistische Regression
+
+Im einfachsten Fall versucht eine [logistische Regression](https://de.wikipedia.org/wiki/Logistische_Regression) eine binäre Entscheidung (abhängige Variable) aus einer oder mehreren unabhängigen Variablen zu treffen.
+
+Wir werden für dieses und die weiteren Beispiele versuchen die Spezies der Pflanze aus ihren Messwerten zu Blattlängen und -breiten vorherzusagen.
+
+```{r}
+# Überschreibt die Variable my.formula von oben
+my.formula <- Species ~ .
+```
+
+```{r}
+# Erstellen einer Teilmenge des Datensatzes mit nur zwei Spezies
+iris_small <- iris %>%
+  filter(Species %in% c("virginica", "versicolor")) %>%
+  # da die Variable Species weiterhin als Factor mit drei Level
+  # angelegt wäre, nutzen wir die droplevels()-Funktion, um
+  # Fehler zu vermeiden.
+  droplevels()
+
+# family = "binomial" gibt hier an, dass nur eine binäre Entscheidung zu treffen ist
+fit <- glm(my.formula, data = iris_small, family = "binomial")
+```
+
+Das in der Variablen `fit` gespeicherte Modell, können wir nun nutzen um die Vorhersagewerte des Modells zu berechnen. Der besseren Übersicht halber speichern wir diese in einer neuen Spalte des ursprünglichen Dataframes.
+
+```{r}
+# wir nutzen hier die add_column()-Funktion aus dem tidyverse
+# und die predict()-Funktion um Werte mithilfe eines Modells
+# zu berechnen
+iris_small_augmented <- iris_small %>% 
+  add_column(vorhersage = predict(fit))
+
+# ein Blick in die ersten Zeilen der Daten
+head(iris_small_augmented)
+
+# eine einfache Visualisierung
+iris_small_augmented %>% 
+  ggplot(aes(x = vorhersage, fill = Species)) +
+    geom_density(alpha = 0.5)
+```
+
+Wir sehen der Vorhersagewert des Modells hat Potential zwischen den beiden Gruppen zu unterscheiden. Wann immer ein kontinuierlicher Vorhersagewert vorliegt, können wir eine ROC-Analyse rechnen.
+
+## ROC-Analyse
+
+```{r message=FALSE, warning=FALSE}
+roc(iris_small_augmented$Species, iris_small_augmented$vorhersage)
+
+roc(iris_small_augmented$Species, iris_small_augmented$vorhersage) %>% 
+  ggroc(color = "steelblue", size = 1) +
+    geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1),
+                 color="grey", linetype="dashed") +
+    theme_minimal() +
+    coord_fixed()
+```
+
