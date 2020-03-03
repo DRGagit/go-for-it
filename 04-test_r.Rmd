@@ -127,7 +127,6 @@ meine_cohens_d_funktion <- function(ergebnis_t.test) {
   df_wert     <- ergebnis_t.test$parameter %>% unname()
 
   # Formel für Cohens d
-  # siehe auch https://www.uccs.edu/lbecker/
   2 * t_statistik / sqrt(df_wert)
 }
 
@@ -137,5 +136,3 @@ t.test(
   paired = FALSE
   ) %>% meine_cohens_d_funktion()
 ```
-
-##
