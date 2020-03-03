@@ -370,15 +370,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb132-5"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-5"></a>  df_wert     &lt;-<span class="st"> </span>ergebnis_t.test<span class="op">$</span>parameter <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unname</span>()</span>
 <span id="cb132-6"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-6"></a></span>
 <span id="cb132-7"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-7"></a>  <span class="co"># Formel für Cohens d</span></span>
-<span id="cb132-8"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-8"></a>  <span class="co"># siehe auch https://www.uccs.edu/lbecker/</span></span>
-<span id="cb132-9"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-9"></a>  <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>t_statistik <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(df_wert)</span>
-<span id="cb132-10"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-10"></a>}</span>
-<span id="cb132-11"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-11"></a></span>
-<span id="cb132-12"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-12"></a><span class="kw">t.test</span>(</span>
-<span id="cb132-13"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-13"></a>  dlp <span class="op">~</span><span class="st"> </span>untersuchung,</span>
-<span id="cb132-14"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-14"></a>  <span class="dt">data =</span> daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abdomen&quot;</span>, <span class="st">&quot;Thorax&quot;</span>)),</span>
-<span id="cb132-15"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-15"></a>  <span class="dt">paired =</span> <span class="ot">FALSE</span></span>
-<span id="cb132-16"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-16"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">meine_cohens_d_funktion</span>()</span></code></pre></div>
+<span id="cb132-8"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-8"></a>  <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>t_statistik <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(df_wert)</span>
+<span id="cb132-9"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-9"></a>}</span>
+<span id="cb132-10"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-10"></a></span>
+<span id="cb132-11"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-11"></a><span class="kw">t.test</span>(</span>
+<span id="cb132-12"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-12"></a>  dlp <span class="op">~</span><span class="st"> </span>untersuchung,</span>
+<span id="cb132-13"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-13"></a>  <span class="dt">data =</span> daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abdomen&quot;</span>, <span class="st">&quot;Thorax&quot;</span>)),</span>
+<span id="cb132-14"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-14"></a>  <span class="dt">paired =</span> <span class="ot">FALSE</span></span>
+<span id="cb132-15"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb132-15"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">meine_cohens_d_funktion</span>()</span></code></pre></div>
 <pre><code>## [1] 0.9162841</code></pre>
 
 </div>
