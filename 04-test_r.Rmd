@@ -136,3 +136,7 @@ t.test(
   paired = FALSE
   ) %>% meine_cohens_d_funktion()
 ```
+
+## ANOVA
+
+
