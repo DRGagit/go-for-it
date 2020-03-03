@@ -1,0 +1,188 @@
+# Deskriptive Statistik in R
+
+Visualisierung ist natürlich schon gut um einen ersten schnellen Überblick über Daten zu bekommen, aber früher oder später geht es ans Eingemachte und es müssen harte und genaue Zahlen her. Einige der wichtigen Zahlen, die unsere Daten beschreiben sind sogenannte [deskriptive Statistiken](https://de.wikipedia.org/wiki/Deskriptive_Statistik). Darunter fallen so einfache Dinge wie der Mittelwert, aber auch andere Werte wie Standardabweichung, Median, Minimum, Maximum und Quartile oder auch seltener gebrauchte Werte wie der Modus, Kurtosis und Varianz.
+
+## Lernziele
+
+In diesem Kapitel werden folgende Themen besprochen:
+
+- deskriptive Statistiken in R erstellen
+- nach Gruppen aufgeteilte deskriptive Statistiken erstellen
+- „tidyverse“-Funktionen nutzen, um tiefere Einblicke in die Daten zu erhalten
+- Boxplots erstellen und verstehen
+- nach Gruppen getrennte Grafiken erstellen
+
+## Deskriptive Statistiken mit Basis R
+
+Erfreulicherweise lassen sich die meisten der Werte für einfache deskriptive Statistiken mit Basis R Funktionen berechnen. Die entsprechenden Funktionen sind nach dem zu berechnenden Wert benannt und im Grunde selbsterklärend.
+
+```{r}
+min(daten$dlp)
+mean(daten$dlp)
+median(daten$dlp)
+max(daten$dlp)
+```
+
+Es wäre natürlich insbesondere in großen Tabellen müßig, jede Spalte einzeln aufzurufen. Die Funktion `summary()` hilft hier und berechnet diese Werte und einige mehr gleich für alle Spalten eines Dataframes. Besonders praktisch hieran: für Spalten, die keine numerischen Werte enthalten, erhält man trotzdem einige praktische quantitative Werte.
+
+```{r}
+summary(daten)
+```
+
+Mit den zwei Funktionen `str()`, die uns einen Überblick über die Struktur eines Dataframes gibt, und der `summary()` Funktion ergibt sich in den meisten Fällen ein recht guter Eindruck der vorliegenden Daten.
+
+Aber oftmals ist nicht so sehr der Überblick über die gesamten Daten gefragt, vielmehr wären nach Gruppen getrennte deskriptive Statistiken von Interesse. Hierzu bietet Basis R die Funktion `by`, die in der Benutzung zwar etwas unintuitiv ist, aber genau diese Funktionsweise abbildet. Als ersten Parameter erwartet `by()` einen Vektor (meist also eine Spalte eines Dataframes), auf den nach dem als zweiten Parameter übergebenen Gruppenvektor die als dritter Parameter übergebene Funktion angewandt wird.
+
+```{r}
+# erster Parameter: die zu untersuchenden Werte
+# zweiter Parameter: die Gruppenvariable
+# dritter Parameter: die anzuwendende Funktion (ohne runde Klammern!)
+by(daten$dlp, daten$untersuchung, median)
+```
+
+```{r eval = FALSE}
+# die Ausgabe kann bei vielen Gruppen und Funktionen, die lange
+# Ausgaben produzieren mitunter recht unübersichtlich werden.
+# Die Ausgabe dieses Befehls wird deshalb hier nicht gezeigt.
+by(daten, daten$untersuchung, summary)
+```
+
+## Deskriptive Statistiken im Tidyverse
+
+Das Berechnen deskriptiver Statistiken ist keine Aufgabe, für die im Tidyverse per se spezielle Funktionen bereitstehen. Trotzdem bieten einige Funktionen umfangreiche Möglichkeiten fast spielerisch mit den Daten zu interagieren und einfach und schnell Daten zu selektieren, zu gruppieren und auszuwerten.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+Die wichtigsten Funktionen sind hierfür die Funktionen `select()` (wählt Spalten aus), `filter()` (wählt Zeilen aus), `group_by()` (bildet Gruppen) und `summarise()` (führt Berechnungen für Gruppen aus). Mithilfe von `arrange()` können wir die entstehende Ausgabe auch noch nach einer Spalte sortieren. Diese Funktionen lassen sich in nahezu beliebiger Weise mit `%>%` verketten und sind trotzdem relativ einfach zu lesen.
+
+Für ein erstes Beispiel wollen wir zum Beispiel unsere Daten nach Untersuchungsbeschreibung gruppieren, dann den Median von CTDI (in mGy wie in der ursprünglichen Tabelle und direkt auch durch 10 geteilt in cGy) und DLP berechnen, sowie die Anzahl der jeweiligen Untersuchungen. Und um die Daten noch leichter fassbar zu machen, soll die Ausgabe nach dem Median des CTDI sortiert werden. Der Übersichtlichkeit halber lohnt es sich statt lange Zeilen zu schreiben, die einzelnen Teile der Befehle auf mehrere Zeilen aufzuteilen.
+
+```{r}
+daten %>%
+  group_by(untersuchung) %>%
+  summarise(
+    median_ctdi_mGy = median(ctdi.vol),
+    median_ctdi_cGy = median(ctdi.vol) / 10,
+    median_dlp = median(dlp),
+    anzahl = n()
+    ) %>%
+  arrange(-median_ctdi_mGy)
+```
+
+In ähnlicher Weise könnten wir auch bspw. zunächst die Daten nach Untersuchungen filtern, bei denen genau 100kV am Gerät eingestellt waren, dann einige der Werte aus dem letzten Beispiel berechnen und zuletzt in der Ausgabe nur diejenigen Untersuchungensbezeichnungen auflisten, die weniger als 100 mal mit 100kV durchgeführt wurden. Zu guter letzt könnte man auch noch die Spalte Anzahl aus der Ausgabe entfernen, sodass nur die berechneten Werte bleiben.
+
+```{r}
+daten %>%
+  filter(kv == 100) %>%
+  group_by(untersuchung) %>%
+  summarise(
+    median_ctdi_mGy = median(ctdi.vol),
+    median_dlp = median(dlp),
+    anzahl = n()
+    ) %>%
+  filter(anzahl < 100) %>%
+  select(-anzahl)
+```
+
+Die Stärke des Tidyverse liegt hier sicher in der Möglichkeit, interaktiv Befehle zu verketten. Man schreibt einige Befehle auf, von denen man glaubt, dass sie das gewünschte Ergebnis bringen könnten oder den Weg dorthin darstellen, führt diese aus und betrachtet die Ausgabe. Dann passt man die Befehle an oder erweitert die Kette um weitere bis man schließlich das gewünschte Ergebnis erhält.
+
+## Deskriptive Statistiken mit anderen Paketen
+
+Wie bereits erwähnt, ist eine der herausragenden Eigenschaften von R, dass unzählige Pakte existieren, die verschiedene Funktionen bereitstellen und so das Arbeiten vereinfachen. Zwei sehr gute Pakete für deskriptive Statisiken sind `psych` und `summarytools`. Diese können, wie Tidyverse im vorherigen Kapitel, über die entsprechenden Funktionen von RStudio oder über die Konsole installiert werden.
+
+### Psych
+
+Aus dem Paket `psych` können wir die Funktion `describe()` benutzen, um eine Vielzahl von Maßzahlen zu berechnen.
+
+```{r message=FALSE, warning=FALSE}
+library(psych)
+describe(daten)
+```
+
+Die üblichen Quartile erhält man, wenn man der `describe()`-Funktion einen entsprechenden zusätzlichen Parameter übergibt. Ebenfalls kann man `describe()` mitteilen, dass nicht-numerische Werte übersprungen werden sollen.
+
+```{r message=FALSE, warning=FALSE}
+describe(daten, quant=c(.25,.75), omit = TRUE)
+```
+
+Eine ebenfalls sehr praktische Funktion ist die der Base-R Funktion `by()` (s.o.) nachempfundenen `describe.by()` Funktion. Dieser können die selben Parameter mitgegeben werden, wie der einfachen `describe()` Funktion.
+
+```{r eval = FALSE}
+# Da auch hier die Ausgabe sehr lang würde, wird sie hier nicht abgebildet.
+describe.by(daten, daten$untersuchung, quant=c(.25,.75), omit = TRUE)
+```
+
+### Summarytools
+
+Auch im Paket `summarytools` existieren Funktionen, die ähnliche Ausgaben erzeugen wie die Funktion `describe()` aus dem `psych` Paket. Welche Pakete man letztenendes benutzen will, ist Frage des persönlichen Geschmacks. Die entsprechenden Funktionen in `summarytools` sind `dscr()` bzw. `stby()`
+
+```{r message=FALSE, warning=FALSE}
+library(summarytools)
+descr(daten)
+```
+
+```{r eval = FALSE}
+# Da auch hier die Ausgabe sehr lang würde, wird sie hier nicht abgebildet.
+stby(daten, daten$untersuchung, descr)
+```
+
+Noch viel praktischer, aber leider nicht nach Gruppen aufgetrennt durchführbar, ist die Funktion `dfSummary()`, insbesondere wenn man ihre Ausgabe weiterleitet an die Funktion `view()` aus dem `summarytools` Paket. Diese produziert dann eine ansprechend formatierte HTML-Datei, in der verschiedene Maßzahlen aufgeführt werden.
+
+Um nach Gruppen getrennte Ausgaben zu bekommen, kann man beispielsweise die tidyverse `filter()` Funktion benutzen, muss dann aber die Befehle für jede Gruppe erneut ausführen.
+
+```{r eval = FALSE}
+# die Ausgaben dieser Funktionen erscheinen nicht auf der Konsole,
+# sondern im Viewer-Pane von RStudio. Dort findet man auch einen Button,
+# um die Datei in einem Internetbrowser zu öffnen.
+
+# einfacher Fall, um einen Überblick über alle Daten zu erhalten
+dfSummary(daten) %>% view()
+
+# innerhalb einer tidyverse-Kette  um bspw. einen Überblick über
+# die Traumaspiralen zu erhalten
+daten %>%
+  filter(untersuchung == "Traumaspirale") %>%
+  dfSummary() %>%
+  view()
+```
+
+## Mehr bunte Bilder
+
+Um deskriptive Statistiken auch grafisch nach Gruppen zu trennen, bietet sich die Funktion `facet_wrap()` an, die ebenfalls Teil von ggplot2 ist. Im Prinzip kann man sich die Funktionsweise ähnlich wie die `by()` Funktion vorstelen, wobei die Handhabung noch etwas simpler ist. Man definiert einfach wie gewohnt die Grafik die man mit `ggplot()` erstellen möchte, und fügt `facet_wrap()` einfach mit `+` in die Kette der Grafikfunktionen. Innerhalb von `facet_wrap()` muss noch etwas umständlich die entsprechende Gruppenvariable in die Funktion `vars()` eingeschlossen werden, aber die Ergebnisse sind sehr ansprechend.
+
+```{r}
+# ähnliche Grafik wie am Ende des letzten Kapitels, aber mit
+# nach Untersuchung getrennten Ausgaben, damit die Punkte
+# weniger überlappen.
+daten %>% 
+  ggplot(aes(x = ctdi.vol, y = dlp, color = untersuchung)) +
+    geom_point() +
+    facet_wrap(vars(untersuchung)) +
+    labs(
+      x = "CTDIvol in mGy",
+      y = "DLP in mGy*cm",
+      title = "Zusammenhang CTDIvol / DLP",
+      color = "Untersuchungsart"
+    ) +
+    theme_bw()
+```
+
+Natürlich funktioniert `facet_wrap()` nicht nur mit Punktwolken, sondern letztlich mit beliebigen Grafiken. Da sich für deskriptive Statistiken [insbesondere Boxplots anbieten](https://de.wikipedia.org/wiki/Box-Plot), im nachfolgenden Beispiel eine etwas komplexere Grafik. In dem Fall wird zunächst die Variable `kv` mithilfe der Funktion `mutate()` statt als numerische Variable als ordinale Variable definiert. Zur besseren Übersichtlichkeit werden nur die Fälle betrachtet mit 80kV, 100kV und 120kV. Der Rest ist dann wie gewohnt die Definition der Grafik und das Aufteilen mittels `facet_wrap()`.
+
+```{r}
+daten %>% 
+  mutate(kv = as.factor(kv)) %>% 
+  filter(kv %in% c(80, 100, 120)) %>% 
+  ggplot(aes(x = kv, y = dlp, fill = kv)) +
+    geom_boxplot() +
+    facet_wrap(vars(untersuchung)) +
+    labs(
+      x = "kV-Einstellung",
+      y = "DLP in mGy*cm",
+      title = "DLP in Abhängigkeit von kV-Einstellung",
+      fill = "kV-Einstellung"
+    ) +
+    theme_bw()
+```

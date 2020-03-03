@@ -1,0 +1,12 @@
+bookdown::gitbook:
+  css: style.css
+  includes:
+       in_header: ga_script.html
+       after_body: disqus.html
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><a href="./">DRG/AGIT - Go for IT</a></li>
+      after: |
+        <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
