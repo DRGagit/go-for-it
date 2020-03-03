@@ -37,7 +37,3 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
-
-# Bookdown temp folders
-_book/
-_bookdown_files/
