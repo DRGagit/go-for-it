@@ -138,10 +138,5 @@ t.test(
   ) %>% meine_cohens_d_funktion()
 ```
 
-<<<<<<< HEAD
 ## ANOVA
 
-
-=======
-##
->>>>>>> parent of 5badd66... initial publish version
