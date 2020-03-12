@@ -9,4 +9,5 @@ bookdown::gitbook:
       before: |
         <li><a href="./">DRG/AGIT - Go for IT</a></li>
       after: |
-        <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+        <li><a href="https://bookdown.org" target="blank">Erstellt mit bookdown</a></li>
+        <li><a href="https://github.com/DRGagit/go-for-it" target="blank">Quelltext zum Buch bei GitHub</a></li>
