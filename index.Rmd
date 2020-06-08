@@ -35,7 +35,7 @@ Doch was steht eigentlich hinter solchen Begriffen wie „Big Data“ oder „Ra
 27.01.2020   R         11 - See one, do one, teach one! Machine Learning in R
 10.02.2020   Theorie   12 - Wenn Bilder auch Daten sind: Einführung in Radiomics
 08.06.2020   Slicer    13 - Hands-on Radiomics: Segmentierung und Feature-Extraktion
-22.06.2020   Theorie   14 - Radiomics: Machine Learning Techniken für Dimensionsreduktion und Featureselektion
+22.06.2020   Theorie   14 - Weniger ist mehr: Feature Reduction in Radiomics-Analysen
 06.07.2020   R         15 - Bilddaten, Datenbilder: Radiomics-Analysen in R
 --------     -------   ------------------
 
