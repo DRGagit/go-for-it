@@ -1,6 +1,39 @@
 # Diverse Tipps & Tricks für R: Nützliche Pakete und Rmarkdown
 
-Inhalt folgt
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+```
 
+## Lernziele
+
+1. Rmarkdown-Dokumente benutzen
+2. Cheatsheets für R finden und benutzen
+3. Styleguide kennenlernen
+
+# Nachvollziehbare Analysen
+
+es ist wichtig, dass man alles nachvollziehbar dokumentiert, weil ja eh die meiste zeit darauf geht
+
+![XXX.](./assets/img/forbes_data_science_tasks.png)
+
+# Rmarkdown
+
+viel praktischer als im Editor
+
+![XXX.](./assets/img/rstudio_editor_example.png)
+sind Rmarkdown-Dokumente, aber erstmal alles löschen
+
+
+![XXX.](./assets/img/rstudio_rmarkdown_default.png)
+![XXX.](./assets/img/rstudio_rmarkdown_example.png)
+
+# Cheatsheets
+
+hier link zu cheat sheets
+
+
+# Styleguide
+
+hier dann nochwas zu lesbarem code und styleguides
 
 https://google.github.io/styleguide/Rguide.xml
