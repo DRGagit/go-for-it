@@ -180,8 +180,8 @@ tukey.ergebnis %>%
 tukey.ergebnis %>% 
   tidy() %>% 
   filter(adj.p.value < 0.05) %>% 
-  select(comparison, estimate, adj.p.value) %>% 
-  ggplot(aes(x = fct_reorder(comparison, estimate), y = estimate, fill = adj.p.value)) +
+  select(contrast, estimate, adj.p.value) %>% 
+  ggplot(aes(x = fct_reorder(contrast, estimate), y = estimate, fill = adj.p.value)) +
     geom_col() +
     coord_flip()  +
     labs(x = "Vergleich",

@@ -288,11 +288,6 @@ ggplot(data = daten, aes(x = ctdi.vol, y = dlp, label = as.character(tag))) +
        color = "Untersuchungsbezeichnung")
 ```
 
-```{r include=FALSE}
-detach("package:ggrepel", unload=TRUE)
-detach("package:ggplot2", unload=TRUE)
-```
-
 ## Schlussbemerkungen
 
 Sicherlich ist man im ersten Moment erschrocken von der Fülle der Möglichkeiten und der gleichzeitigen Abwesenheit eines Leitfadens. Keine Menüs in denen man einfach mal nach der passenden Funktion suchen kann. Aber glücklicherweise ist die R Community sehr aktiv, und man wird selbst für die banalsten Probleme mit einer kurzen Google-Suche fündig. Dabei sollte man allerdings besser direkt auf Englisch suchen, weil dies zweifelsohne die Chance erhöht eine Antwort zu finden. Zum Beispiel: [`"Wie erstelle ich ein dataframe?"` bzw. `"How to build a dataframe?"`](https://www.google.com/search?client=safari&rls=en&q=how+to+build+a+dataframe+in+r&ie=UTF-8&oe=UTF-8).

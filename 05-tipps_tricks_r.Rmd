@@ -10,29 +10,34 @@ library(tidyverse)
 2. Cheatsheets für R finden und benutzen
 3. Styleguide kennenlernen
 
-# Nachvollziehbare Analysen
+## Nachvollziehbare Analysen
 
-es ist wichtig, dass man alles nachvollziehbar dokumentiert, weil ja eh die meiste zeit darauf geht
+Wie bereits eingangs gesagt, hat das Arbeiten mit R und RStudio hat unter anderem den Vorteil, dass alle Analysen in einem - im idealfall nachvollziehbar Skript - festgehalten werden können. Diese Art des Arbeitens ermöglicht es uns nicht nur einfach reproduzierbare Auswertungen zu machen, es erlaubt auch bspw. Erklärungen und Gedanken im Code als Anmerkungen und Kommentare zu hinterlassen. Hinzu kommt, dass in typischen "Data Science"-Projekten laut [Forbes-Magazin](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/#946a4c76f637) ca. 80% der Arbeit auf das Sammeln, Organisieren und Säubern von Daten entfallen. Eine gute Dokumentation dieser Schritte kann, insbesondere wenn mehrere Menschen an einem Projekt arbeiten, helfen unnötige doppelte Arbeiten zu vermeiden.
 
-![XXX.](./assets/img/forbes_data_science_tasks.png)
+![Verteilung der Arbeitszeit in "Data Science"-Projekten](./assets/img/forbes_data_science_tasks.png)
 
-# Rmarkdown
+## Rmarkdown
 
-viel praktischer als im Editor
+Eine sehr elegante Möglichkeit die eigenen Skripte um eine gute Dokumentation zu ergänzen ist die Nutzung von [Rmarkdown](https://rmarkdown.rstudio.com). Um nur einige der Vorteile zu nennen: Rmarkdown-Dokumente erlauben den eigenen Code in sogenannte "Chunks" zu orgnisieren, deren Output nicht wie in einfachen Skripten auf der Konsole erscheint, sondern (sogar hübscher formatiert) direkt unterhalb des "Chunks".
 
-![XXX.](./assets/img/rstudio_editor_example.png)
-sind Rmarkdown-Dokumente, aber erstmal alles löschen
+![Eine einfache Auswertung im Editor bzw. als einfaches R-Skript](./assets/img/rstudio_editor_example.png)
+Rmarkdown-Dokumente können neben Code-Chunks auch [Markdown](https://de.wikipedia.org/wiki/Markdown)-Text enthalten (daher der Name), der in gewissem Umfang Formatierungen wie Überschriften und Schriftstile erlaubt. Und vielleicht am praktischsten von allem, können der Text und die R-Ausgaben von Rmarkdown-Dokumente in HTML-Dokumente verwandelt werden, was es relativ komfortabl macht Auswertungen mit anderen, die R nicht installiert haben, zu teilen.
+
+![Ein neues Rmarkdown-Dokument](./assets/img/rstudio_rmarkdown_default.png)
+Erstellt man ein neues Rmarkdown-Dokument, ist üblicherweise zunächst Beispielcode darin enthaten. Diesen kann man aber getrost löschen und dann eigenen Code schreiben. Einen neuen Code-"Chunk" erstellt man mit `opt+cmd+I` auf dem Mac, bzw. `Strg+Alt+I` auf Windows.
+
+![Ein Beispiel für eine Auswertung innerhalb eines Rmarkdown-Dokuments. Die Ausgabe erscheint direkt unterhalb des Code-"Chunks", die Tabellenausgabe ist etwas angenehmer formatiert.](./assets/img/rstudio_rmarkdown_example.png)
+
+Über die Schaltfläche "Knit" lässt sich der Prozess starten, der das Rmarkdown-Dokument inkl. der R-Ausgaben in eine HTML-Datei umwandelt. Wichtig hierbei ist zu bedenken, dass dazu das gesamte Rmarkdown-Dokument ausgeführt wird, Variablen oder Funktionen, die in diesem Dokument nicht enthalten sind, aber auch nicht benutzt werden können. Was wie ein Nachteil klingt ist aber für gewöhnlich sogar eher ein Vorteil, weil man so für sich nochmal prüfen kann, ob tatsächlich alle nötigen Schritte in der richtigen Reihenfolge enthalten sind.
 
 
-![XXX.](./assets/img/rstudio_rmarkdown_default.png)
-![XXX.](./assets/img/rstudio_rmarkdown_example.png)
 
-# Cheatsheets
+## Cheatsheets
 
 hier link zu cheat sheets
 
 
-# Styleguide
+## Styleguide
 
 hier dann nochwas zu lesbarem code und styleguides
 

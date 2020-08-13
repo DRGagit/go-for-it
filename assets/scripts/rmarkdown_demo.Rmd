@@ -1,0 +1,30 @@
+---
+title: "Untitled"
+author: "Daniel Pinto dos Santos"
+date: "7/13/2020"
+output: html_document
+---
+
+# Libraries und Daten
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(psych)
+```
+
+Hier lesen wir unsere Beispieldatei mit Dosisdaten ein.
+
+```{r}
+daten <- read.csv("../data/ct_data.csv", sep = ";", dec = ",")
+```
+
+# Auswertung
+
+Zu Demonstrationszwecken berechnen wir hier bloß die _Schiefe_ der Verteilung des DLP, gruppiert nach Untersuchungsart.
+
+```{r}
+daten %>% 
+  group_by(untersuchung) %>% 
+  summarize(schiefe_dlp = skew(dlp))
+```
+
