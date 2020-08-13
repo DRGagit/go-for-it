@@ -1,0 +1,70 @@
+# Diverse Tipps & Tricks für R
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+```
+
+## Lernziele
+
+1. Rmarkdown-Dokumente benutzen
+2. Styleguide kennenlernen
+3. Cheatsheets für R finden und benutzen
+
+## Nachvollziehbare Analysen und Rmarkdown
+
+Nachdem wir uns nun schon etwas in die Materie und R eingearbeitet haben, wollen wir an dieser Stelle einmal unterbrechen und noch einige nütliche Tips & Tricks zusammenfassen.
+
+Bislang hatten wir uns hauptsächlich im Editor- bzw. im Konsolen-Abschnitt der RStudio-Oberfläche bewegt. Zwar bietet der Editor natürlich die Möglichkeit Code zu schreiben und auszuführen, und die Ausgabe auf der Konsole ist natürlich nicht schlecht, aber an einigen Ecken und besonders in größeren Projekten ist dieser Arbeitsablauf doch manchmal etwas wenig praktisch. Beispielsweise kann es vorkommen, dass auf Zwischenergebnisse zurückgekommen werden muss, die aber in einem längeren Ergebnisverlauf auf der Konsole versteckt sind.
+
+![Verteilung der Arbeitszeit in "Data Science"-Projekten](./assets/img/forbes_data_science_tasks.png)
+
+Insbesondere wenn man dann bedenkt, dass in "Data Science"-Projekten die meiste Zeit auf das Organisieren und Aufräumen von Daten verwendet wird, wäre für diese Schritte ein möglichst einfacher und gut dokumentierter Workflow hilfreich. Ein weiterer und in diesem Zusammenhang nicht weniger wichtiger Punkt ist aber auch das Teilen von Ergebnissen bspw. mit Kollegen, die R und RStudio nicht nutzen - das pure R-Skript hilft da wenig. Glücklicherweise bietet RStudio aber auch hierfür eine gute Lösung, ohne dass man etwas völlig neues lernen müsste.
+
+![Eine einfache Auswertung im Editor bzw. als einfaches R-Skript](./assets/img/rstudio_editor_example.png)
+
+Die für die meisten Zwecke eleganteste Lösung dürfte zweifelsohne das Arbeiten mit [R Markdown](https://rmarkdown.rstudio.com) Dokumenten sein. Dabei handelt es sich um eine Mischung aus sogenanntem [Markdown](https://de.wikipedia.org/wiki/Markdown)-Text (eine sehr einfache Art der Auszeichnung von Textformaten) und R-Skripten, in welchen der R-Code in sogenannten [Code-Chunks](https://rmarkdown.rstudio.com/lesson-3.html) organisiert wird. Alles außerhalb dieser Code Chunks ist lediglich Text und wird nicht ausgeführt. Diese Bereiche außerhalb der Chunks kann man aber beispielsweise dazu nutzen seine Auswertungen zu dokumentieren, oder auch einfach nur um Notizen zu machen.
+
+![Ein neues Rmarkdown-Dokument, der Beispielinhalt kann einfach gelöscht werden](./assets/img/rstudio_rmarkdown_default.png)
+
+Ein neues R Markdown-Dokument kann man z.B. über `File -> New file -> R Markdown...` erstellen. Den daraufhin erscheinenden Dialog, kann man getrost mit `OK` bestätigen, und erhält dann nahezu leeres R Markdown-Dokument, in dem lediglich ein wenig Beispielcode enthalten ist. Den Beispielcode kann man einfach löschen, sollte dabei aber darauf achten den Kopfteil des Dokumentes, dessen Anfang und Ende mit `---` bezeichnet wird, zu belassen.
+
+Da die [Dokumentation zu R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) kaum zu schlagen ist, an dieser Stelle nur die wichtigsten Informationen. Einen neuen Chunk kann man mit `Strg + Alt + I` bzw. `Cmd + Option + I` anlegen oder über den kleinen Button überhalb des Dokumentes. Code innerhalb des Chunks kann einfach wie gewohnt mit `Strg + Enter` bzw. `Cmd + Enter` ausführen, die Ausgabe erhält man aber für gewöhnlich direkt unterhalb des Chunks, wo sie auch bestehen bleibt, bis in dem Chunk anderer Code ausgeführt wird.
+
+![Ein Beispiel für eine Auswertung innerhalb eines Rmarkdown-Dokuments. Die Ausgabe erscheint direkt unterhalb des Code-"Chunks", die Tabellenausgabe ist etwas angenehmer formatiert.](./assets/img/rstudio_rmarkdown_example.png)
+
+Eine weitere sehr praktische Funktion, ist die, dass sich solche Rmarkdown-Dokumente als HTML-Datei exportieren lassen, in denen dann neben dem R-Code auch die entsprechenden Ausgaben enthalten sind. Diese HTML-Dateien, kann man dann bspw. Kollegen schicken, die R nicht installiert haben, so aber trotzdem nachvollziehen können was getan wurde.
+
+Über die Schaltfläche "Knit" lässt sich der Prozess starten, der das Rmarkdown-Dokument inkl. der R-Ausgaben in eine HTML-Datei umwandelt. Wichtig hierbei ist zu bedenken, dass dazu das gesamte Rmarkdown-Dokument ausgeführt wird, Variablen oder Funktionen, die in diesem Dokument nicht enthalten sind, aber auch nicht benutzt werden können. Was wie ein Nachteil klingt ist aber für gewöhnlich sogar eher ein Vorteil, weil man so für sich nochmal prüfen kann, ob tatsächlich alle nötigen Schritte in der richtigen Reihenfolge enthalten sind.
+
+![Das selbe Rmarkdown-Dokument als HTML-Output.](./assets/img/rstudio_knit_example.png)
+
+## Styleguide
+
+Ein weiterer wichtiger Punkt, um Code gut lesbar und damit einfacher nachvollziehbar zu machen, ist sich an einen guten [Programmierstil](https://de.wikipedia.org/wiki/Programmierstil) zu halten. Sicher gibt es dazu verschiedene Ansichten, und was für den einen funktioniert, mag der andere für Unsinn halten. Letztlich ist man natürlich frei in dem wie man seinen Code organisiert und schreibt, aber insbesondere wenn man mit anderen gemeinsam arbeitet, ist es sicher von Vorteil sich auf einen Stil zu einigen. Einen schönen Anhaltspunkt hierfür liefert z.B. der [tidyverse style guide](https://style.tidyverse.org/index.html), in dem sich zahlreiche Vorschläge finden wie R-Code möglichst einfach lesbar gehalten wird. So wird beispielsweise vorgeschlagen für die Benennung von Variablen nur Kleinbuchstaben zu verwenden und innerhalb von Namen Unterstriche zu verwenden, falls mehrere Wörter Teil des Namens sind.
+
+```{r eval=FALSE}
+# Gut
+daten <- read.csv("ct_data.csv", sep = ";", dec = ",")
+dosis_daten <- read.csv("ct_data.csv", sep = ";", dec = ",")
+
+# Schlecht
+DaTeN <- read.csv("ct_data.csv", sep = ";", dec = ",")
+meineDosisDaten <- read.csv("ct_data.csv", sep = ";", dec = ",")
+```
+
+Trotzdem, die Vielzahl der R-Styleguides im Internet zeigt, dass es vermutlich kein zwingendes Argument für den einen und gegen einen anderen Stil gibt. Solange es funktioniert, und man sich im Code zurechtfindet ist jeder Stil erlaubt. Vermutlich wird jeder über die Zeit seinen eigenen Stil finden, aber für den Start kann ein bisschen Orientierung nicht schaden.
+
+## Cheatsheets
+
+Ein weiterer Nachteil code-basierten Arbeitens gegenüber der Benutzung einer Software, die in Menüs per Klick erreichbare Befehle anbietet, ist dass man sich gelegentlich nicht mehr an den richtigen Befehl oder dessen Parameter erinnert, bzw. dass man eine bestimmte Funktion bräuchte, ihren Namen aber nicht kennt. Wie bereits in der Einleitung gesagt, ist das zwar in den meisten Fällen mit einer schnellen Google-Suche zu erledigen, aber es gibt auch noch eine andere hilfreiche Möglichkeit.
+
+Die sogenannten [Cheatsheets](https://rstudio.com/resources/cheatsheets/), also quasi Spickzetteln, bieten meist zu einem Paket (bzw. einer `library()`), eine schnelle und kompakte Informationssammlung an. Dort findet man auf einen Blick bspw. eine Übersicht über die wichtigsten Funktionen und deren Nutzung, und gelegentlich noch weitere nützliche Informationen. Insbesondere zu den Tidyverse-Paketen gibt es exzellente Cheatsheets, die helfen vielleicht auch mal eine neue Funktion zu entdecken und auszuprobieren, von der man noch gar nicht wusste, dass man sie eigentlich braucht!
+
+![Das _dplyr_ Cheatsheet](./assets/img/cheatsheet_example.png)
+
+Ein paar der nützlichsten Cheatsheets sind hier direkt verlinkt:
+
+- [Datentransformation mit _dplyr_](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+- [Datenvisualisierung mit _ggplot_](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+- [Buchstabenketten manipulieren mit _stringr_](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)
+- [Datums- und Zeitangaben mit _lubridate_](https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf)
