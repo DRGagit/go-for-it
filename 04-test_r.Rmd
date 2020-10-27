@@ -1,4 +1,4 @@
-# Theoretisch ja, praktisch auch! Tests in R
+# Theoretisch ja, praktisch auch! Tests in R {#tests-in-r}
 
 Üblicherweise geht es nach den deskriptiven Statistiken in den meisten Fällen ans Eingemachte - die [statistischen Tests](https://de.wikipedia.org/wiki/Statistischer_Test). Nehmen wir an, in zwei Gruppen beobachten wir unterschiedliche Mittelwerte. Eine mögliche Erklärung könnte sein, dass der bloße Zufall hier Unterschiede erscheinen lässt, wo in Wirklichkeit keine sind. Eine andere Möglichkeit wäre dann, dass in der Tat Unterschiede zwischen den Gruppen bestehen, und diese nicht alleine dem Zufall zu schulden sind.
 
@@ -94,7 +94,7 @@ Genau so einfach ließe sich entsprechend auch ein T-Test `t.test()` rechnen, de
 t.test(dlp.abdomen, dlp.thorax, paired = FALSE)
 ```
 
-### Ein kurzer Ausflug in Formeln
+### Ein kurzer Ausflug in Formeln {#formulas-in-r}
 
 Mit Formeln werden in R nicht übliche Formeln in der Art `f(x) = mx + b` bezeichnet, sondern bei der Definition von statistischen Tests oder Modellen ein Ausdruck, der beschreibt welche Zielvariable von welchen Einflussvariablen abhängen soll. Eine Formel in R besteht immer aus einer Tilde `~` und einem oder mehreren Ausdrücken, die jeweils rechts (RHS = right hand side) bzw. links (LHS = left hand side) der Tilde `~` stehen. Die Zielvariable steht dabei links (LHS) und die möglichen Einflussvariablen rechts (RHS).
 
@@ -156,7 +156,7 @@ aov(dlp ~ untersuchung, data = daten) %>% TukeyHSD()
 
 Das Ergebnis zeigt uns nun, dass außer für die Vergleiche Gesicht/Becken, Thorax/Becken und Thorax/Gesicht, jeweils signifikante Unterschiede der DLP-Mittelwerte bestehen (die p-Werte sind in der letzten Spalte zu finden). Zudem wird die mittlere Differenz sowie das 95%-Konfidenzintervall der Unterschiede mit ausgegeben.
 
-### Ein zweiter kurzer Ausfulg in Ergebnisobjekte
+### Ein zweiter kurzer Ausfulg in Ergebnisobjekte {#broom-return-objects}
 
 Gerade solche Ausgaben, wie die der `TukeyHSD()` Funktion sind manchmal etwas unübersichtlich, obwohl sie ja eigentlich sogar eine Tabelle mit ausgeben. Diese Tabelle aber wiederum weiter zu manipulieren, ist mit R Basisfunktionen kaum möglich. Erfreulicherweise gibt es auch hier aus dem Tidyverse einige praktische Helferfunktionen, die in dem Paket [`broom`](https://broom.tidyverse.org) enthalten sind. Insbesondere die Funktion `tidy()` hilft Ergebnistabellen statistischer Tests in saubere Dataframes zu überführen, mit denen dann wie gewohnt weitergearbeitet werden kann.
 

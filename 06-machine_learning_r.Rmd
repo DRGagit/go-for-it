@@ -4,6 +4,12 @@
 library(tidyverse)
 ```
 
+Nachdem wir uns nun bereits in deskriptive Statistiken und statistische Tests eingearbeitet haben, können wir einen Schritt weiter gehen und kommen zu dem Thema, das aktuell mehr denn je in aller Munde ist - [Maschinelles Lernen bzw. Machine Learning](https://de.wikipedia.org/wiki/Maschinelles_Lernen). In seinen einfacheren Ausprägungen ist maschinelles Lernen nichts anderes als die Erarbeitung eines statistischen Modells, welches dann wiederum auf neue Daten angewandt werden kann, um bspw. Vorhersagen zu treffen.
+
+![Künstliche Intelligenz, Maschinelles Lernen und Neuronale Netze](./assets/img/circles_of_ai.png)
+
+Heute werden die Begriffe "Künstliche Intelligenz", "Maschinelles Lernen" und "Neuronale Netzwerke" teils synonym verwandt. Korrekterweise kann man jedoch sagen, dass die neuronalen Netze ledigliche ein Teilgebiet des maschinellen Lernens sind, das wiederum ein Teil von dem bezeichnet was unter künstlicher Intelligenz verstanden wird. Im folgenden werden wir einige einfachere Algorithmen kennenlernen und in R ausprobiern. Wer danach noch Hunger auf mehr Machine Learning Algorithmen und deren Anwendung in R hat, dem sei die Webseite [101 Machine Learning Algorithms](https://blog.datasciencedojo.com/machine-learning-algorithms/) ans Herz gelegt.
+
 ## Lernziele
 
 1. Verschiedene Machine Learning Algorithmen in R nutzen
@@ -20,15 +26,60 @@ data("iris")
 str(iris)
 ```
 
+In dem Datensatz enthalten sind Beobachtungen zu 150 verschiedenen Schwertlilien enthalten, jede Beobachtung enthält Angaben zu Länge und Breite der Kelch- und Kronblätter sowie zur Zugehörigkeit zu einer von drei Schwertlilienarten. Die übliche Aufgabe ist es dann anhand dieses Datensatzes einen Algorithmus zu trainieren, der aus den Angaben zur Länge und Breite der Kelch- und Kronblätter Vorhersagen über die Artzugehörigkeit trifft.
+
 ## Explorative Datenvisualisierung
+
+Ein guter Anfang ist meist sich einen visuellen Überblick über die Daten zu verschaffen. Man könnte beispielsweise die Verteilung der Messwerte als gruppierte Punktwolken darstellen.
 
 ```{r}
 iris %>% 
   pivot_longer(-Species, names_to = "variable") %>% 
   ggplot(aes(x = Species, y = value, color = Species)) +
-    geom_point() +
+    geom_jitter() +
     facet_wrap(vars(variable))
 ```
+
+Wie man sieht, müsste es möglich sein anhand der Daten die Artzugehörigkeit abzuschätzen. Rein visuell könnte man vermuten, dass sich dafür insbesondere die Länge der Kronblätter (`Petal-Lenght`) eignen müsste.
+
+## Lineare Regression
+
+Einer der einfachsten Machine Learning Algorithmen, die [Lineare Regression](https://de.wikipedia.org/wiki/Lineare_Regression) eignet sich zwar nicht zur Vorhersage eines kategorialen Variable, wie sie die Artzugehörigkeit ist, sollte aber hier trotzdem nicht unerwähnt bleiben. Üblicherweise versucht eine lineare Regression einen kontinuierlichen Zahlenwert für eine abhängige Variable aus einer oder mehreren unabhängigen Variablen zu berechnen. In unserem Fall könnten wir beispielsweise versuchen die Breite der Kronblätter (`Petal.Width`) aus den übrigen Variablen abzuschätzen.
+
+Hierzu nutzen wir die Funktion `lm()`. Erster Parameter dieser Funktion ist eine Formel, wie wir sie bereits im Kapitel zu den statistischen Tests benutzt haben (Abschnitt \@ref(formulas-in-r)). In Formeln kann der Punkt `.` genutzt werden, um alle Variablen (bzw. Spalten) außer der links der Tilde `~` angegebenen zu referenzieren. Der zweite Parameter der Funktion ist das Dataframe, das genutzt werden soll. Da es hier keinen Sinn machen würde die Art einzuschließen, nutzen wir innerhalb der `lm()`-Funktion ein `select()`, um die Variable `Species` auszuschließen.
+
+```{r}
+fit <- lm(formula = Petal.Width ~ ., data = iris %>% select(-Species))
+summary(fit)
+```
+
+Die Ausgabe ist auf den ersten Blick nicht besonders eingängig, zeigt aber im Wesentlichen schon, dass signifikante Zusammenhänge zwischen Kronblattbreite und allen anderen Variablen existieren.
+
+Natürlich können auch die Ergebnisobjekte von Machine Learning Algorithmen für die weitere Nutzung mit Tidyverse-Paketen aufbereitet werden (siehe Abschnitt \@ref(broom-return-objects)).
+
+```{r}
+library(broom)
+tidy(fit)
+
+tidy(fit, conf.int = TRUE) %>% 
+  filter(term != "(Intercept)") %>% 
+  mutate(p.value.chr = format.pval(p.value, digits = 1)) %>% 
+  ggplot(aes(x = estimate, y = fct_reorder(term, estimate))) +
+    geom_point() +
+    geom_errorbar(aes(xmin = conf.low, xmax = conf.high), width = 0.15) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    geom_text(aes(label = paste("p-value =", p.value.chr)), nudge_y = 0.2) +
+    scale_x_continuous(limits = c(-0.8, 0.8)) +
+    labs(y = "",
+         x = "Estimate")
+```
+
+
+----
+
+
+
+
 
 ## Praktische Pakete für Machine Learning
 
@@ -50,28 +101,7 @@ library(class)
 library(pROC)
 ```
 
-## "Formeln in R"
 
-Mit Formeln werden in R nicht übliche Formeln in der Art `f(x) = mx + b` bezeichnet, sondern bei der Definition von Modellen ein Ausdruck, der beschreibt welche Zielvariable durch welche Einflussvariablen erklärt werden soll. Formeln können auch als Variable gespeichert werden.
-
-```{r}
-# Die Zielvariable befindet sich dabei stets auf der linken Seite,
-# die Einflussvariablen rechts.
-my.formula <- Petal.Width ~ Petal.Length + Sepal.Length + Sepal.Width
-
-# zur Vereinfachung kann ein Punkt genutzt werden, der alle Variblen eines
-# Dataframes mit Ausnahme der links definierten Zielvariable referenziert
-my.formula <- Petal.Width ~ .
-```
-
-## Lineare Regression
-
-[Lineare Regressionen](https://de.wikipedia.org/wiki/Lineare_Regression) versuchen eine abhängige Variable von einer oder mehrere unabhängigen Variablen zu berechnen. Üblicherweise wird dabei ein Zahlenwert ausgegeben. In unserem Fall `my.formula <- Petal.Width ~ .` würden wir versuchen die Blütenblatt-Breite aus der Länge und Breite der Kelchblätter, der Länge der Blütenblätter zu berechnen und der Spezies zu berechnen (der `.` referenziert alle Variablen des Dataframes außer der Zielvariablen).
-
-```{r}
-fit <- lm(formula = my.formula, data = iris)
-summary(fit)
-```
 
 ## Logistische Regression
 
