@@ -40,7 +40,7 @@ iris %>%
     facet_wrap(vars(variable))
 ```
 
-Wie man sieht, müsste es möglich sein anhand der Daten die Artzugehörigkeit abzuschätzen. Rein visuell könnte man vermuten, dass sich dafür insbesondere die Länge der Kronblätter (`Petal-Lenght`) eignen müsste.
+Wie man sieht, müsste es möglich sein anhand der Daten die Artzugehörigkeit abzuschätzen. Rein visuell könnte man vermuten, dass sich dafür insbesondere die Länge der Kronblätter (`Petal-Length`) eignen müsste.
 
 ## Lineare Regression
 
@@ -61,9 +61,10 @@ Natürlich können auch die Ergebnisobjekte von Machine Learning Algorithmen fü
 library(broom)
 tidy(fit)
 
-tidy(fit, conf.int = TRUE) %>% 
+fit %>% 
+  tidy(conf.int = TRUE) %>% 
   filter(term != "(Intercept)") %>% 
-  mutate(p.value.chr = format.pval(p.value, digits = 1)) %>% 
+  mutate(p.value.chr = format.pval(p.value, digits = 2)) %>% 
   ggplot(aes(x = estimate, y = fct_reorder(term, estimate))) +
     geom_point() +
     geom_errorbar(aes(xmin = conf.low, xmax = conf.high), width = 0.15) +
@@ -72,6 +73,110 @@ tidy(fit, conf.int = TRUE) %>%
     scale_x_continuous(limits = c(-0.8, 0.8)) +
     labs(y = "",
          x = "Estimate")
+```
+
+## Logistische Regression
+
+Einer der einfachtsten Machine Learning Algorithmen zur Vorhersage einer binären Entscheidung (wie bspw. benigne vs. maligne) ist die [Logistische Regression](https://de.wikipedia.org/wiki/Logistische_Regression). Das Vorgehen in R ist hierbei weitestgehend gleich zu dem bei der linearen Regression, nur dass wir in diesem Fall eben als abhängige Variable eine Variable nehmen müssen, die entweder als `Character` oder als `Factor` vorliegt und nur zwei Ausprägungen hat.
+
+Im Iris-Datensatz könnten wir also beispeilsweise versuchen anhand von Blattlängen und -breiten zwischen den Arten `virginica` und `versicolor` zu unterscheiden. Dazu nutzen wir die Funktion `glm()` und geben dieser als Parameter `family = "binomial` mit.
+
+```{r}
+# Erstellen einer Teilmenge des Datensatzes mit nur zwei Spezies
+iris_binominal <- iris %>%
+  filter(Species %in% c("virginica", "versicolor")) %>%
+  # da die Variable Species weiterhin als Factor mit drei Level
+  # angelegt wäre, nutzen wir die droplevels()-Funktion, um
+  # Fehler zu vermeiden.
+  droplevels()
+
+# family = "binomial" gibt hier an, dass nur eine binäre Entscheidung zu treffen ist
+fit <- glm(Species ~ ., data = iris_binominal, family = "binomial")
+summary(fit)
+
+```
+
+In diesem konkreten Beispiel erscheint es so, dass lediglich die Kronblattlänge (`Petal.Length`) signifikant mit der Artzugehörigkeit zusammenhängt. In einem "echten" Projekt könnte man jetzt versuchen das Modell zu optimieren und nicht signifikante Faktoren entfernen, für unsere Zwecke arbeiten wir aber jetzt mit diesem (sicher nicht idealen) Modell weiter.
+
+Wir können nun das in der Variablen `fit` gespeicherte Modell nutzen, und uns die Vorhersagewerte des Modells zu ausgeben. Mit einigen praktischen Befehlen können wir die Vorhersagen auch gleich als neue Spalte dem ursprünglichen Dataframe hinzufügen.
+
+```{r}
+# wir nutzen hier die add_column()-Funktion aus dem tidyverse
+# und die predict()-Funktion um Werte mithilfe eines Modells
+# zu berechnen
+iris_binominal_predictions <- iris_binominal %>% 
+  add_column(prediction_value = predict(fit))
+
+# ein Blick in die ersten Zeilen der Daten
+head(iris_binominal_predictions)
+```
+
+Wie man sieht, gibt das Modell der logistischen Regression uns einen numerieschen Wert (in unserem Fall in der Spalte `prediction_value`) zurück, der in gewisser Weise aber die Zugehörigkeit zu der jeweiligen Klasse wiederspiegelt. Diese Daten könnten wir nun für eine einfache Visualisierung der Klassifikationsgenauigkeit nutzen.
+
+```{r}
+iris_binominal_predictions %>% 
+  ggplot(aes(y = prediction_value, x = Species, color = Species)) +
+    geom_jitter() +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(x = "Spezies",
+         y = "Ausgabewert der logistischen Regression",
+         color = "") +
+    theme(legend.position = "none")
+```
+Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausgabe der logistischen Regression eher für Schwertlilien der Art `virginica` zu sprechen, negative Werte für die Art `versicolor`. Nur in je einem Fall liegt dieses Modell für beide Arten liegt das Modell falsch.
+
+### Ein kurzer Ausflug in ROC-Analysen.
+
+Ohne zu sehr darauf eingehen zu wollen, an dieser Stelle ein kurzer Exkurs zu [ROC-Analysen](https://de.wikipedia.org/wiki/ROC-Kurve). In einer ROC-Kurve wird sozusagen jede Kombination von Sensitivität und Spezifität aufgetragen, die sich in Abhängigkeit von der Variation eines Parameters (in unserem Fall also bspw. der Ausgabewert der logistischen Regression) ergibt. Je näher die Fläche unterhalb der ROC-Kurve am Wert 1 ist, desto besser die diagnostische oder prädiktive Performance eines Modells.
+
+In R können ROC-Kurven und dazugehörige Berechnungen sehr einfach mit dem Paket `pROC` vorgenommen werden. Im Folgenden nehmen wir das Dataframe mit den ergänzten Vorhersagewerten und teilen der Funktion `roc()` als ersten Parameter den wahren Wert (hier also `Species`) und als zweiten Parameter den vorhersagenden Wert (hier also `prediction_value`) mit.
+
+```{r message=FALSE, warning=FALSE}
+library(pROC)
+iris_binominal_predictions %>% 
+  roc(Species, prediction_value)
+```
+
+Wie wir erwartet hätte funktioniert unser Modell sehr gut und erreicht eine AUC von 0.99.
+
+Noch eingängiger wäre nun auch eine entsprechende grafische Darstellung der Kurve. Erfreulicherweise enthält das Paket `pROC` auch hierfür Funktionen, insbesondere die Funktion `ggroc()`, die direkt eine in `ggplot` weiter modifizierbare Grafik erzeugt. 
+
+```{r}
+iris_binominal_predictions %>% 
+  roc(Species, prediction_value) %>% 
+  ggroc(color = "steelblue", size = 1) +
+    geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1),
+                 color="grey", linetype="dashed") +
+    coord_fixed()
+```
+
+Wollen wir diese Grafik noch um weitere wichtige Informationen ergänzen, so können wir auch das einfach erreichen.
+
+```{r}
+# zunächst speichern wir unsere ROC-Analyse in einer Variablen
+roc_result <- iris_binominal_predictions %>% 
+  roc(Species, prediction_value)
+
+# AUC und optimaler threshold werden berechnet und in Variablen gespeichert
+roc_auc <- auc(roc_result)
+roc_optimal_point <- coords(roc_result, "best", transpose = FALSE)
+
+# ROC-Kurve mit Anmerkungen
+roc_result %>% 
+  ggroc(color = "steelblue", size = 1) +
+    geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1),
+                 color="grey", linetype="dashed") +
+    coord_fixed() +
+    annotate("text", x = 0.05, y = 0.1, label = paste("AUC =", roc_auc), hjust = 1) +
+    geom_text(data = roc_optimal_point,
+              aes(x = specificity, y = sensitivity, label = paste("Best operating point =", round(threshold, 2),
+                                                                  "\nSensitivity:", round(sensitivity, 2),
+                                                                  "\nSpecificity:", round(specificity, 2)
+                                                                  )),
+              hjust = 0, vjust = 1,
+              nudge_x = 0.02, nudge_y = -0.02,
+              size = 3) +
+    geom_point(aes(x = roc_optimal_point$specificity, y = roc_optimal_point$sensitivity), color = "orange", shape = 4, size = 4)
 ```
 
 
@@ -101,62 +206,4 @@ library(class)
 library(pROC)
 ```
 
-
-
-## Logistische Regression
-
-Im einfachsten Fall versucht eine [logistische Regression](https://de.wikipedia.org/wiki/Logistische_Regression) eine binäre Entscheidung (abhängige Variable) aus einer oder mehreren unabhängigen Variablen zu treffen.
-
-Wir werden für dieses und die weiteren Beispiele versuchen die Spezies der Pflanze aus ihren Messwerten zu Blattlängen und -breiten vorherzusagen.
-
-```{r}
-# Überschreibt die Variable my.formula von oben
-my.formula <- Species ~ .
-```
-
-```{r}
-# Erstellen einer Teilmenge des Datensatzes mit nur zwei Spezies
-iris_small <- iris %>%
-  filter(Species %in% c("virginica", "versicolor")) %>%
-  # da die Variable Species weiterhin als Factor mit drei Level
-  # angelegt wäre, nutzen wir die droplevels()-Funktion, um
-  # Fehler zu vermeiden.
-  droplevels()
-
-# family = "binomial" gibt hier an, dass nur eine binäre Entscheidung zu treffen ist
-fit <- glm(my.formula, data = iris_small, family = "binomial")
-```
-
-Das in der Variablen `fit` gespeicherte Modell, können wir nun nutzen um die Vorhersagewerte des Modells zu berechnen. Der besseren Übersicht halber speichern wir diese in einer neuen Spalte des ursprünglichen Dataframes.
-
-```{r}
-# wir nutzen hier die add_column()-Funktion aus dem tidyverse
-# und die predict()-Funktion um Werte mithilfe eines Modells
-# zu berechnen
-iris_small_augmented <- iris_small %>% 
-  add_column(vorhersage = predict(fit))
-
-# ein Blick in die ersten Zeilen der Daten
-head(iris_small_augmented)
-
-# eine einfache Visualisierung
-iris_small_augmented %>% 
-  ggplot(aes(x = vorhersage, fill = Species)) +
-    geom_density(alpha = 0.5)
-```
-
-Wir sehen der Vorhersagewert des Modells hat Potential zwischen den beiden Gruppen zu unterscheiden. Wann immer ein kontinuierlicher Vorhersagewert vorliegt, können wir eine ROC-Analyse rechnen.
-
-## ROC-Analyse
-
-```{r message=FALSE, warning=FALSE}
-roc(iris_small_augmented$Species, iris_small_augmented$vorhersage)
-
-roc(iris_small_augmented$Species, iris_small_augmented$vorhersage) %>% 
-  ggroc(color = "steelblue", size = 1) +
-    geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1),
-                 color="grey", linetype="dashed") +
-    theme_minimal() +
-    coord_fixed()
-```
 
