@@ -114,7 +114,7 @@ Eine ebenfalls sehr praktische Funktion ist die der Base-R Funktion `by()` (s.o.
 describe.by(daten, daten$untersuchung, quant=c(.25,.75), omit = TRUE)
 ```
 
-### Summarytools
+### Summarytools {#summarytools}
 
 Auch im Paket `summarytools` existieren Funktionen, die ähnliche Ausgaben erzeugen wie die Funktion `describe()` aus dem `psych` Paket. Welche Pakete man letztenendes benutzen will, ist Frage des persönlichen Geschmacks. Die entsprechenden Funktionen in `summarytools` sind `dscr()` bzw. `stby()`
 

@@ -28,7 +28,7 @@ str(iris)
 
 In dem Datensatz enthalten sind Beobachtungen zu 150 verschiedenen Schwertlilien enthalten, jede Beobachtung enthält Angaben zu Länge und Breite der Kelch- und Kronblätter sowie zur Zugehörigkeit zu einer von drei Schwertlilienarten. Die übliche Aufgabe ist es dann anhand dieses Datensatzes einen Algorithmus zu trainieren, der aus den Angaben zur Länge und Breite der Kelch- und Kronblätter Vorhersagen über die Artzugehörigkeit trifft.
 
-## Explorative Datenvisualisierung
+## Explorative Datenvisualisierung {#explorative-datenvisualisierung}
 
 Ein guter Anfang ist meist sich einen visuellen Überblick über die Daten zu verschaffen. Man könnte beispielsweise die Verteilung der Messwerte als gruppierte Punktwolken darstellen.
 
@@ -98,7 +98,7 @@ summary(fit)
 
 In diesem konkreten Beispiel erscheint es so, dass lediglich die Kronblattlänge (`Petal.Length`) signifikant mit der Artzugehörigkeit zusammenhängt. In einem "echten" Projekt könnte man jetzt versuchen das Modell zu optimieren und nicht signifikante Faktoren entfernen, für unsere Zwecke arbeiten wir aber jetzt mit diesem (sicher nicht idealen) Modell weiter.
 
-Wir können nun das in der Variablen `fit` gespeicherte Modell nutzen, und uns die Vorhersagewerte des Modells zu ausgeben. Mit einigen praktischen Befehlen können wir die Vorhersagen auch gleich als neue Spalte dem ursprünglichen Dataframe hinzufügen.
+Wir können nun das in der Variablen `fit` gespeicherte Modell mithilfe der Funktion `predict()` nutzen, und uns die Vorhersagewerte des Modells zu ausgeben. Mit einigen praktischen Befehlen können wir die Vorhersagen auch gleich als neue Spalte dem ursprünglichen Dataframe hinzufügen.
 
 ```{r}
 # wir nutzen hier die add_column()-Funktion aus dem tidyverse
@@ -141,7 +141,7 @@ Wie wir erwartet hätte funktioniert unser Modell sehr gut und erreicht eine AUC
 
 Noch eingängiger wäre nun auch eine entsprechende grafische Darstellung der Kurve. Erfreulicherweise enthält das Paket `pROC` auch hierfür Funktionen, insbesondere die Funktion `ggroc()`, die direkt eine in `ggplot` weiter modifizierbare Grafik erzeugt. 
 
-```{r}
+```{r message=FALSE}
 iris_binominal_predictions %>% 
   roc(Species, prediction_value) %>% 
   ggroc(color = "steelblue", size = 1) +
@@ -150,9 +150,9 @@ iris_binominal_predictions %>%
     coord_fixed()
 ```
 
-Wollen wir diese Grafik noch um weitere wichtige Informationen ergänzen, so können wir auch das einfach erreichen.
+Wollen wir diese Grafik dann noch bspw. um weitere wichtige Informationen ergänzen, können wir auch ganz das einfach erreichen.
 
-```{r}
+```{r message=FALSE}
 # zunächst speichern wir unsere ROC-Analyse in einer Variablen
 roc_result <- iris_binominal_predictions %>% 
   roc(Species, prediction_value)
@@ -178,6 +178,70 @@ roc_result %>%
               size = 3) +
     geom_point(aes(x = roc_optimal_point$specificity, y = roc_optimal_point$sensitivity), color = "orange", shape = 4, size = 4)
 ```
+
+## Datenaufbereitung für Machine Learning
+
+Für die Anwendung "komplizierterer" Machine Learning Algorithmen sollte man sich an einige wichtige Regel halten. Ohne, dass wir hier alle Details bedenken können, sind zwei wichtige Schritte sicherlich die [Normalisierung der Daten](https://en.wikipedia.org/wiki/Normalization_(statistics)) und die Aufteilung in Trainings- und Testdaten.
+
+Für beide Arbeitsschritte können wir Funktionen aus dem Paket `caret` benutzen. Für die Normalisierung der Daten legen wir zunächst mit der Funktion `preProcess()` ein Objekt an, das die relevanten Informationen enthält, dieses wiederum wenden wir dann mit der schon bekannten Funktion `predict()` an.
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+
+preprocess_object <- preProcess(iris, method=c("range"))
+
+iris_normalized <- predict(preprocess_object, iris)
+
+iris_normalized %>% 
+  pivot_longer(-Species, names_to = "variable") %>% 
+  ggplot(aes(x = Species, y = value, color = Species)) +
+    geom_jitter() +
+    facet_wrap(vars(variable)) +
+    labs(y = "normalized value")
+```
+
+Man erkennt, dass nun alle Werte auf einen Bereich zwischen 0 und 1 abgebildet wurden, was bspw. die Vergleichbarkeit (auch visuell, vgl. Abschnitt \@ref(explorative-datenvisualisierung)) verbessern kann.
+
+Im nächsten Schritt wollen wir die Daten aufteilen, sodass wir einen Datensatz erhalten, den wir zum Training unseres Algorithmus nutzen, und einen Datensatz, den wir zum Testen bzw. Validieren unseres Modells nutzen. Dabei sollte gewährleistet werden, dass in beiden Gruppen alle Werte annähernd ähnlich verteilt sind, die Zuordnung aber möglichst trotzdem zufällig stattfindet. Auch hier können wir uns einer Funktion des Pakets `caret` bedienen, in dem Fall die Funktion `createDataPartition()`. Dieser Funktion müssen wir als Parameter noch die Spalte mitgeben, die unsere vorherzusagende Variable enthält (in unserem Fall also `iris$Species`), welcher Prozentsatz der Daten dem Training zugeordnet werden soll (z.B.: 80%) und ob wir ein `list`-Objekt erhalten wollen (wenn wir nur _eine_ Aufteilung machen wollen, sollte man hier `FALSE` wählen). Da die Funktion uns nur die Position der Zeilen des Dataframes, die zur Trainingsgruppe gehören sollen, gibt, ist es praktischer diese in einer Variablen zu speichern, die wir dann nutzen, um aus dem ursprünglichen Dataframe die entsprechenden Zeilen zu selektieren bzw. zu entfernen.
+
+```{r}
+training_index <- createDataPartition(iris$Species, p = .8, list = FALSE)
+
+iris_training <- iris[training_index,]
+iris_testing  <- iris[-training_index,]
+```
+
+Um das Ergebnis zu kontrollieren, können wir bspw. die bekannten Funktionen zur Erstellung deskriptiver Statistiken nutzen (bspw. die Funktionen aus dem Paket `summarytools`, siehe auch Abschnitt \@ref(summarytools)).
+
+```{r eval=FALSE}
+# Da der Output recht lang ist, führen wir hier nur die Befehle auf.
+library(summarytools)
+dfSummary(iris_training)
+dfSummary(iris_testing)
+```
+
+Sobald wir unsere Daten entsprechend aufgeteilt haben, können wir anfangen unsere Modelle zu trainieren.
+
+## Support Vector Machine
+
+```{r eval=FALSE, include=FALSE}
+library(caret)
+
+library(e1071)
+
+fit <- svm(Species ~ Sepal.Width + Sepal.Length + Petal.Width + Petal.Length, data = iris)
+fit <- svm(Species ~ ., data = iris_training)
+
+iris %>% 
+  add_column(prediction = predict(fit))
+
+summary(fit)
+predict(fit)
+
+table(predict(fit, iris), iris$Species) %>% 
+  confusionMatrix()
+```
+
 
 
 ----
