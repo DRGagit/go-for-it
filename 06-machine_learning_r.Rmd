@@ -256,28 +256,9 @@ Die Funktion `confusionMatrix()` gibt erfreulicherweise auch gleich die Kreuztab
 
 ## Weitere Informationen zu Machine Learning in R
 
-Natürlich können wir an dieser Stelle nicht alle Machine Learning Algorithmen behandeln, die man in R nutzen kann. Es gibt aber 
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX hier weiter
-
-## Praktische Pakete für Machine Learning
-
-Für die meisten Anwedungen und Algorithmen existieren mehrere Pakete, mit vergleichbarer Funktionalität. In diesem Webinar haben wir die folgenden benutzt.
+Natürlich können wir an dieser Stelle nicht alle Machine Learning Algorithmen behandeln, die man in R nutzen kann. Eine tolle Zusammenstellung vieler Algorithmen, inkl. Tutorials in R, findet man auf der Webseite [DataScienceDojo](https://blog.datasciencedojo.com/machine-learning-algorithms/). Wie man schnell sieht sind die hier verwendeten nur ein kleiner Ausschnitt. Trotzdem, alleine mit diesen vier Paketen hat man viele der typischerweise in der Radiologie angewandten Techniken zur Verfügung:
 
 - [`broom`](https://github.com/tidymodels/broom) enthält etliche praktische Funktionen, um mit Modellen zu interagieren
 - [`caret`](http://caret.r-forge.r-project.org) bietet Funktionen zum Präprozessieren und Aufteilen von Daten
-- [`e1071`](https://www.rdocumentation.org/packages/e1071/versions/1.7-3) nutzen wir für das Training einer Support Vector Machine
-- [`randomForest`](https://www.rdocumentation.org/packages/randomForest/) nutzen wir für das Training eines Random Forest
-- [`class`](https://www.rdocumentation.org/packages/class) nutzen wir für das Training eines k-Nearest Neighbour Classifiers
-- [`pROC`](https://web.expasy.org/pROC/) ist ein Paket mit Funktionen um ROC-Analysen durchzuführen
-
-```{r message=FALSE, warning=FALSE}
-library(broom)
-library(caret)
-library(e1071)
-library(randomForest)
-library(class)
-library(pROC)
-```
-
-
+- [`e1071`](https://www.rdocumentation.org/packages/e1071/versions/1.7-3) stellt Funktionen für Support Vector Machines zur Verfügung
+- [`pROC`](https://web.expasy.org/pROC/) ermöglicht ROC-Analysen inkl. deren graphische Darstelung
