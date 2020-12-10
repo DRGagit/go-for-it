@@ -42,7 +42,7 @@ iris %>%
 
 Wie man sieht, müsste es möglich sein anhand der Daten die Artzugehörigkeit abzuschätzen. Rein visuell könnte man vermuten, dass sich dafür insbesondere die Länge der Kronblätter (`Petal-Length`) eignen müsste.
 
-## Lineare Regression
+## Lineare Regression {#lin-regression}
 
 Einer der einfachsten Machine Learning Algorithmen, die [Lineare Regression](https://de.wikipedia.org/wiki/Lineare_Regression) eignet sich zwar nicht zur Vorhersage eines kategorialen Variable, wie sie die Artzugehörigkeit ist, sollte aber hier trotzdem nicht unerwähnt bleiben. Üblicherweise versucht eine lineare Regression einen kontinuierlichen Zahlenwert für eine abhängige Variable aus einer oder mehreren unabhängigen Variablen zu berechnen. In unserem Fall könnten wir beispielsweise versuchen die Breite der Kronblätter (`Petal.Width`) aus den übrigen Variablen abzuschätzen.
 
@@ -72,10 +72,11 @@ fit %>%
     geom_text(aes(label = paste("p-value =", p.value.chr)), nudge_y = 0.2) +
     scale_x_continuous(limits = c(-0.8, 0.8)) +
     labs(y = "",
-         x = "Estimate")
+         x = "Estimate",
+         title = "Linear regression coefficients for Petal.Width")
 ```
 
-## Logistische Regression
+## Logistische Regression {#log-regression}
 
 Einer der einfachtsten Machine Learning Algorithmen zur Vorhersage einer binären Entscheidung (wie bspw. benigne vs. maligne) ist die [Logistische Regression](https://de.wikipedia.org/wiki/Logistische_Regression). Das Vorgehen in R ist hierbei weitestgehend gleich zu dem bei der linearen Regression, nur dass wir in diesem Fall eben als abhängige Variable eine Variable nehmen müssen, die entweder als `Character` oder als `Factor` vorliegt und nur zwei Ausprägungen hat.
 
@@ -224,31 +225,40 @@ Sobald wir unsere Daten entsprechend aufgeteilt haben, können wir anfangen unse
 
 ## Support Vector Machine
 
-```{r eval=FALSE, include=FALSE}
-library(caret)
+Ein gern und häufig verwendeter, etwas komplexerer Machine Learning Algorithmus zur Klassifikation auch mehrerer Gruppen ist die [Support Vector Machine](https://de.wikipedia.org/wiki/Support_Vector_Machine). Der Algorithmus versucht hierbei möglichst gute Trennungen zwischen den Klassen (auch mehreren) in einem sogenannten Vektorraum zu finden.
 
+In R gibt es mehrere Pakete, die Support Vector Machines zur Verfügung stellen, ein Beispiel wäre das Paket `e1071`. Das Vorgehen ist dem bei der logistischen Regression (siehe \@ref(log-regression)) sehr ähnlich. Der Funktion `svm()` übergeben wir auch in diesem Falle eine Formel und den entsprechenden Datensatz. Hier ist es allerdings wichtig nur den Trainingsdatensatz zu verwenden.
+
+```{r}
 library(e1071)
 
-fit <- svm(Species ~ Sepal.Width + Sepal.Length + Petal.Width + Petal.Length, data = iris)
 fit <- svm(Species ~ ., data = iris_training)
-
-iris %>% 
-  add_column(prediction = predict(fit))
-
 summary(fit)
-predict(fit)
+```
 
-table(predict(fit, iris), iris$Species) %>% 
+Ein solches Modell erschließt sich entsprechend nicht ganz so intuitiv wie bspw. eine linieare Regression (\@ref(lin-regression)). Für die meisten unserer Anwendungen muss dies aber kein Nachteil sein, es sollte aber bei solchen Algorithmen in besonderem Maße darauf geachtet werden, dass letztlich nur die Ergebnisse in dem Testdatensatz bedeutend sind. Gute Ergebnisse in den Trainingsdaten können auch lediglich Ausdruck eines sogenannten [Overfittings](https://de.wikipedia.org/wiki/Überanpassung) sein und sind nicht immer auf die Testdaten übertragbar.
+
+In einem zweiten Schritt wenden wir, wie auch schon bei den Regressionen, daher nun das trainierte Modell auf neue Daten an - in diesem Fall den Testdatensatz, der nicht Teil des Trainingsprozesses war.
+
+```{r}
+iris_test <- iris_testing %>% 
+  add_column(prediction = predict(fit, iris_testing))
+```
+
+Zur Bewertung der diagnostischen Genauigkeit des Modells sind eine Reihe Maßzahlen üblich. Erfreulicherweise enthält das o.g. Paket `caret` auch einige praktische Funktionen, um diese einfach berechnen zu lassen. Die Funktion `confusionMatrix()` benötigt dazu als Parameter eine Kreuztabelle, die wir in R wiederum mithilfe der Funktion `table()` erstellen können.
+
+```{r}
+table(iris_test$Species, iris_test$prediction) %>% 
   confusionMatrix()
 ```
 
+Die Funktion `confusionMatrix()` gibt erfreulicherweise auch gleich die Kreuztabelle mit aus. Dabei entsprechen die Zeilen dem "wahren" Label oder Wert und die Spalten der Vorhersage des Algorithmus. Wir sehen also nun, dass sich der Algorithmus nur in zwei Fällen im Testdatensatz vertan hat (beide Male gab der Algorithmus Art `versicolor` aus, obwohl es sich um Schwertlilien der Art `virginica` handelte).
 
+## Weitere Informationen zu Machine Learning in R
 
-----
+Natürlich können wir an dieser Stelle nicht alle Machine Learning Algorithmen behandeln, die man in R nutzen kann. Es gibt aber 
 
-
-
-
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX hier weiter
 
 ## Praktische Pakete für Machine Learning
 
