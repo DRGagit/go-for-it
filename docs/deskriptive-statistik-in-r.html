@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Deskriptive Statistik in R | DRG/AGIT - Go for IT</title>
   <meta name="description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Deskriptive Statistik in R | DRG/AGIT - Go for IT" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bettina Baeßler &amp; Daniel Pinto dos Santos" />
 
 
-<meta name="date" content="2020-08-13" />
+<meta name="date" content="2020-12-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,8 +32,8 @@
   
   
 <link rel="prev" href="nächste-schritte-in-r-bunte-bilder-und-mehr.html"/>
-<link rel="next" href="theoretisch-ja-praktisch-auch-tests-in-r.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<link rel="next" href="tests-in-r.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +52,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119151357-2"></script>
 <script>
@@ -170,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><i class="fa fa-check"></i><b>2</b> Nächste Schritte in R: bunte Bilder und mehr</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>2.1</b> Lernziele</a></li>
+<li class="chapter" data-level="2.1" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#lernziele-1"><i class="fa fa-check"></i><b>2.1</b> Lernziele</a></li>
 <li class="chapter" data-level="2.2" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#grafiken-in-base-r"><i class="fa fa-check"></i><b>2.2</b> Grafiken in Base R</a></li>
 <li class="chapter" data-level="2.3" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#pakete-installieren-und-laden"><i class="fa fa-check"></i><b>2.3</b> Pakete installieren und laden</a>
 <ul>
@@ -180,7 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html"><i class="fa fa-check"></i><b>3</b> Deskriptive Statistik in R</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>3.1</b> Lernziele</a></li>
+<li class="chapter" data-level="3.1" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#lernziele-2"><i class="fa fa-check"></i><b>3.1</b> Lernziele</a></li>
 <li class="chapter" data-level="3.2" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-mit-basis-r"><i class="fa fa-check"></i><b>3.2</b> Deskriptive Statistiken mit Basis R</a></li>
 <li class="chapter" data-level="3.3" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-im-tidyverse"><i class="fa fa-check"></i><b>3.3</b> Deskriptive Statistiken im Tidyverse</a></li>
 <li class="chapter" data-level="3.4" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-mit-anderen-paketen"><i class="fa fa-check"></i><b>3.4</b> Deskriptive Statistiken mit anderen Paketen</a>
@@ -190,29 +192,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#mehr-bunte-bilder"><i class="fa fa-check"></i><b>3.5</b> Mehr bunte Bilder</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html"><i class="fa fa-check"></i><b>4</b> Theoretisch ja, praktisch auch! Tests in R</a>
+<li class="chapter" data-level="4" data-path="tests-in-r.html"><a href="tests-in-r.html"><i class="fa fa-check"></i><b>4</b> Theoretisch ja, praktisch auch! Tests in R</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>4.1</b> Lernziele</a></li>
-<li class="chapter" data-level="4.2" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#normalverteilung-prüfen"><i class="fa fa-check"></i><b>4.2</b> Normalverteilung prüfen</a>
+<li class="chapter" data-level="4.1" data-path="tests-in-r.html"><a href="tests-in-r.html#lernziele-3"><i class="fa fa-check"></i><b>4.1</b> Lernziele</a></li>
+<li class="chapter" data-level="4.2" data-path="tests-in-r.html"><a href="tests-in-r.html#normalverteilung-prüfen"><i class="fa fa-check"></i><b>4.2</b> Normalverteilung prüfen</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#ein-kurzer-ausflug-in-ergebnisobjekte"><i class="fa fa-check"></i><b>4.2.1</b> Ein kurzer Ausflug in Ergebnisobjekte</a></li>
+<li class="chapter" data-level="4.2.1" data-path="tests-in-r.html"><a href="tests-in-r.html#ein-kurzer-ausflug-in-ergebnisobjekte"><i class="fa fa-check"></i><b>4.2.1</b> Ein kurzer Ausflug in Ergebnisobjekte</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#t-test-und-wilcoxon-test"><i class="fa fa-check"></i><b>4.3</b> T-Test und Wilcoxon-Test</a>
+<li class="chapter" data-level="4.3" data-path="tests-in-r.html"><a href="tests-in-r.html#t-test-und-wilcoxon-test"><i class="fa fa-check"></i><b>4.3</b> T-Test und Wilcoxon-Test</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#ein-kurzer-ausflug-in-formeln"><i class="fa fa-check"></i><b>4.3.1</b> Ein kurzer Ausflug in Formeln</a></li>
-<li class="chapter" data-level="4.3.2" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#ein-kurzer-ausflug-in-funktionen"><i class="fa fa-check"></i><b>4.3.2</b> Ein kurzer Ausflug in Funktionen</a></li>
+<li class="chapter" data-level="4.3.1" data-path="tests-in-r.html"><a href="tests-in-r.html#formulas-in-r"><i class="fa fa-check"></i><b>4.3.1</b> Ein kurzer Ausflug in Formeln</a></li>
+<li class="chapter" data-level="4.3.2" data-path="tests-in-r.html"><a href="tests-in-r.html#ein-kurzer-ausflug-in-funktionen"><i class="fa fa-check"></i><b>4.3.2</b> Ein kurzer Ausflug in Funktionen</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#anova"><i class="fa fa-check"></i><b>4.4</b> ANOVA</a>
+<li class="chapter" data-level="4.4" data-path="tests-in-r.html"><a href="tests-in-r.html#anova"><i class="fa fa-check"></i><b>4.4</b> ANOVA</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#ein-zweiter-kurzer-ausfulg-in-ergebnisobjekte"><i class="fa fa-check"></i><b>4.4.1</b> Ein zweiter kurzer Ausfulg in Ergebnisobjekte</a></li>
+<li class="chapter" data-level="4.4.1" data-path="tests-in-r.html"><a href="tests-in-r.html#broom-return-objects"><i class="fa fa-check"></i><b>4.4.1</b> Ein zweiter kurzer Ausfulg in Ergebnisobjekte</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html"><i class="fa fa-check"></i><b>5</b> Diverse Tipps &amp; Tricks für R</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>5.1</b> Lernziele</a></li>
+<li class="chapter" data-level="5.1" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#lernziele-4"><i class="fa fa-check"></i><b>5.1</b> Lernziele</a></li>
 <li class="chapter" data-level="5.2" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#nachvollziehbare-analysen-und-rmarkdown"><i class="fa fa-check"></i><b>5.2</b> Nachvollziehbare Analysen und Rmarkdown</a></li>
 <li class="chapter" data-level="5.3" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#styleguide"><i class="fa fa-check"></i><b>5.3</b> Styleguide</a></li>
 <li class="chapter" data-level="5.4" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#cheatsheets"><i class="fa fa-check"></i><b>5.4</b> Cheatsheets</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html"><i class="fa fa-check"></i><b>6</b> See one, do one, teach one! Machine Learning in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#lernziele-5"><i class="fa fa-check"></i><b>6.1</b> Lernziele</a></li>
+<li class="chapter" data-level="6.2" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#das-iris-dataset"><i class="fa fa-check"></i><b>6.2</b> Das Iris Dataset</a></li>
+<li class="chapter" data-level="6.3" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#explorative-datenvisualisierung"><i class="fa fa-check"></i><b>6.3</b> Explorative Datenvisualisierung</a></li>
+<li class="chapter" data-level="6.4" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#lin-regression"><i class="fa fa-check"></i><b>6.4</b> Lineare Regression</a></li>
+<li class="chapter" data-level="6.5" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#log-regression"><i class="fa fa-check"></i><b>6.5</b> Logistische Regression</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#ein-kurzer-ausflug-in-roc-analysen."><i class="fa fa-check"></i><b>6.5.1</b> Ein kurzer Ausflug in ROC-Analysen.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#datenaufbereitung-für-machine-learning"><i class="fa fa-check"></i><b>6.6</b> Datenaufbereitung für Machine Learning</a></li>
+<li class="chapter" data-level="6.7" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#support-vector-machine"><i class="fa fa-check"></i><b>6.7</b> Support Vector Machine</a></li>
+<li class="chapter" data-level="6.8" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#weitere-informationen-zu-machine-learning-in-r"><i class="fa fa-check"></i><b>6.8</b> Weitere Informationen zu Machine Learning in R</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Erstellt mit bookdown</a></li>
@@ -237,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="deskriptive-statistik-in-r" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Deskriptive Statistik in R</h1>
 <p>Visualisierung ist natürlich schon gut um einen ersten schnellen Überblick über Daten zu bekommen, aber früher oder später geht es ans Eingemachte und es müssen harte und genaue Zahlen her. Einige der wichtigen Zahlen, die unsere Daten beschreiben sind sogenannte <a href="https://de.wikipedia.org/wiki/Deskriptive_Statistik">deskriptive Statistiken</a>. Darunter fallen so einfache Dinge wie der Mittelwert, aber auch andere Werte wie Standardabweichung, Median, Minimum, Maximum und Quartile oder auch seltener gebrauchte Werte wie der Modus, Kurtosis und Varianz.</p>
-<div id="lernziele" class="section level2" number="3.1">
+<div id="lernziele-2" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Lernziele</h2>
 <p>In diesem Kapitel werden folgende Themen besprochen:</p>
 <ul>
@@ -486,7 +502,7 @@ s.setAttribute('data-timestamp', +new Date());
         </div>
       </div>
 <a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="theoretisch-ja-praktisch-auch-tests-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tests-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

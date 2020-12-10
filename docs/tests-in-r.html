@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Theoretisch ja, praktisch auch! Tests in R | DRG/AGIT - Go for IT</title>
   <meta name="description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Theoretisch ja, praktisch auch! Tests in R | DRG/AGIT - Go for IT" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bettina Baeßler &amp; Daniel Pinto dos Santos" />
 
 
-<meta name="date" content="2020-08-13" />
+<meta name="date" content="2020-12-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="deskriptive-statistik-in-r.html"/>
 <link rel="next" href="diverse-tipps-tricks-für-r.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +52,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119151357-2"></script>
 <script>
@@ -170,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><i class="fa fa-check"></i><b>2</b> Nächste Schritte in R: bunte Bilder und mehr</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>2.1</b> Lernziele</a></li>
+<li class="chapter" data-level="2.1" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#lernziele-1"><i class="fa fa-check"></i><b>2.1</b> Lernziele</a></li>
 <li class="chapter" data-level="2.2" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#grafiken-in-base-r"><i class="fa fa-check"></i><b>2.2</b> Grafiken in Base R</a></li>
 <li class="chapter" data-level="2.3" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#pakete-installieren-und-laden"><i class="fa fa-check"></i><b>2.3</b> Pakete installieren und laden</a>
 <ul>
@@ -180,7 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html"><i class="fa fa-check"></i><b>3</b> Deskriptive Statistik in R</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>3.1</b> Lernziele</a></li>
+<li class="chapter" data-level="3.1" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#lernziele-2"><i class="fa fa-check"></i><b>3.1</b> Lernziele</a></li>
 <li class="chapter" data-level="3.2" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-mit-basis-r"><i class="fa fa-check"></i><b>3.2</b> Deskriptive Statistiken mit Basis R</a></li>
 <li class="chapter" data-level="3.3" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-im-tidyverse"><i class="fa fa-check"></i><b>3.3</b> Deskriptive Statistiken im Tidyverse</a></li>
 <li class="chapter" data-level="3.4" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-mit-anderen-paketen"><i class="fa fa-check"></i><b>3.4</b> Deskriptive Statistiken mit anderen Paketen</a>
@@ -190,29 +192,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#mehr-bunte-bilder"><i class="fa fa-check"></i><b>3.5</b> Mehr bunte Bilder</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html"><i class="fa fa-check"></i><b>4</b> Theoretisch ja, praktisch auch! Tests in R</a>
+<li class="chapter" data-level="4" data-path="tests-in-r.html"><a href="tests-in-r.html"><i class="fa fa-check"></i><b>4</b> Theoretisch ja, praktisch auch! Tests in R</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>4.1</b> Lernziele</a></li>
-<li class="chapter" data-level="4.2" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#normalverteilung-prüfen"><i class="fa fa-check"></i><b>4.2</b> Normalverteilung prüfen</a>
+<li class="chapter" data-level="4.1" data-path="tests-in-r.html"><a href="tests-in-r.html#lernziele-3"><i class="fa fa-check"></i><b>4.1</b> Lernziele</a></li>
+<li class="chapter" data-level="4.2" data-path="tests-in-r.html"><a href="tests-in-r.html#normalverteilung-prüfen"><i class="fa fa-check"></i><b>4.2</b> Normalverteilung prüfen</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#ein-kurzer-ausflug-in-ergebnisobjekte"><i class="fa fa-check"></i><b>4.2.1</b> Ein kurzer Ausflug in Ergebnisobjekte</a></li>
+<li class="chapter" data-level="4.2.1" data-path="tests-in-r.html"><a href="tests-in-r.html#ein-kurzer-ausflug-in-ergebnisobjekte"><i class="fa fa-check"></i><b>4.2.1</b> Ein kurzer Ausflug in Ergebnisobjekte</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#t-test-und-wilcoxon-test"><i class="fa fa-check"></i><b>4.3</b> T-Test und Wilcoxon-Test</a>
+<li class="chapter" data-level="4.3" data-path="tests-in-r.html"><a href="tests-in-r.html#t-test-und-wilcoxon-test"><i class="fa fa-check"></i><b>4.3</b> T-Test und Wilcoxon-Test</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#ein-kurzer-ausflug-in-formeln"><i class="fa fa-check"></i><b>4.3.1</b> Ein kurzer Ausflug in Formeln</a></li>
-<li class="chapter" data-level="4.3.2" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#ein-kurzer-ausflug-in-funktionen"><i class="fa fa-check"></i><b>4.3.2</b> Ein kurzer Ausflug in Funktionen</a></li>
+<li class="chapter" data-level="4.3.1" data-path="tests-in-r.html"><a href="tests-in-r.html#formulas-in-r"><i class="fa fa-check"></i><b>4.3.1</b> Ein kurzer Ausflug in Formeln</a></li>
+<li class="chapter" data-level="4.3.2" data-path="tests-in-r.html"><a href="tests-in-r.html#ein-kurzer-ausflug-in-funktionen"><i class="fa fa-check"></i><b>4.3.2</b> Ein kurzer Ausflug in Funktionen</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#anova"><i class="fa fa-check"></i><b>4.4</b> ANOVA</a>
+<li class="chapter" data-level="4.4" data-path="tests-in-r.html"><a href="tests-in-r.html#anova"><i class="fa fa-check"></i><b>4.4</b> ANOVA</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="theoretisch-ja-praktisch-auch-tests-in-r.html"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#ein-zweiter-kurzer-ausfulg-in-ergebnisobjekte"><i class="fa fa-check"></i><b>4.4.1</b> Ein zweiter kurzer Ausfulg in Ergebnisobjekte</a></li>
+<li class="chapter" data-level="4.4.1" data-path="tests-in-r.html"><a href="tests-in-r.html#broom-return-objects"><i class="fa fa-check"></i><b>4.4.1</b> Ein zweiter kurzer Ausfulg in Ergebnisobjekte</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html"><i class="fa fa-check"></i><b>5</b> Diverse Tipps &amp; Tricks für R</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>5.1</b> Lernziele</a></li>
+<li class="chapter" data-level="5.1" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#lernziele-4"><i class="fa fa-check"></i><b>5.1</b> Lernziele</a></li>
 <li class="chapter" data-level="5.2" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#nachvollziehbare-analysen-und-rmarkdown"><i class="fa fa-check"></i><b>5.2</b> Nachvollziehbare Analysen und Rmarkdown</a></li>
 <li class="chapter" data-level="5.3" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#styleguide"><i class="fa fa-check"></i><b>5.3</b> Styleguide</a></li>
 <li class="chapter" data-level="5.4" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#cheatsheets"><i class="fa fa-check"></i><b>5.4</b> Cheatsheets</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html"><i class="fa fa-check"></i><b>6</b> See one, do one, teach one! Machine Learning in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#lernziele-5"><i class="fa fa-check"></i><b>6.1</b> Lernziele</a></li>
+<li class="chapter" data-level="6.2" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#das-iris-dataset"><i class="fa fa-check"></i><b>6.2</b> Das Iris Dataset</a></li>
+<li class="chapter" data-level="6.3" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#explorative-datenvisualisierung"><i class="fa fa-check"></i><b>6.3</b> Explorative Datenvisualisierung</a></li>
+<li class="chapter" data-level="6.4" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#lin-regression"><i class="fa fa-check"></i><b>6.4</b> Lineare Regression</a></li>
+<li class="chapter" data-level="6.5" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#log-regression"><i class="fa fa-check"></i><b>6.5</b> Logistische Regression</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#ein-kurzer-ausflug-in-roc-analysen."><i class="fa fa-check"></i><b>6.5.1</b> Ein kurzer Ausflug in ROC-Analysen.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#datenaufbereitung-für-machine-learning"><i class="fa fa-check"></i><b>6.6</b> Datenaufbereitung für Machine Learning</a></li>
+<li class="chapter" data-level="6.7" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#support-vector-machine"><i class="fa fa-check"></i><b>6.7</b> Support Vector Machine</a></li>
+<li class="chapter" data-level="6.8" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#weitere-informationen-zu-machine-learning-in-r"><i class="fa fa-check"></i><b>6.8</b> Weitere Informationen zu Machine Learning in R</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Erstellt mit bookdown</a></li>
@@ -234,7 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="theoretisch-ja-praktisch-auch-tests-in-r" class="section level1" number="4">
+<div id="tests-in-r" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Theoretisch ja, praktisch auch! Tests in R</h1>
 <p>Üblicherweise geht es nach den deskriptiven Statistiken in den meisten Fällen ans Eingemachte - die <a href="https://de.wikipedia.org/wiki/Statistischer_Test">statistischen Tests</a>. Nehmen wir an, in zwei Gruppen beobachten wir unterschiedliche Mittelwerte. Eine mögliche Erklärung könnte sein, dass der bloße Zufall hier Unterschiede erscheinen lässt, wo in Wirklichkeit keine sind. Eine andere Möglichkeit wäre dann, dass in der Tat Unterschiede zwischen den Gruppen bestehen, und diese nicht alleine dem Zufall zu schulden sind.</p>
 <p>Die gesamten theoretischen Grundlagen hier zu wiederholen würde sicher den Rahmen sprengen, insofern beschränken wir uns im Folgenden mit der Durchführung verschiedener statistischer Tests in R. Welcher Test wann der geeignete ist, ist manchmal nicht leicht zu erkennen. Für eine erste grobe Einschätzung kann aber die folgende Tabelle hilfreich sein.</p>
@@ -242,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="assets/img/stat_tests.png" alt="" />
 <p class="caption">Mögliche statistische Tests in Abhängigkeit der Variablen. (Tabelle ursprünglich aus Wikipedia unter Creative Commons Lizenz)</p>
 </div>
-<div id="lernziele" class="section level2" number="4.1">
+<div id="lernziele-3" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Lernziele</h2>
 <ul>
 <li>Daten auf Normalverteilung prüfen (Shapiro-Test)</li>
@@ -255,11 +271,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.2</span> Normalverteilung prüfen</h2>
 <p>Wie aus obiger Tabelle ersichtlich ist, kann es mitunter zur Auswahl des korrekten statistischen Tests wichtig sein zunächst zu prüfen, ob die Werte einer Variablen normalverteilt sind. Natürlich können wir versuchen visuell abzuschätzen, ob dies der Fall ist. Für ein fiktives Beispiel wären wir zudem interessiert, die Normalverteilung für einen Wert innerhalb verschiedener Gruppen zu untersuchen. Eine schnelle deskriptive Statistik bzw. Visualisierung könnte wie folgt aussehen.</p>
 <p>Wir nutzen hier die <code>skew()</code>-Funktion aus dem <code>psych</code> Paket, um die <a href="https://de.wikipedia.org/wiki/Schiefe_(Statistik)">Schiefe</a> der Verteilung zu erhalten (bei einer Normalverteilung nahe 0, bei positiven Werten ist der Ausläufer nach rechts länger, bei negativen Werten der Ausläufer nach links).</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb116-1"></a><span class="kw">library</span>(psych)</span>
-<span id="cb116-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb116-2"></a></span>
-<span id="cb116-3"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb116-3"></a>daten <span class="op">%&gt;%</span></span>
-<span id="cb116-4"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb116-4"></a><span class="st">  </span><span class="kw">group_by</span>(untersuchung) <span class="op">%&gt;%</span></span>
-<span id="cb116-5"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb116-5"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">schiefe_dlp =</span> <span class="kw">skew</span>(dlp))</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="tests-in-r.html#cb116-1"></a><span class="kw">library</span>(psych)</span>
+<span id="cb116-2"><a href="tests-in-r.html#cb116-2"></a></span>
+<span id="cb116-3"><a href="tests-in-r.html#cb116-3"></a>daten <span class="op">%&gt;%</span></span>
+<span id="cb116-4"><a href="tests-in-r.html#cb116-4"></a><span class="st">  </span><span class="kw">group_by</span>(untersuchung) <span class="op">%&gt;%</span></span>
+<span id="cb116-5"><a href="tests-in-r.html#cb116-5"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">schiefe_dlp =</span> <span class="kw">skew</span>(dlp))</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 6 x 2
 ##   untersuchung  schiefe_dlp
@@ -270,20 +286,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 Kopf               0.223 
 ## 5 Thorax             3.58  
 ## 6 Traumaspirale      0.0290</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb119-1"></a>daten <span class="op">%&gt;%</span></span>
-<span id="cb119-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb119-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dlp, <span class="dt">fill =</span> untersuchung)) <span class="op">+</span></span>
-<span id="cb119-3"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb119-3"></a><span class="st">    </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
-<span id="cb119-4"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb119-4"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(untersuchung)) <span class="op">+</span></span>
-<span id="cb119-5"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb119-5"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;DLP [mGy*cm]&quot;</span>,</span>
-<span id="cb119-6"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb119-6"></a>         <span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb119-7"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb119-7"></a>         <span class="dt">fill =</span> <span class="st">&quot;Untersuchungsbezeichnung&quot;</span>) <span class="op">+</span></span>
-<span id="cb119-8"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb119-8"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="tests-in-r.html#cb119-1"></a>daten <span class="op">%&gt;%</span></span>
+<span id="cb119-2"><a href="tests-in-r.html#cb119-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dlp, <span class="dt">fill =</span> untersuchung)) <span class="op">+</span></span>
+<span id="cb119-3"><a href="tests-in-r.html#cb119-3"></a><span class="st">    </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
+<span id="cb119-4"><a href="tests-in-r.html#cb119-4"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(untersuchung)) <span class="op">+</span></span>
+<span id="cb119-5"><a href="tests-in-r.html#cb119-5"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;DLP [mGy*cm]&quot;</span>,</span>
+<span id="cb119-6"><a href="tests-in-r.html#cb119-6"></a>         <span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb119-7"><a href="tests-in-r.html#cb119-7"></a>         <span class="dt">fill =</span> <span class="st">&quot;Untersuchungsbezeichnung&quot;</span>) <span class="op">+</span></span>
+<span id="cb119-8"><a href="tests-in-r.html#cb119-8"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <p>Wir sehen hier bereits, dass die DLP-Werte für Untersuchungen des Kopfes und bei Traumaspiralen vermutlich normalverteilt sind. Doch um wirklich sicher zu gehen, sollte ein entsprechender statistischer Test verwendet werden. Für diese Frage bietet sich der <a href="https://de.wikipedia.org/wiki/Shapiro-Wilk-Test">Shapiro-Wilk-Test</a> an.</p>
 <p>Der Shapiro-Wilk-Test nimmt als sog. Nullhypothese an, dass die Daten normalverteilt sind. Ein kleiner p-Wert zeigt in diesem Fall dann entsprechen an, dass die Alternativhypothese anzunehmen ist, also dass die Daten nicht normalverteilt sind. Erfreulicherweise findet sich für die meisten statistischen Tests in R eine entsprechend benannte Funktion. Um also bspw. die DLP-Werte im gesamten Datensatz auf Normalverteilung zu untersuchen, können wir einfach die Funktion <code>shapiro.test()</code> nutzen.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb120-1"></a><span class="kw">shapiro.test</span>(daten<span class="op">$</span>dlp)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="tests-in-r.html#cb120-1"></a><span class="kw">shapiro.test</span>(daten<span class="op">$</span>dlp)</span></code></pre></div>
 <pre><code>## 
-## 	Shapiro-Wilk normality test
+##  Shapiro-Wilk normality test
 ## 
 ## data:  daten$dlp
 ## W = 0.8234, p-value &lt; 2.2e-16</code></pre>
@@ -291,8 +307,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ein-kurzer-ausflug-in-ergebnisobjekte" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Ein kurzer Ausflug in Ergebnisobjekte</h3>
 <p>In vielen Fällen sind die Ausgaben solcher statistischen Tests etwas unintuitiv formatiert und die einzelnen Werte weiterzuverwenden erscheint zunächst schwierig. Es lohnt daher an dieser Stelle ein kurzer Ausflug, denn wir können durchaus auf Einzelteile der Ausgabe direkt zugreifen. Um einen etwas tieferen Einblick zu erhalten, speichern wir zunächst das Ergebnis der <code>shapiro.test()</code> Funktion in einer Variablen und schauen uns die Struktur der Variablen an.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb122-1"></a>shapiro.ergebnis &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(daten<span class="op">$</span>dlp)</span>
-<span id="cb122-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb122-2"></a><span class="kw">str</span>(shapiro.ergebnis)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="tests-in-r.html#cb122-1"></a>shapiro.ergebnis &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(daten<span class="op">$</span>dlp)</span>
+<span id="cb122-2"><a href="tests-in-r.html#cb122-2"></a><span class="kw">str</span>(shapiro.ergebnis)</span></code></pre></div>
 <pre><code>## List of 4
 ##  $ statistic: Named num 0.823
 ##   ..- attr(*, &quot;names&quot;)= chr &quot;W&quot;
@@ -301,15 +317,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ data.name: chr &quot;daten$dlp&quot;
 ##  - attr(*, &quot;class&quot;)= chr &quot;htest&quot;</code></pre>
 <p>Wie man erkennen kann, handelt es sich um eine Liste von Werten, die einfach—wenn sie nicht in einer Variablen gespeichert sind—gemeinsam auf der Konsole ausgegeben werden. Das Dollarzeichen <code>$</code> in der Ausgabe der <code>str()</code> Funktion zeigt hier aber bereits an, dass wir auch einzelne Teile des Ergebnisses direkt referenzieren können, ähnlich den Spalten eines Dataframes.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb124-1"></a>shapiro.ergebnis<span class="op">$</span>p.value</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="tests-in-r.html#cb124-1"></a>shapiro.ergebnis<span class="op">$</span>p.value</span></code></pre></div>
 <pre><code>## [1] 8.48211e-46</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb126-1"></a>shapiro.ergebnis<span class="op">$</span>p.value <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span></span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="tests-in-r.html#cb126-1"></a>shapiro.ergebnis<span class="op">$</span>p.value <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Wären wir also bspw. in obigem fiktiven Beispiel daran interessiert die Normalverteilung innerhalb der Subgruppen zu prüfen, könnten wir in Tidyverse-Syntax eine Verkettung von Befehlen schreiben, an deren Ende eine ansprechend formatierte Tabelle stünde, die in einer Spalte auch gleich prüft, ob der p-Wert unterhalb des Signifikanzniveau von 0.05 liegt.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb128-1"></a>daten <span class="op">%&gt;%</span></span>
-<span id="cb128-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb128-2"></a><span class="st">  </span><span class="kw">group_by</span>(untersuchung) <span class="op">%&gt;%</span></span>
-<span id="cb128-3"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb128-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">shapiro_p.wert =</span> <span class="kw">shapiro.test</span>(dlp)<span class="op">$</span>p.value) <span class="op">%&gt;%</span></span>
-<span id="cb128-4"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb128-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">signifikant_0.05 =</span> shapiro_p.wert <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="tests-in-r.html#cb128-1"></a>daten <span class="op">%&gt;%</span></span>
+<span id="cb128-2"><a href="tests-in-r.html#cb128-2"></a><span class="st">  </span><span class="kw">group_by</span>(untersuchung) <span class="op">%&gt;%</span></span>
+<span id="cb128-3"><a href="tests-in-r.html#cb128-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">shapiro_p.wert =</span> <span class="kw">shapiro.test</span>(dlp)<span class="op">$</span>p.value) <span class="op">%&gt;%</span></span>
+<span id="cb128-4"><a href="tests-in-r.html#cb128-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">signifikant_0.05 =</span> shapiro_p.wert <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 6 x 3
 ##   untersuchung  shapiro_p.wert signifikant_0.05
@@ -326,22 +342,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="t-test-und-wilcoxon-test" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> T-Test und Wilcoxon-Test</h2>
 <p>Nachdem nun die Daten auf Normalverteilung geprüft wurden, können wir mit dem entsprechenden statistischen Test untersuchen, ob zwischen einzelnen Gruppen ein signifikanter Unterschied in der Verteilung der Werte für eine Variable existiert. In unserem Falle wäre, da die Daten nicht normalverteilt sind, der <a href="https://de.wikipedia.org/wiki/Wilcoxon-Mann-Whitney-Test">Wilcoxon-Mann-Whitney-Test</a> die richtige Wahl. Ähnlich wie für den Shapiro-Wilk-Test <code>shapiro.test()</code> existiert in diesem Falle die Funktion <code>wilcoxon.test()</code>. Die Funktion erwartet als Parameter entweder zwei Vektoren mit Zahlenwerten (oder ein Dataframe und eine sogenannte Formel, aber dazu später). Für ein einfaches Beispiel wollen wir den Vergleich der DLP-Werte von Thorax-Untersuchungen mit denen von Abdomen-Untersuchungen untersuchen. Hierzu ziehen wir uns zunächst die entsprechenden Werte aus dem Dataframe heraus und speichern sie in separaten Variablen, anschließend können diese Vektoren der Funktion <code>wilcoxon.test()</code> übergeben werden. Im Übrigen geht R bei T-Test und Wilcoxon-Test davon aus, dass es sich um unverbundene Stichproben handelt. Sicherheitshalber sollte man sich aber angewöhnen, dies auch explizit mithilfe des Parameters <code>paired = FALSE</code> anzugeben.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb131-1"></a><span class="co"># erst die Funktion pull() extrahiert aus dem Dataframe einen einfachen Vektor</span></span>
-<span id="cb131-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb131-2"></a>dlp.abdomen &lt;-<span class="st"> </span>daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">==</span><span class="st"> &quot;Abdomen&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(dlp)</span>
-<span id="cb131-3"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb131-3"></a>dlp.thorax  &lt;-<span class="st"> </span>daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">==</span><span class="st"> &quot;Thorax&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(dlp)</span>
-<span id="cb131-4"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb131-4"></a></span>
-<span id="cb131-5"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb131-5"></a><span class="kw">wilcox.test</span>(dlp.abdomen, dlp.thorax, <span class="dt">paired =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="tests-in-r.html#cb131-1"></a><span class="co"># erst die Funktion pull() extrahiert aus dem Dataframe einen einfachen Vektor</span></span>
+<span id="cb131-2"><a href="tests-in-r.html#cb131-2"></a>dlp.abdomen &lt;-<span class="st"> </span>daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">==</span><span class="st"> &quot;Abdomen&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(dlp)</span>
+<span id="cb131-3"><a href="tests-in-r.html#cb131-3"></a>dlp.thorax  &lt;-<span class="st"> </span>daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">==</span><span class="st"> &quot;Thorax&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(dlp)</span>
+<span id="cb131-4"><a href="tests-in-r.html#cb131-4"></a></span>
+<span id="cb131-5"><a href="tests-in-r.html#cb131-5"></a><span class="kw">wilcox.test</span>(dlp.abdomen, dlp.thorax, <span class="dt">paired =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
-## 	Wilcoxon rank sum test with continuity correction
+##  Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  dlp.abdomen and dlp.thorax
 ## W = 445818, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Wie erwartet, zeigt hier der p-Wert &lt; 2,2 x 10<sup>-16</sup> an, dass die DLP-Werte von Thorax-Untersuchungen und Abdomen-Untersuchungen signifikant verschieden sind.</p>
 <p>Genau so einfach ließe sich entsprechend auch ein T-Test <code>t.test()</code> rechnen, der zwar in diesem Falle vielleicht nicht optimal wäre, weil wie bereits besprochen keine Normalverteilung der Werte vorliegt, aber das ignorieren wir einmal.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb133-1"></a><span class="kw">t.test</span>(dlp.abdomen, dlp.thorax, <span class="dt">paired =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="tests-in-r.html#cb133-1"></a><span class="kw">t.test</span>(dlp.abdomen, dlp.thorax, <span class="dt">paired =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
-## 	Welch Two Sample t-test
+##  Welch Two Sample t-test
 ## 
 ## data:  dlp.abdomen and dlp.thorax
 ## t = 14.719, df = 1032.2, p-value &lt; 2.2e-16
@@ -351,18 +367,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## mean of x mean of y 
 ## 1037.5276  397.4961</code></pre>
-<div id="ein-kurzer-ausflug-in-formeln" class="section level3" number="4.3.1">
+<div id="formulas-in-r" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Ein kurzer Ausflug in Formeln</h3>
 <p>Mit Formeln werden in R nicht übliche Formeln in der Art <code>f(x) = mx + b</code> bezeichnet, sondern bei der Definition von statistischen Tests oder Modellen ein Ausdruck, der beschreibt welche Zielvariable von welchen Einflussvariablen abhängen soll. Eine Formel in R besteht immer aus einer Tilde <code>~</code> und einem oder mehreren Ausdrücken, die jeweils rechts (RHS = right hand side) bzw. links (LHS = left hand side) der Tilde <code>~</code> stehen. Die Zielvariable steht dabei links (LHS) und die möglichen Einflussvariablen rechts (RHS).</p>
 <p>Wollten wir also beispielsweise ausdrücken, dass wir das DLP in Abhängigkeit der Untersuchungsbeschreibung auf statistische Signifikanz untersuchen wollen würden, könnten wir das folgendermaßen ausdrücken: <code>dlp ~ untersuchung</code>. Wollten wir also in unserem Beispiel die beiden Gruppen Thorax und Abdomen vergleichen, könnten wir den Ausdruck <code>daten %&gt;% filter(untersuchung %in% c("Abdomen", "Thorax"))</code> nutzen, um ein Dataframe zu erzeugen, das nur diese beiden Gruppen enthält. Bei dem Aufruf der Funktion <code>t.test()</code> müssten wir dieses Dataframe als Parameter <code>data =</code> übergeben und als ersten Parameter die oben genannte Formel <code>dlp ~ untersuchung</code>.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb135-1"></a><span class="co"># auch hier hilft eine Schreibweise mit Zeilenumbrüchen nicht den Überblick zu verlieren</span></span>
-<span id="cb135-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb135-2"></a><span class="kw">t.test</span>(</span>
-<span id="cb135-3"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb135-3"></a>  dlp <span class="op">~</span><span class="st"> </span>untersuchung,</span>
-<span id="cb135-4"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb135-4"></a>  <span class="dt">data =</span> daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abdomen&quot;</span>, <span class="st">&quot;Thorax&quot;</span>)),</span>
-<span id="cb135-5"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb135-5"></a>  <span class="dt">paired =</span> <span class="ot">FALSE</span></span>
-<span id="cb135-6"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb135-6"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="tests-in-r.html#cb135-1"></a><span class="co"># auch hier hilft eine Schreibweise mit Zeilenumbrüchen nicht den Überblick zu verlieren</span></span>
+<span id="cb135-2"><a href="tests-in-r.html#cb135-2"></a><span class="kw">t.test</span>(</span>
+<span id="cb135-3"><a href="tests-in-r.html#cb135-3"></a>  dlp <span class="op">~</span><span class="st"> </span>untersuchung,</span>
+<span id="cb135-4"><a href="tests-in-r.html#cb135-4"></a>  <span class="dt">data =</span> daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abdomen&quot;</span>, <span class="st">&quot;Thorax&quot;</span>)),</span>
+<span id="cb135-5"><a href="tests-in-r.html#cb135-5"></a>  <span class="dt">paired =</span> <span class="ot">FALSE</span></span>
+<span id="cb135-6"><a href="tests-in-r.html#cb135-6"></a>  )</span></code></pre></div>
 <pre><code>## 
-## 	Welch Two Sample t-test
+##  Welch Two Sample t-test
 ## 
 ## data:  dlp by untersuchung
 ## t = 14.719, df = 1032.2, p-value &lt; 2.2e-16
@@ -379,22 +395,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Im Live-Webinar hatten wir darüber gesprochen, dass bspw. beim T-Test neben dem p-Wert auch die sog. <a href="https://de.wikipedia.org/wiki/Effektstärke">Effektstärke</a> relevant sein kann. Zwar existiert für R beispielsweise das Paket <a href="https://cran.r-project.org/web/packages/effsize/index.html"><code>effsize</code></a>, das Funktionen enthält um die Effektstärke zu berechnen, aber gelegentlich kommt vielleicht man an einen Punkt, wo auf die Schnelle kein Paket zu finden ist, dass genau die Funktion enthält, die man sucht. Für solche Fälle bietet R die Möglichkeit, eigene Funktionen zu definieren, die der Vollständigkeit hier genannt werden soll, obwohl diese spezielle Funktionalität für den Anfang vielleicht etwas komplex ist.</p>
 <p>Für ein kurzes Beispiel wollen wir einen Spezialfall betrachten, in dem für unverbundene Stichproben gleicher Gruppengröße die Effektstärke anhand von T-Statistik und df-Wert des T-Testes brechnet werden kann. Wir wollen dabei das Ergebnisobjekt der Funktion <code>t.test()</code> nehmen und direkt die Werte für T-Statistik und df extrahiert und sodann die Effektstärke berechnet werden kann.</p>
 <p>Eine Funktion kann einfach mithilfe der Funktion <code>function()</code> definiert werden, und in einer Variable gespeichert werden, die genutzt werden kann, um die Funktion aufzurufen. Innerhalb der runden Klammern <code>()</code> von <code>function()</code> können Parameter definiert werden, die dann innerhalb der Funktion verfügbar sind. Beim Aufruf kann auch an selbst definierte Formeln mithilfe des Verkettungsoperators <code>%&gt;%</code> ein Parameter übergeben werden. Die Möglichkeiten, die sich hierdurch ergeben sind schier endlos…</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-1"></a>meine_cohens_d_funktion &lt;-<span class="st"> </span><span class="cf">function</span>(ergebnis_t.test) {</span>
-<span id="cb137-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-2"></a>  <span class="co"># Die Funktion unname() ist hier für eine schönere Ausgabe am Ende</span></span>
-<span id="cb137-3"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-3"></a>  <span class="co"># der Funktion nötig. Kann aber auch ignoriert werden.</span></span>
-<span id="cb137-4"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-4"></a>  t_statistik &lt;-<span class="st"> </span>ergebnis_t.test<span class="op">$</span>statistic <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unname</span>()</span>
-<span id="cb137-5"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-5"></a>  df_wert     &lt;-<span class="st"> </span>ergebnis_t.test<span class="op">$</span>parameter <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unname</span>()</span>
-<span id="cb137-6"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-6"></a></span>
-<span id="cb137-7"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-7"></a>  <span class="co"># Formel für Cohens d</span></span>
-<span id="cb137-8"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-8"></a>  <span class="co"># siehe auch https://www.uccs.edu/lbecker/</span></span>
-<span id="cb137-9"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-9"></a>  <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>t_statistik <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(df_wert)</span>
-<span id="cb137-10"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-10"></a>}</span>
-<span id="cb137-11"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-11"></a></span>
-<span id="cb137-12"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-12"></a><span class="kw">t.test</span>(</span>
-<span id="cb137-13"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-13"></a>  dlp <span class="op">~</span><span class="st"> </span>untersuchung,</span>
-<span id="cb137-14"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-14"></a>  <span class="dt">data =</span> daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abdomen&quot;</span>, <span class="st">&quot;Thorax&quot;</span>)),</span>
-<span id="cb137-15"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-15"></a>  <span class="dt">paired =</span> <span class="ot">FALSE</span></span>
-<span id="cb137-16"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb137-16"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">meine_cohens_d_funktion</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="tests-in-r.html#cb137-1"></a>meine_cohens_d_funktion &lt;-<span class="st"> </span><span class="cf">function</span>(ergebnis_t.test) {</span>
+<span id="cb137-2"><a href="tests-in-r.html#cb137-2"></a>  <span class="co"># Die Funktion unname() ist hier für eine schönere Ausgabe am Ende</span></span>
+<span id="cb137-3"><a href="tests-in-r.html#cb137-3"></a>  <span class="co"># der Funktion nötig. Kann aber auch ignoriert werden.</span></span>
+<span id="cb137-4"><a href="tests-in-r.html#cb137-4"></a>  t_statistik &lt;-<span class="st"> </span>ergebnis_t.test<span class="op">$</span>statistic <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unname</span>()</span>
+<span id="cb137-5"><a href="tests-in-r.html#cb137-5"></a>  df_wert     &lt;-<span class="st"> </span>ergebnis_t.test<span class="op">$</span>parameter <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unname</span>()</span>
+<span id="cb137-6"><a href="tests-in-r.html#cb137-6"></a></span>
+<span id="cb137-7"><a href="tests-in-r.html#cb137-7"></a>  <span class="co"># Formel für Cohens d</span></span>
+<span id="cb137-8"><a href="tests-in-r.html#cb137-8"></a>  <span class="co"># siehe auch https://www.uccs.edu/lbecker/</span></span>
+<span id="cb137-9"><a href="tests-in-r.html#cb137-9"></a>  <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>t_statistik <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(df_wert)</span>
+<span id="cb137-10"><a href="tests-in-r.html#cb137-10"></a>}</span>
+<span id="cb137-11"><a href="tests-in-r.html#cb137-11"></a></span>
+<span id="cb137-12"><a href="tests-in-r.html#cb137-12"></a><span class="kw">t.test</span>(</span>
+<span id="cb137-13"><a href="tests-in-r.html#cb137-13"></a>  dlp <span class="op">~</span><span class="st"> </span>untersuchung,</span>
+<span id="cb137-14"><a href="tests-in-r.html#cb137-14"></a>  <span class="dt">data =</span> daten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(untersuchung <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abdomen&quot;</span>, <span class="st">&quot;Thorax&quot;</span>)),</span>
+<span id="cb137-15"><a href="tests-in-r.html#cb137-15"></a>  <span class="dt">paired =</span> <span class="ot">FALSE</span></span>
+<span id="cb137-16"><a href="tests-in-r.html#cb137-16"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">meine_cohens_d_funktion</span>()</span></code></pre></div>
 <pre><code>## [1] 0.9162841</code></pre>
 </div>
 </div>
@@ -402,14 +418,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.4</span> ANOVA</h2>
 <p>Was aber wenn wir nun nicht nur zwei Gruppen auf signifikante Unterschiede hin untersuchen wollen, sondern gleich mehrere? Der Gedanke einfach bspw. mehrere T-Tests hintereinander zu machen, läge natürlich nahe. Aber dabei ergäbe sich ein zentrales Problem: Wenn wir für unsere Test ein <a href="https://de.wikipedia.org/wiki/Statistische_Signifikanz#Irrtumswahrscheinlichkeit_und_Signifikanzniveau">Signifikanzniveau</a> von 0.05 ansetzen, die Wahrscheinlichkeit keinen Typ I Fehler zu machen also bei 95% liegt, würde sich bei einem Vergleich von nur drei Gruppen schon eine Wahrscheinlichkeit von knapp 14% ergeben mindestens eine Nullhypothese falsch abzulehnen.</p>
 <p>Für genau solche Fälle eignen sich sogenannte <a href="https://de.wikipedia.org/wiki/Varianzanalyse">Varianzanalysen</a> (im Englischen auch als ANOVA = <em>analysis of variance</em> bezeichnet). Diese Verfahren testen im Grunde genommen die Nullhypothese, dass die Mittelwerte aller Gruppen gleich sind. In R kann eine solche Varianzanalyse sehr einfach mit der Funktion <code>aov()</code> durchgeführt werden, wobei der p-Wert hier nur ausgegeben wird, wenn man sich das Ergebnisobjekt genauer ansieht.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb139-1"></a><span class="kw">aov</span>(dlp <span class="op">~</span><span class="st"> </span>untersuchung, <span class="dt">data =</span> daten) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="tests-in-r.html#cb139-1"></a><span class="kw">aov</span>(dlp <span class="op">~</span><span class="st"> </span>untersuchung, <span class="dt">data =</span> daten) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span></code></pre></div>
 <pre><code>##                Df    Sum Sq   Mean Sq F value Pr(&gt;F)    
 ## untersuchung    5 1.454e+09 290784001   408.5 &lt;2e-16 ***
 ## Residuals    2435 1.733e+09    711883                   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>In diesem Fall sehen wir als, dass wir unsere Nullhypothese verwerfen können, d.h. für das DLP gibt es in Abhängigkeit von der Untersuchungsart signifikante Unterschiede der Mittelwerte zwischen den Gruppen. Dieses Ergebnis ist für sich genommen natürlich wenig hilfreich, denn das wirklich interessante wäre nun zu wissen, welche Gruppen sich auf welche Art unterscheiden. Hierfür können sogenannte <a href="https://de.wikipedia.org/wiki/Post-hoc-Test">post-hoc Tests</a> durchgeführt werden, die die Ergebnisse der Varianzanalyse weiter untersuchen und automatisch für das <a href="https://de.wikipedia.org/wiki/Alphafehler-Kumulierung">multiple Testen</a> korrigieren. Ein Beispiel für einen solchen post-hoc Test ist der Tukey-Test, für den R die Funktion <code>TukeyHSD()</code> enthält.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb141-1"></a><span class="kw">aov</span>(dlp <span class="op">~</span><span class="st"> </span>untersuchung, <span class="dt">data =</span> daten) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">TukeyHSD</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="tests-in-r.html#cb141-1"></a><span class="kw">aov</span>(dlp <span class="op">~</span><span class="st"> </span>untersuchung, <span class="dt">data =</span> daten) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">TukeyHSD</span>()</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -433,20 +449,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Traumaspirale-Kopf     1143.25518   963.5854  1322.9250 0.0000000
 ## Traumaspirale-Thorax   2427.53139  2259.3137  2595.7491 0.0000000</code></pre>
 <p>Das Ergebnis zeigt uns nun, dass außer für die Vergleiche Gesicht/Becken, Thorax/Becken und Thorax/Gesicht, jeweils signifikante Unterschiede der DLP-Mittelwerte bestehen (die p-Werte sind in der letzten Spalte zu finden). Zudem wird die mittlere Differenz sowie das 95%-Konfidenzintervall der Unterschiede mit ausgegeben.</p>
-<div id="ein-zweiter-kurzer-ausfulg-in-ergebnisobjekte" class="section level3" number="4.4.1">
+<div id="broom-return-objects" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Ein zweiter kurzer Ausfulg in Ergebnisobjekte</h3>
 <p>Gerade solche Ausgaben, wie die der <code>TukeyHSD()</code> Funktion sind manchmal etwas unübersichtlich, obwohl sie ja eigentlich sogar eine Tabelle mit ausgeben. Diese Tabelle aber wiederum weiter zu manipulieren, ist mit R Basisfunktionen kaum möglich. Erfreulicherweise gibt es auch hier aus dem Tidyverse einige praktische Helferfunktionen, die in dem Paket <a href="https://broom.tidyverse.org"><code>broom</code></a> enthalten sind. Insbesondere die Funktion <code>tidy()</code> hilft Ergebnistabellen statistischer Tests in saubere Dataframes zu überführen, mit denen dann wie gewohnt weitergearbeitet werden kann.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-1"></a><span class="kw">library</span>(broom)</span>
-<span id="cb143-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-2"></a></span>
-<span id="cb143-3"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-3"></a><span class="co"># zunächst speichern wir das Ergebnis des Tukey-Tests, wobei natürlich auch eine</span></span>
-<span id="cb143-4"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-4"></a><span class="co"># direkte Verkettung zur tidy()-Funktion, usw. möglich wäre</span></span>
-<span id="cb143-5"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-5"></a>tukey.ergebnis &lt;-<span class="st"> </span><span class="kw">aov</span>(dlp <span class="op">~</span><span class="st"> </span>untersuchung, <span class="dt">data =</span> daten) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">TukeyHSD</span>()</span>
-<span id="cb143-6"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-6"></a></span>
-<span id="cb143-7"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-7"></a><span class="co"># Tukey Ergebnisse im tidy-Format</span></span>
-<span id="cb143-8"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-8"></a><span class="co"># (sieht in der Ausgabe hier online nicht so sehr anders aus,</span></span>
-<span id="cb143-9"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-9"></a><span class="co"># in RStudio ist der Unterschied deutlicher)</span></span>
-<span id="cb143-10"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-10"></a>tukey.ergebnis <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb143-11"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb143-11"></a><span class="st">  </span><span class="kw">tidy</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="tests-in-r.html#cb143-1"></a><span class="kw">library</span>(broom)</span>
+<span id="cb143-2"><a href="tests-in-r.html#cb143-2"></a></span>
+<span id="cb143-3"><a href="tests-in-r.html#cb143-3"></a><span class="co"># zunächst speichern wir das Ergebnis des Tukey-Tests, wobei natürlich auch eine</span></span>
+<span id="cb143-4"><a href="tests-in-r.html#cb143-4"></a><span class="co"># direkte Verkettung zur tidy()-Funktion, usw. möglich wäre</span></span>
+<span id="cb143-5"><a href="tests-in-r.html#cb143-5"></a>tukey.ergebnis &lt;-<span class="st"> </span><span class="kw">aov</span>(dlp <span class="op">~</span><span class="st"> </span>untersuchung, <span class="dt">data =</span> daten) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">TukeyHSD</span>()</span>
+<span id="cb143-6"><a href="tests-in-r.html#cb143-6"></a></span>
+<span id="cb143-7"><a href="tests-in-r.html#cb143-7"></a><span class="co"># Tukey Ergebnisse im tidy-Format</span></span>
+<span id="cb143-8"><a href="tests-in-r.html#cb143-8"></a><span class="co"># (sieht in der Ausgabe hier online nicht so sehr anders aus,</span></span>
+<span id="cb143-9"><a href="tests-in-r.html#cb143-9"></a><span class="co"># in RStudio ist der Unterschied deutlicher)</span></span>
+<span id="cb143-10"><a href="tests-in-r.html#cb143-10"></a>tukey.ergebnis <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb143-11"><a href="tests-in-r.html#cb143-11"></a><span class="st">  </span><span class="kw">tidy</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 15 x 7
 ##    term      contrast        null.value estimate conf.low conf.high  adj.p.value
 ##    &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
@@ -465,21 +481,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 13 untersuc… Thorax-Kopf              0  -1284.    -1419.    -1150.      0.     
 ## 14 untersuc… Traumaspirale-…          0   1143.      964.     1323.      0.     
 ## 15 untersuc… Traumaspirale-…          0   2428.     2259.     2596.      0.</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-1"></a><span class="co"># sind die Tukey Ergebnisse einmal in ein sauberes Dataframe überführt, können wir</span></span>
-<span id="cb145-2"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-2"></a><span class="co"># alle Tidyverse-Funktionen in gewohnter Weise nutzen</span></span>
-<span id="cb145-3"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-3"></a><span class="co"># bspw. nur die signifkanten Ergebnisse anzeigen, nach Größe der mittleren Differenz</span></span>
-<span id="cb145-4"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-4"></a><span class="co"># sortiert, und das ganze dann graphisch aufbereitet</span></span>
-<span id="cb145-5"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-5"></a>tukey.ergebnis <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb145-6"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-6"></a><span class="st">  </span><span class="kw">tidy</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb145-7"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-7"></a><span class="st">  </span><span class="kw">filter</span>(adj.p.value <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb145-8"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-8"></a><span class="st">  </span><span class="kw">select</span>(contrast, estimate, adj.p.value) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb145-9"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">fct_reorder</span>(contrast, estimate), <span class="dt">y =</span> estimate, <span class="dt">fill =</span> adj.p.value)) <span class="op">+</span></span>
-<span id="cb145-10"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-10"></a><span class="st">    </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
-<span id="cb145-11"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-11"></a><span class="st">    </span><span class="kw">coord_flip</span>()  <span class="op">+</span></span>
-<span id="cb145-12"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-12"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Vergleich&quot;</span>,</span>
-<span id="cb145-13"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-13"></a>         <span class="dt">y =</span> <span class="st">&quot;Mittlere Differenz DLP&quot;</span>,</span>
-<span id="cb145-14"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-14"></a>         <span class="dt">fill =</span> <span class="st">&quot;p-Wert&quot;</span>) <span class="op">+</span></span>
-<span id="cb145-15"><a href="theoretisch-ja-praktisch-auch-tests-in-r.html#cb145-15"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="tests-in-r.html#cb145-1"></a><span class="co"># sind die Tukey Ergebnisse einmal in ein sauberes Dataframe überführt, können wir</span></span>
+<span id="cb145-2"><a href="tests-in-r.html#cb145-2"></a><span class="co"># alle Tidyverse-Funktionen in gewohnter Weise nutzen</span></span>
+<span id="cb145-3"><a href="tests-in-r.html#cb145-3"></a><span class="co"># bspw. nur die signifkanten Ergebnisse anzeigen, nach Größe der mittleren Differenz</span></span>
+<span id="cb145-4"><a href="tests-in-r.html#cb145-4"></a><span class="co"># sortiert, und das ganze dann graphisch aufbereitet</span></span>
+<span id="cb145-5"><a href="tests-in-r.html#cb145-5"></a>tukey.ergebnis <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb145-6"><a href="tests-in-r.html#cb145-6"></a><span class="st">  </span><span class="kw">tidy</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb145-7"><a href="tests-in-r.html#cb145-7"></a><span class="st">  </span><span class="kw">filter</span>(adj.p.value <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb145-8"><a href="tests-in-r.html#cb145-8"></a><span class="st">  </span><span class="kw">select</span>(contrast, estimate, adj.p.value) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb145-9"><a href="tests-in-r.html#cb145-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">fct_reorder</span>(contrast, estimate), <span class="dt">y =</span> estimate, <span class="dt">fill =</span> adj.p.value)) <span class="op">+</span></span>
+<span id="cb145-10"><a href="tests-in-r.html#cb145-10"></a><span class="st">    </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb145-11"><a href="tests-in-r.html#cb145-11"></a><span class="st">    </span><span class="kw">coord_flip</span>()  <span class="op">+</span></span>
+<span id="cb145-12"><a href="tests-in-r.html#cb145-12"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Vergleich&quot;</span>,</span>
+<span id="cb145-13"><a href="tests-in-r.html#cb145-13"></a>         <span class="dt">y =</span> <span class="st">&quot;Mittlere Differenz DLP&quot;</span>,</span>
+<span id="cb145-14"><a href="tests-in-r.html#cb145-14"></a>         <span class="dt">fill =</span> <span class="st">&quot;p-Wert&quot;</span>) <span class="op">+</span></span>
+<span id="cb145-15"><a href="tests-in-r.html#cb145-15"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 
 </div>
