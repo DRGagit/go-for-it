@@ -10,53 +10,96 @@ Das ist ein etwas vereinfachtes Beispiel und viele der nötigen Arbeitsschritte,
 
 - [Radiomics in medical imaging—“how-to” guide and critical reflection](https://insightsimaging.springeropen.com/articles/10.1186/s13244-020-00887-2)
 
-![Fig. 3 aus "Radiomics in medical imaging—“how-to” guide and critical reflection"](./assets/img/radiomics-howto.png)
-
-## Lernziele
+## Lernziele {#radiomics-howto}
 
 In diesem Kapitel werden folgende Themen besprochen:
 
 - Eine beispielhafte Radiomics-Analyse in R nachvollziehen
 
+![Fig. 3 aus "Radiomics in medical imaging—“how-to” guide and critical reflection"](./assets/img/radiomics-howto.png)
+
 ## Daten einlesen
 
-```{r eval=FALSE}
-# alternativ ginge auch einfach read.csv2("ct_data.csv")
+Wie in jedem Projekt müssen wir zunächst einmal die Daten einlesen. Dafür benötigen wir die Datei `sample_radiomics_data.csv` [(\~Download\~)](./assets/sample_radiomics_data.csv). Die Datei ist, wie üblich auf Systemen mit deutschen Spracheinstellungen, so formatiert, dass das Semikolon `;` als Trennzeichen verwendet wird und das Komma `,` als Dezimaltrenner. Im Tidyverse gibt es dafür die Funktion `read_csv2()`, die genau dies als Vorseinstellung bereits berücksichtigt (im Gegensatz zu `read_csv()`, die das Komma `,` als Trennzeichen verwendet und den Punkt `.` als Dezimaltrenner).
+
+```{r eval=FALSE, message=FALSE, warning=FALSE}
 radiomics_daten <- read_csv2("sample_radiomics_data.csv")
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 radiomics_daten <- read_csv2("./assets/data/sample_radiomics_data.csv")
 ```
 
-## Überblick
+Für einen ersten Überblick über die Daten eignet sich wie immer gut die Funktion `dfSummary()` aus den Paket `summarytools`. Wer lieber in Basis-R bleiben möchte, verwendet bspw. die Funktion `str()`.
+
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+# beides wird hier nicht ausgeführt, da der Output zu lang wäre
+
+library(summarytools)
+dfSummary(radiomics_daten) %>% view()
+
+str(radiomics_daten)
+```
+
+Wichtig ist hier noch zu erwähnen, dass die Funktion `read_csv2()` für Spalten, die Text enthalten, automatisch den Typ `character` annimmt. Das ist für fast alle Fälle das gewünschte Ergebnis, da wir aber im weiteren benötigen werden, dass unsere Zielvariable `histo` den Typ `factor` hat, korrigieren wir das hier noch.
 
 ```{r}
-library(summarytools)
-
-view(dfSummary(radiomics_daten))
-
 radiomics_daten <- radiomics_daten %>% 
   mutate(histo = factor(histo))
 ```
 
 ## Interreader Variabilität
 
-```{r}
+Der nächste wichtige Schritt ist das identifizieren reproduzierbarer Features, bzw. genauer gesagt das Eliminieren nicht-reproduzierbarer Features vor der weiteren Datenanalyse (siehe Grafik in \@ref(radiomics-howto)).
+
+In unserem Beispiel wollen wir nun zunächst für jedes der 30 Features den "Concordance Correlation Coefficient" berechnen. Dafür können wir die Funktion `CCC()` aus dem Paket `DescTools` nutzen. Allerdings wäre es sehr mühsam jeden der 30 Vergleiche von Hand zu schreiben, die Ergebnisse zu speichern und dann die entsprechenden Features auszuwählen und bspw. in einer Variablen zu speichern. Insbesondere wäre so ein Vorgehen unpraktisch, wenn sich an den Daten etwas ändert, vielleicht sogar eine Variable hinzukäme. Und man müsste immer aufpassen, die richtigen Namen in der entsprechenden Variablen zu speichern.
+
+Erfreulicherweise können wir uns vieler praktischer Features aus dem Tidyverse bedienen, um dies in einem einzigen Arbeitsschritt zu erledigen, der dann auch direkt die Namen der nicht-reproduzierbaren Features in einer Variablen speichert, unabhängig von der Zahl der zu untersuchenden Variablen. Die beiden entscheidenden Schritte hier sind die Funktion `split()` aus Basis-R und die Funktion [`map_df()`](https://purrr.tidyverse.org/reference/map.html) aus dem Tidyverse. Letztere Funktion ist extrem nützlich in vielen Anwendungsfällen, die Nutzung erschließt sich aber nicht auf den ersten Blick (daher hier noch zwei Links zur Erklärung, aber nicht frustrieren lassen, wenn es sich trotzdem nicht direkt erschließt: [Post von Matt Upson](https://www.machinegurning.com/rstats/map_df/), [Post von Rebecca Barter](http://www.rebeccabarter.com/blog/2019-08-19_purrr/)).
+
+```{r message=FALSE, warning=FALSE}
 library(DescTools)
 
+# Zur einfacheren Nachvollziehbarkeit kann es praktisch sein die einzelnen Schritte separat auszuführen
+# und das jeweilige Ergebniss anzuschauen
+
 features.nonreproducible <- radiomics_daten %>% 
+  # zunächst transformieren wir unsere Daten so, dass eine lange Tabelle
+  # entsteht, die statt 33 Spalten nur 5 Spalten hat, dafür aber statt 320
+  # Zeilen 9600 Zeilen, sodass eine Spalte den Namen des Features enthält,
+  # und eine weitere den Wert des jeweiligen Features
   pivot_longer(-c(reader, histo, PatID), names_to = "feature") %>% 
+  # als nächstes wollen wir die Tabelle so transformieren, dass je eine Spalte
+  # für reader_01 und eine für reader_02 entsteht, denn für die Funktion CCC
+  # müssen die Daten in diesem Format vorliegen
   pivot_wider(names_from = reader, values_from = value) %>% 
+  # hier entfernen wir alle Zeilen, in denen es keinen Wert für reader_02
+  # gibt, der ja nur einen Teil der Daten, nämlich nur 20 Fälle ausgewertet
+  # hatte
   filter(!is.na(reader_02)) %>% 
+  # nun Teilen wir mit split() unser Dataframe in viele Dataframes auf,
+  # die jeweils nur ein Feature enthalten, in unserem Beispiel erhalten
+  # wir hier also eine sog. Liste mit 30 Dataframes
   split(.$feature) %>% 
+  # nun nutzen wir map_df() um die Funktion CCC in jedem der 30 Dataframes
+  # anzuwenden, als Ergebnis erhalten wir ein einziges Dataframe mit den 
+  # 30 berechneten CCCs, dem fügen wir noch den Namen der Features als Spalte
+  # hinzu.
   map_df(~ add_column(CCC(.$reader_01, .$reader_02, ci = "z-transform", conf.level = 0.95, na.rm = TRUE)$rho.c, feature = unique(.$feature), .before = 1)) %>% 
-  mutate(est.round = round(est, 3)) %>% 
+  # als nächstes filtern wir das Dataframe so, dass wir nur die Zeilen der
+  # Features erhalten, deren CCC-Wert unterhalb der von uns gesetzten Grenze
+  # von 0,8 lag.
   filter(est < 0.8) %>% 
+  # als letzten Schritt holen wir uns die Namen der Features aus der
+  # entsprechenden Spalte des Dataframes, nur diese werden dann in der
+  # oben angegebenen Variable gespeichert.
   pull(feature)
+
+features.nonreproducible
 ```
 
-## nicht reproduzierbare aus Datensatz entfernen
+## Normalisierung
+
+Nachdem wir nun also die nicht-reproduzierbaren Features identifiziert haben, können wir uns daran machen die Daten für das folgende Machine Learning vorzubereiten (siehe Grafik in \@ref(radiomics-howto)). Zunächst benötigen wir also ein Dataframe in dem nur die reproduzierbaren Features enthalten sind und nur Daten von `reader_01`.
 
 ```{r}
 radiomics_daten.reproducible <- radiomics_daten %>% 
@@ -64,33 +107,43 @@ radiomics_daten.reproducible <- radiomics_daten %>%
   select(- all_of(features.nonreproducible))
 ```
 
-## Normalisierung
+Anschließend normalisieren wir die Daten, wie in \@ref(ml-preprocessing) besprochen.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(caret)
 
 radiomics_daten.reproducible.norm <- radiomics_daten.reproducible %>% 
   preProcess(method = "range") %>% 
   predict(radiomics_daten.reproducible)
-
-radiomics_daten %>% 
-  filter(reader == "reader_01") %>% 
-  pivot_longer(-c(reader, PatID, histo), names_to = "feature") %>% 
-  ggplot(aes(x = feature, y = value, fill = histo)) +
-    geom_boxplot() +
-    coord_flip()
-
-radiomics_daten.reproducible.norm %>% 
-  filter(reader == "reader_01") %>% 
-  pivot_longer(-c(reader, PatID, histo), names_to = "feature") %>% 
-  ggplot(aes(x = feature, y = value, fill = histo)) +
-    geom_boxplot() +
-    coord_flip()
 ```
 
-## Daten in Training und Test aufteilen
+Um das Ergebnis der Normalisierung zu überprüfen, stellen wir uns das ganze einmal graphisch dar. Zur besseren Visualisierung stellen wir die Grafiken direkt nebeneinander dar, das Paket `cowplot` bietet dafür tolle Funktionalitäten.
 
 ```{r}
+library(cowplot)
+
+plot_grid(
+  radiomics_daten %>% 
+    filter(reader == "reader_01") %>% 
+    pivot_longer(-c(reader, PatID, histo), names_to = "feature") %>% 
+    ggplot(aes(x = feature, y = value, fill = histo)) +
+      geom_boxplot() +
+      coord_flip() +
+      theme(legend.position="top"),
+  
+  radiomics_daten.reproducible.norm %>% 
+    filter(reader == "reader_01") %>% 
+    pivot_longer(-c(reader, PatID, histo), names_to = "feature") %>% 
+    ggplot(aes(x = feature, y = value, fill = histo)) +
+      geom_boxplot() +
+      coord_flip() +
+      theme(legend.position="top")
+)
+```
+
+Wir sehen also, dass die Werte alle Features erfolgreich auf einen Bereich zwischen 0 und 1 normalisiert wurden. Als nächstes können wir das Dataframe mit den reproduzierbaren und normalisierten Daten in Trainings und Testdaten aufteilen.
+
+```{r message=FALSE, warning=FALSE}
 index.training <- createDataPartition(radiomics_daten.reproducible.norm$histo, p = 0.8, list = FALSE)
 
 radiomics_daten.reproducible.norm.train <- radiomics_daten.reproducible.norm[index.training, ]
@@ -98,6 +151,8 @@ radiomics_daten.reproducible.norm.test  <- radiomics_daten.reproducible.norm[-in
 ```
 
 ## Feature Reduction
+
+XXX hier weiter XXX
 
 ```{r}
 library(Boruta)
