@@ -126,7 +126,7 @@ iris_binominal_predictions %>%
 ```
 Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausgabe der logistischen Regression eher für Schwertlilien der Art `virginica` zu sprechen, negative Werte für die Art `versicolor`. Nur in je einem Fall liegt dieses Modell für beide Arten liegt das Modell falsch.
 
-### Ein kurzer Ausflug in ROC-Analysen.
+### Ein kurzer Ausflug in ROC-Analysen {#roc-analysis}
 
 Ohne zu sehr darauf eingehen zu wollen, an dieser Stelle ein kurzer Exkurs zu [ROC-Analysen](https://de.wikipedia.org/wiki/ROC-Kurve). In einer ROC-Kurve wird sozusagen jede Kombination von Sensitivität und Spezifität aufgetragen, die sich in Abhängigkeit von der Variation eines Parameters (in unserem Fall also bspw. der Ausgabewert der logistischen Regression) ergibt. Je näher die Fläche unterhalb der ROC-Kurve am Wert 1 ist, desto besser die diagnostische oder prädiktive Performance eines Modells.
 
@@ -180,7 +180,7 @@ roc_result %>%
     geom_point(aes(x = roc_optimal_point$specificity, y = roc_optimal_point$sensitivity), color = "orange", shape = 4, size = 4)
 ```
 
-## Datenaufbereitung für Machine Learning
+## Datenaufbereitung für Machine Learning {#ml-preprocessing}
 
 Für die Anwendung "komplizierterer" Machine Learning Algorithmen sollte man sich an einige wichtige Regel halten. Ohne, dass wir hier alle Details bedenken können, sind zwei wichtige Schritte sicherlich die [Normalisierung der Daten](https://en.wikipedia.org/wiki/Normalization_(statistics)) und die Aufteilung in Trainings- und Testdaten.
 
