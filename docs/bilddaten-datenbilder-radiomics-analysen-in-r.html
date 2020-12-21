@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Bilddaten, Datenbilder: Radiomics-Analysen in R | DRG/AGIT - Go for IT</title>
+  <meta name="description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Bilddaten, Datenbilder: Radiomics-Analysen in R | DRG/AGIT - Go for IT" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="./assets/img/banner.png" />
+  <meta property="og:description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Bilddaten, Datenbilder: Radiomics-Analysen in R | DRG/AGIT - Go for IT" />
+  
+  <meta name="twitter:description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
+  <meta name="twitter:image" content="./assets/img/banner.png" />
+
+<meta name="author" content="Bettina Baeßler &amp; Daniel Pinto dos Santos" />
+
+
+<meta name="date" content="2020-12-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="see-one-do-one-teach-one-machine-learning-in-r.html"/>
+
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119151357-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-119151357-2');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">DRG/AGIT - Go for IT</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Einleitung</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#termine-der-live-webinare-20192020"><i class="fa fa-check"></i>Termine der Live-Webinare 2019/2020</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#zum-nachschauen"><i class="fa fa-check"></i>Zum Nachschauen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html"><i class="fa fa-check"></i><b>1</b> Einstieg in R: erste Schritte</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#lernziele"><i class="fa fa-check"></i><b>1.1</b> Lernziele</a></li>
+<li class="chapter" data-level="1.2" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#installation-von-r-und-rstudio"><i class="fa fa-check"></i><b>1.2</b> Installation von R und RStudio</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#installation-r"><i class="fa fa-check"></i><b>1.2.1</b> Installation R</a></li>
+<li class="chapter" data-level="1.2.2" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#installation-rstudio"><i class="fa fa-check"></i><b>1.2.2</b> Installation RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#die-rstudio-oberfläche"><i class="fa fa-check"></i><b>1.3</b> Die RStudio Oberfläche</a></li>
+<li class="chapter" data-level="1.4" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#arithmetische-operatoren"><i class="fa fa-check"></i><b>1.4</b> Arithmetische Operatoren</a></li>
+<li class="chapter" data-level="1.5" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#logische-operatoren"><i class="fa fa-check"></i><b>1.5</b> Logische Operatoren</a></li>
+<li class="chapter" data-level="1.6" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#besondere-operatoren"><i class="fa fa-check"></i><b>1.6</b> Besondere Operatoren</a></li>
+<li class="chapter" data-level="1.7" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#variablen"><i class="fa fa-check"></i><b>1.7</b> Variablen</a></li>
+<li class="chapter" data-level="1.8" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>1.8</b> Funktionen</a></li>
+<li class="chapter" data-level="1.9" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#vektoren"><i class="fa fa-check"></i><b>1.9</b> Vektoren</a></li>
+<li class="chapter" data-level="1.10" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#dataframes"><i class="fa fa-check"></i><b>1.10</b> Dataframes</a></li>
+<li class="chapter" data-level="1.11" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#daten-einlesen"><i class="fa fa-check"></i><b>1.11</b> Daten einlesen</a></li>
+<li class="chapter" data-level="1.12" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#ausblick"><i class="fa fa-check"></i><b>1.12</b> Ausblick</a></li>
+<li class="chapter" data-level="1.13" data-path="einstieg-in-r-erste-schritte.html"><a href="einstieg-in-r-erste-schritte.html#schlussbemerkungen"><i class="fa fa-check"></i><b>1.13</b> Schlussbemerkungen</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><i class="fa fa-check"></i><b>2</b> Nächste Schritte in R: bunte Bilder und mehr</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#lernziele-1"><i class="fa fa-check"></i><b>2.1</b> Lernziele</a></li>
+<li class="chapter" data-level="2.2" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#grafiken-in-base-r"><i class="fa fa-check"></i><b>2.2</b> Grafiken in Base R</a></li>
+<li class="chapter" data-level="2.3" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#pakete-installieren-und-laden"><i class="fa fa-check"></i><b>2.3</b> Pakete installieren und laden</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#ein-kurzer-ausflug-ins-tidyverse"><i class="fa fa-check"></i><b>2.3.1</b> Ein kurzer Ausflug ins Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="nächste-schritte-in-r-bunte-bilder-und-mehr.html"><a href="nächste-schritte-in-r-bunte-bilder-und-mehr.html#grafiken-mit-ggplot2"><i class="fa fa-check"></i><b>2.4</b> Grafiken mit ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html"><i class="fa fa-check"></i><b>3</b> Deskriptive Statistik in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#lernziele-2"><i class="fa fa-check"></i><b>3.1</b> Lernziele</a></li>
+<li class="chapter" data-level="3.2" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-mit-basis-r"><i class="fa fa-check"></i><b>3.2</b> Deskriptive Statistiken mit Basis R</a></li>
+<li class="chapter" data-level="3.3" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-im-tidyverse"><i class="fa fa-check"></i><b>3.3</b> Deskriptive Statistiken im Tidyverse</a></li>
+<li class="chapter" data-level="3.4" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-mit-anderen-paketen"><i class="fa fa-check"></i><b>3.4</b> Deskriptive Statistiken mit anderen Paketen</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#psych"><i class="fa fa-check"></i><b>3.4.1</b> Psych</a></li>
+<li class="chapter" data-level="3.4.2" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#summarytools"><i class="fa fa-check"></i><b>3.4.2</b> Summarytools</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="deskriptive-statistik-in-r.html"><a href="deskriptive-statistik-in-r.html#mehr-bunte-bilder"><i class="fa fa-check"></i><b>3.5</b> Mehr bunte Bilder</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="tests-in-r.html"><a href="tests-in-r.html"><i class="fa fa-check"></i><b>4</b> Theoretisch ja, praktisch auch! Tests in R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="tests-in-r.html"><a href="tests-in-r.html#lernziele-3"><i class="fa fa-check"></i><b>4.1</b> Lernziele</a></li>
+<li class="chapter" data-level="4.2" data-path="tests-in-r.html"><a href="tests-in-r.html#normalverteilung-prüfen"><i class="fa fa-check"></i><b>4.2</b> Normalverteilung prüfen</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="tests-in-r.html"><a href="tests-in-r.html#ein-kurzer-ausflug-in-ergebnisobjekte"><i class="fa fa-check"></i><b>4.2.1</b> Ein kurzer Ausflug in Ergebnisobjekte</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="tests-in-r.html"><a href="tests-in-r.html#t-test-und-wilcoxon-test"><i class="fa fa-check"></i><b>4.3</b> T-Test und Wilcoxon-Test</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="tests-in-r.html"><a href="tests-in-r.html#formulas-in-r"><i class="fa fa-check"></i><b>4.3.1</b> Ein kurzer Ausflug in Formeln</a></li>
+<li class="chapter" data-level="4.3.2" data-path="tests-in-r.html"><a href="tests-in-r.html#ein-kurzer-ausflug-in-funktionen"><i class="fa fa-check"></i><b>4.3.2</b> Ein kurzer Ausflug in Funktionen</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="tests-in-r.html"><a href="tests-in-r.html#anova"><i class="fa fa-check"></i><b>4.4</b> ANOVA</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="tests-in-r.html"><a href="tests-in-r.html#broom-return-objects"><i class="fa fa-check"></i><b>4.4.1</b> Ein zweiter kurzer Ausfulg in Ergebnisobjekte</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html"><i class="fa fa-check"></i><b>5</b> Diverse Tipps &amp; Tricks für R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#lernziele-4"><i class="fa fa-check"></i><b>5.1</b> Lernziele</a></li>
+<li class="chapter" data-level="5.2" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#nachvollziehbare-analysen-und-rmarkdown"><i class="fa fa-check"></i><b>5.2</b> Nachvollziehbare Analysen und Rmarkdown</a></li>
+<li class="chapter" data-level="5.3" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#styleguide"><i class="fa fa-check"></i><b>5.3</b> Styleguide</a></li>
+<li class="chapter" data-level="5.4" data-path="diverse-tipps-tricks-für-r.html"><a href="diverse-tipps-tricks-für-r.html#cheatsheets"><i class="fa fa-check"></i><b>5.4</b> Cheatsheets</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html"><i class="fa fa-check"></i><b>6</b> See one, do one, teach one! Machine Learning in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#lernziele-5"><i class="fa fa-check"></i><b>6.1</b> Lernziele</a></li>
+<li class="chapter" data-level="6.2" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#das-iris-dataset"><i class="fa fa-check"></i><b>6.2</b> Das Iris Dataset</a></li>
+<li class="chapter" data-level="6.3" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#explorative-datenvisualisierung"><i class="fa fa-check"></i><b>6.3</b> Explorative Datenvisualisierung</a></li>
+<li class="chapter" data-level="6.4" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#lin-regression"><i class="fa fa-check"></i><b>6.4</b> Lineare Regression</a></li>
+<li class="chapter" data-level="6.5" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#log-regression"><i class="fa fa-check"></i><b>6.5</b> Logistische Regression</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#roc-analysis"><i class="fa fa-check"></i><b>6.5.1</b> Ein kurzer Ausflug in ROC-Analysen</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#ml-preprocessing"><i class="fa fa-check"></i><b>6.6</b> Datenaufbereitung für Machine Learning</a></li>
+<li class="chapter" data-level="6.7" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#support-vector-machine"><i class="fa fa-check"></i><b>6.7</b> Support Vector Machine</a></li>
+<li class="chapter" data-level="6.8" data-path="see-one-do-one-teach-one-machine-learning-in-r.html"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#weitere-informationen-zu-machine-learning-in-r"><i class="fa fa-check"></i><b>6.8</b> Weitere Informationen zu Machine Learning in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html"><i class="fa fa-check"></i><b>7</b> Bilddaten, Datenbilder: Radiomics-Analysen in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-howto"><i class="fa fa-check"></i><b>7.1</b> Lernziele</a></li>
+<li class="chapter" data-level="7.2" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#daten-einlesen-1"><i class="fa fa-check"></i><b>7.2</b> Daten einlesen</a></li>
+<li class="chapter" data-level="7.3" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#interreader-variabilität"><i class="fa fa-check"></i><b>7.3</b> Interreader Variabilität</a></li>
+<li class="chapter" data-level="7.4" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#normalisierung"><i class="fa fa-check"></i><b>7.4</b> Normalisierung</a></li>
+<li class="chapter" data-level="7.5" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-boruta"><i class="fa fa-check"></i><b>7.5</b> Feature Reduction</a></li>
+<li class="chapter" data-level="7.6" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#korrelationsanalyse"><i class="fa fa-check"></i><b>7.6</b> Korrelationsanalyse</a></li>
+<li class="chapter" data-level="7.7" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#fitten-und-testen-des-modells"><i class="fa fa-check"></i><b>7.7</b> Fitten und Testen des Modells</a></li>
+<li class="chapter" data-level="7.8" data-path="bilddaten-datenbilder-radiomics-analysen-in-r.html"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#das-ende.-vielen-dank"><i class="fa fa-check"></i><b>7.8</b> Das Ende. Vielen Dank!</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Erstellt mit bookdown</a></li>
+<li><a href="https://github.com/DRGagit/go-for-it" target="blank">Quelltext zum Buch bei GitHub</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DRG/AGIT - Go for IT</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bilddaten-datenbilder-radiomics-analysen-in-r" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Bilddaten, Datenbilder: Radiomics-Analysen in R</h1>
+<p>Im letzten Kapitel wollen wir uns eine etwas vereinfachte und trotzdem realitätsnahe <a href="https://de.wikipedia.org/wiki/Radiomics">Radiomics</a>-Analyse vornehmen. Dazu benutzen wir eine Datentabelle mit fiktiven Radiomics-Daten. In dem Beispiel wurden 300 Radiomics-Features für 300 Patienten berechnet, deren histologisches Ergebnis entweder “benigne” oder “maligne” war. Zur Analyse der <a href="https://de.wikipedia.org/wiki/Interrater-Reliabilität">Interrater-Reliabilität</a> hat ein zweiter Reader für 20 Fälle ebenfalls Radiomics Features berechnet.</p>
+<p>Das ist ein etwas vereinfachtes Beispiel und viele der nötigen Arbeitsschritte, die man schon vor der Datenanalyse in R beachten sollte sind an dieser Stelle nicht genannt. Wer sich auch in diese Aspekte einlesen will, dem sei die folgende Publikation an der auch Bettina Baeßler maßgeblich beteiligt war ans Herz gelegt:</p>
+<ul>
+<li><a href="https://insightsimaging.springeropen.com/articles/10.1186/s13244-020-00887-2">Radiomics in medical imaging—“how-to” guide and critical reflection</a></li>
+</ul>
+<div id="radiomics-howto" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Lernziele</h2>
+<p>In diesem Kapitel werden folgende Themen besprochen:</p>
+<ul>
+<li>Eine beispielhafte Radiomics-Analyse in R nachvollziehen</li>
+</ul>
+<div class="figure">
+<img src="assets/img/radiomics-howto.png" alt="" />
+<p class="caption">Fig. 3 aus “Radiomics in medical imaging—“how-to” guide and critical reflection"</p>
+</div>
+</div>
+<div id="daten-einlesen-1" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Daten einlesen</h2>
+<p>Wie in jedem Projekt müssen wir zunächst einmal die Daten einlesen. Dafür benötigen wir die Datei <code>sample_radiomics_data.csv</code> <a href="./assets/sample_radiomics_data.csv">(~Download~)</a>. Die Datei ist, wie üblich auf Systemen mit deutschen Spracheinstellungen, so formatiert, dass das Semikolon <code>;</code> als Trennzeichen verwendet wird und das Komma <code>,</code> als Dezimaltrenner. Im Tidyverse gibt es dafür die Funktion <code>read_csv2()</code>, die genau dies als Vorseinstellung bereits berücksichtigt (im Gegensatz zu <code>read_csv()</code>, die das Komma <code>,</code> als Trennzeichen verwendet und den Punkt <code>.</code> als Dezimaltrenner).</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb172-1"></a>radiomics_daten &lt;-<span class="st"> </span><span class="kw">read_csv2</span>(<span class="st">&quot;sample_radiomics_data.csv&quot;</span>)</span></code></pre></div>
+<p>Für einen ersten Überblick über die Daten eignet sich wie immer gut die Funktion <code>dfSummary()</code> aus den Paket <code>summarytools</code>. Wer lieber in Basis-R bleiben möchte, verwendet bspw. die Funktion <code>str()</code>.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb173-1"></a><span class="co"># beides wird hier nicht ausgeführt, da der Output zu lang wäre</span></span>
+<span id="cb173-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb173-2"></a></span>
+<span id="cb173-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb173-3"></a><span class="kw">library</span>(summarytools)</span>
+<span id="cb173-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb173-4"></a><span class="kw">dfSummary</span>(radiomics_daten) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">view</span>()</span>
+<span id="cb173-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb173-5"></a></span>
+<span id="cb173-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb173-6"></a><span class="kw">str</span>(radiomics_daten)</span></code></pre></div>
+<p>Wichtig ist hier noch zu erwähnen, dass die Funktion <code>read_csv2()</code> für Spalten, die Text enthalten, automatisch den Typ <code>character</code> annimmt. Das ist für fast alle Fälle das gewünschte Ergebnis, da wir aber im weiteren benötigen werden, dass unsere Zielvariable <code>histo</code> den Typ <code>factor</code> hat, korrigieren wir das hier noch.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb174-1"></a>radiomics_daten &lt;-<span class="st"> </span>radiomics_daten <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb174-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb174-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">histo =</span> <span class="kw">factor</span>(histo))</span></code></pre></div>
+</div>
+<div id="interreader-variabilität" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Interreader Variabilität</h2>
+<p>Der nächste wichtige Schritt ist das identifizieren reproduzierbarer Features, bzw. genauer gesagt das Eliminieren nicht-reproduzierbarer Features vor der weiteren Datenanalyse (siehe Grafik in <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-howto">7.1</a>).</p>
+<p>In unserem Beispiel wollen wir nun zunächst für jedes der 30 Features den “Concordance Correlation Coefficient” berechnen. Dafür können wir die Funktion <code>CCC()</code> aus dem Paket <code>DescTools</code> nutzen. Allerdings wäre es sehr mühsam jeden der 30 Vergleiche von Hand zu schreiben, die Ergebnisse zu speichern und dann die entsprechenden Features auszuwählen und bspw. in einer Variablen zu speichern. Insbesondere wäre so ein Vorgehen unpraktisch, wenn sich an den Daten etwas ändert, vielleicht sogar eine Variable hinzukäme. Und man müsste immer aufpassen, die richtigen Namen in der entsprechenden Variablen zu speichern.</p>
+<p>Erfreulicherweise können wir uns vieler praktischer Features aus dem Tidyverse bedienen, um dies in einem einzigen Arbeitsschritt zu erledigen, der dann auch direkt die Namen der nicht-reproduzierbaren Features in einer Variablen speichert, unabhängig von der Zahl der zu untersuchenden Variablen. Die beiden entscheidenden Schritte hier sind die Funktion <code>split()</code> aus Basis-R und die Funktion <a href="https://purrr.tidyverse.org/reference/map.html"><code>map_df()</code></a> aus dem Tidyverse. Letztere Funktion ist extrem nützlich in vielen Anwendungsfällen, die Nutzung erschließt sich aber nicht auf den ersten Blick (daher hier noch zwei Links zur Erklärung, aber nicht frustrieren lassen, wenn es sich trotzdem nicht direkt erschließt: <a href="https://www.machinegurning.com/rstats/map_df/">Post von Matt Upson</a>, <a href="http://www.rebeccabarter.com/blog/2019-08-19_purrr/">Post von Rebecca Barter</a>).</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-1"></a><span class="kw">library</span>(DescTools)</span>
+<span id="cb175-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-2"></a></span>
+<span id="cb175-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-3"></a><span class="co"># Zur einfacheren Nachvollziehbarkeit kann es praktisch sein die einzelnen Schritte separat auszuführen</span></span>
+<span id="cb175-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-4"></a><span class="co"># und das jeweilige Ergebniss anzuschauen</span></span>
+<span id="cb175-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-5"></a></span>
+<span id="cb175-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-6"></a>features.nonreproducible &lt;-<span class="st"> </span>radiomics_daten <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb175-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-7"></a><span class="st">  </span><span class="co"># zunächst transformieren wir unsere Daten so, dass eine lange Tabelle</span></span>
+<span id="cb175-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-8"></a><span class="st">  </span><span class="co"># entsteht, die statt 33 Spalten nur 5 Spalten hat, dafür aber statt 320</span></span>
+<span id="cb175-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-9"></a><span class="st">  </span><span class="co"># Zeilen 9600 Zeilen, sodass eine Spalte den Namen des Features enthält,</span></span>
+<span id="cb175-10"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-10"></a><span class="st">  </span><span class="co"># und eine weitere den Wert des jeweiligen Features</span></span>
+<span id="cb175-11"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-11"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span><span class="kw">c</span>(reader, histo, PatID), <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb175-12"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-12"></a><span class="st">  </span><span class="co"># als nächstes wollen wir die Tabelle so transformieren, dass je eine Spalte</span></span>
+<span id="cb175-13"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-13"></a><span class="st">  </span><span class="co"># für reader_01 und eine für reader_02 entsteht, denn für die Funktion CCC</span></span>
+<span id="cb175-14"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-14"></a><span class="st">  </span><span class="co"># müssen die Daten in diesem Format vorliegen</span></span>
+<span id="cb175-15"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-15"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> reader, <span class="dt">values_from =</span> value) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb175-16"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-16"></a><span class="st">  </span><span class="co"># hier entfernen wir alle Zeilen, in denen es keinen Wert für reader_02</span></span>
+<span id="cb175-17"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-17"></a><span class="st">  </span><span class="co"># gibt, der ja nur einen Teil der Daten, nämlich nur 20 Fälle ausgewertet</span></span>
+<span id="cb175-18"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-18"></a><span class="st">  </span><span class="co"># hatte</span></span>
+<span id="cb175-19"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-19"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(reader_<span class="dv">02</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb175-20"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-20"></a><span class="st">  </span><span class="co"># nun Teilen wir mit split() unser Dataframe in viele Dataframes auf,</span></span>
+<span id="cb175-21"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-21"></a><span class="st">  </span><span class="co"># die jeweils nur ein Feature enthalten, in unserem Beispiel erhalten</span></span>
+<span id="cb175-22"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-22"></a><span class="st">  </span><span class="co"># wir hier also eine sog. Liste mit 30 Dataframes</span></span>
+<span id="cb175-23"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-23"></a><span class="st">  </span><span class="kw">split</span>(.<span class="op">$</span>feature) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb175-24"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-24"></a><span class="st">  </span><span class="co"># nun nutzen wir map_df() um die Funktion CCC in jedem der 30 Dataframes</span></span>
+<span id="cb175-25"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-25"></a><span class="st">  </span><span class="co"># anzuwenden, als Ergebnis erhalten wir ein einziges Dataframe mit den </span></span>
+<span id="cb175-26"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-26"></a><span class="st">  </span><span class="co"># 30 berechneten CCCs, dem fügen wir noch den Namen der Features als Spalte</span></span>
+<span id="cb175-27"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-27"></a><span class="st">  </span><span class="co"># hinzu.</span></span>
+<span id="cb175-28"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-28"></a><span class="st">  </span><span class="kw">map_df</span>(<span class="op">~</span><span class="st"> </span><span class="kw">add_column</span>(<span class="kw">CCC</span>(.<span class="op">$</span>reader_<span class="dv">01</span>, .<span class="op">$</span>reader_<span class="dv">02</span>, <span class="dt">ci =</span> <span class="st">&quot;z-transform&quot;</span>, <span class="dt">conf.level =</span> <span class="fl">0.95</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)<span class="op">$</span>rho.c, <span class="dt">feature =</span> <span class="kw">unique</span>(.<span class="op">$</span>feature), <span class="dt">.before =</span> <span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb175-29"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-29"></a><span class="st">  </span><span class="co"># als nächstes filtern wir das Dataframe so, dass wir nur die Zeilen der</span></span>
+<span id="cb175-30"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-30"></a><span class="st">  </span><span class="co"># Features erhalten, deren CCC-Wert unterhalb der von uns gesetzten Grenze</span></span>
+<span id="cb175-31"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-31"></a><span class="st">  </span><span class="co"># von 0,8 lag.</span></span>
+<span id="cb175-32"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-32"></a><span class="st">  </span><span class="kw">filter</span>(est <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.8</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb175-33"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-33"></a><span class="st">  </span><span class="co"># als letzten Schritt holen wir uns die Namen der Features aus der</span></span>
+<span id="cb175-34"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-34"></a><span class="st">  </span><span class="co"># entsprechenden Spalte des Dataframes, nur diese werden dann in der</span></span>
+<span id="cb175-35"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-35"></a><span class="st">  </span><span class="co"># oben angegebenen Variable gespeichert.</span></span>
+<span id="cb175-36"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-36"></a><span class="st">  </span><span class="kw">pull</span>(feature)</span>
+<span id="cb175-37"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-37"></a></span>
+<span id="cb175-38"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb175-38"></a>features.nonreproducible</span></code></pre></div>
+<pre><code>## [1] &quot;feature_10&quot; &quot;feature_11&quot; &quot;feature_22&quot; &quot;feature_30&quot;</code></pre>
+</div>
+<div id="normalisierung" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Normalisierung</h2>
+<p>Nachdem wir nun also die nicht-reproduzierbaren Features identifiziert haben, können wir uns daran machen die Daten für das folgende Machine Learning vorzubereiten (siehe Grafik in <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-howto">7.1</a>). Zunächst benötigen wir also ein Dataframe in dem nur die reproduzierbaren Features enthalten sind und nur Daten von <code>reader_01</code>.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb177-1"></a>radiomics_daten.reproducible &lt;-<span class="st"> </span>radiomics_daten <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb177-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb177-2"></a><span class="st">  </span><span class="kw">filter</span>(reader <span class="op">==</span><span class="st"> &quot;reader_01&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb177-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb177-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st"> </span><span class="kw">all_of</span>(features.nonreproducible))</span></code></pre></div>
+<p>Anschließend normalisieren wir die Daten, wie in <a href="see-one-do-one-teach-one-machine-learning-in-r.html#ml-preprocessing">6.6</a> besprochen.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb178-1"></a><span class="kw">library</span>(caret)</span>
+<span id="cb178-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb178-2"></a></span>
+<span id="cb178-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb178-3"></a>radiomics_daten.reproducible.norm &lt;-<span class="st"> </span>radiomics_daten.reproducible <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb178-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb178-4"></a><span class="st">  </span><span class="kw">preProcess</span>(<span class="dt">method =</span> <span class="st">&quot;range&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb178-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb178-5"></a><span class="st">  </span><span class="kw">predict</span>(radiomics_daten.reproducible)</span></code></pre></div>
+<p>Um das Ergebnis der Normalisierung zu überprüfen, stellen wir uns das ganze einmal graphisch dar. Zur besseren Visualisierung stellen wir die Grafiken direkt nebeneinander dar, das Paket <code>cowplot</code> bietet dafür tolle Funktionalitäten.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-1"></a><span class="kw">library</span>(cowplot)</span>
+<span id="cb179-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-2"></a></span>
+<span id="cb179-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-3"></a><span class="kw">plot_grid</span>(</span>
+<span id="cb179-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-4"></a>  radiomics_daten <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb179-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-5"></a><span class="st">    </span><span class="kw">filter</span>(reader <span class="op">==</span><span class="st"> &quot;reader_01&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb179-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-6"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="op">-</span><span class="kw">c</span>(reader, PatID, histo), <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb179-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-7"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> feature, <span class="dt">y =</span> value, <span class="dt">fill =</span> histo)) <span class="op">+</span></span>
+<span id="cb179-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-8"></a><span class="st">      </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
+<span id="cb179-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-9"></a><span class="st">      </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
+<span id="cb179-10"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-10"></a><span class="st">      </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;top&quot;</span>),</span>
+<span id="cb179-11"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-11"></a>  </span>
+<span id="cb179-12"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-12"></a>  radiomics_daten.reproducible.norm <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb179-13"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-13"></a><span class="st">    </span><span class="kw">filter</span>(reader <span class="op">==</span><span class="st"> &quot;reader_01&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb179-14"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-14"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="op">-</span><span class="kw">c</span>(reader, PatID, histo), <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb179-15"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-15"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> feature, <span class="dt">y =</span> value, <span class="dt">fill =</span> histo)) <span class="op">+</span></span>
+<span id="cb179-16"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-16"></a><span class="st">      </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
+<span id="cb179-17"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-17"></a><span class="st">      </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
+<span id="cb179-18"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-18"></a><span class="st">      </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;top&quot;</span>)</span>
+<span id="cb179-19"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb179-19"></a>)</span></code></pre></div>
+<p><img src="go_for_it_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p>Wir sehen also, dass die Werte alle Features erfolgreich auf einen Bereich zwischen 0 und 1 normalisiert wurden. Als nächstes können wir das Dataframe mit den reproduzierbaren und normalisierten Daten in Trainings und Testdaten aufteilen.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb180-1"></a>index.training &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(radiomics_daten.reproducible.norm<span class="op">$</span>histo, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.vector</span>()</span>
+<span id="cb180-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb180-2"></a></span>
+<span id="cb180-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb180-3"></a>radiomics_daten.reproducible.norm.train &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm[index.training, ]</span>
+<span id="cb180-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb180-4"></a>radiomics_daten.reproducible.norm.test  &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm[<span class="op">-</span>index.training, ]</span></code></pre></div>
+</div>
+<div id="radiomics-boruta" class="section level2" number="7.5">
+<h2><span class="header-section-number">7.5</span> Feature Reduction</h2>
+<p>Als nächstes können wir uns nun einem der wichtigsten Schritte in unserem Workflow widmen. Der <a href="https://de.wikipedia.org/wiki/Feature_Subset_Selection">Auswahl der Features</a>, die potentiell relevant für die Unterscheidung der zwei Gruppen (benigne vs. maligne) sein könnten (siehe Grafik in <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-howto">7.1</a>). Schließlich wäre es ja wenig hilfreich alle Features in ein Modell zu werfen, denn es kommt nicht selten vor, dass eine Vielzahl von Features keinen echten Informationsgehalt besitzen und in beiden Gruppen annähernd ähnlich verteilt sind.</p>
+<p>Hierzu gibt es eine Vielzahl von Möglichkeiten. Ein oft benutzter Algorithmus in vielen Radiomics-Publikationen ist der sogenannte <a href="https://en.wikipedia.org/wiki/Lasso_(statistics)">“least absolute shrinkage ans selection operator (LASSO)”</a> (zu dem es <a href="https://rstatisticsblog.com/data-science-in-action/machine-learning/lasso-regression/">hier</a> auch ein schönes Tutorial gibt - verwendet das Paket <code>glmnet</code>). Wir wollten hier einen anderen verwenden, nämlich den sogenannten <a href="https://www.listendata.com/2017/05/feature-selection-boruta-package.html">Boruta Algorithmus</a>. Hierzu nutzen wir das Paket <code>Boruta</code>, das die Anwendung recht simpel macht.</p>
+<p>Zunächst laden wir das entsprechende Paket und entfernen alle nicht benötigten Spalten aus unserem Trainings-Dataframe, sodass nur noch unsere Features und die Gruppenvariable (in unserem Fall als <code>histo</code>) übrig bleiben.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb181-1"></a><span class="kw">library</span>(Boruta)</span>
+<span id="cb181-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb181-2"></a></span>
+<span id="cb181-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb181-3"></a>radiomics_daten.reproducible.norm.train.boruta &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.train <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb181-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb181-4"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>PatID, <span class="op">-</span>reader)</span></code></pre></div>
+<p>Als nächtes wenden wir die Funktion <code>Boruta()</code> an und übergeben auch hier wieder eine Formel als ersten Parameter, die definiert welche Variable durch welche anderen Variablen erklärt werden soll (in diesem Fall also <code>histo ~ .</code>).</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb182-1"></a>my.boruta &lt;-<span class="st"> </span><span class="kw">Boruta</span>(histo <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> radiomics_daten.reproducible.norm.train.boruta)</span>
+<span id="cb182-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb182-2"></a>my.boruta</span></code></pre></div>
+<pre><code>## Boruta performed 76 iterations in 2.421193 secs.
+##  5 attributes confirmed important: feature_09, feature_26, feature_27,
+## feature_28, feature_29;
+##  21 attributes confirmed unimportant: feature_01, feature_02,
+## feature_03, feature_04, feature_05 and 16 more;</code></pre>
+<p>Der Boruta-Algorithmus gibt uns nun an welche Features wichtig zur Unterscheidung zwischen den Gruppen zu sein scheinen. Gelegentlich gibt der Algorithmus auch noch an, dass eine oder mehrere Variablen nicht final entschieden werden konnten. Um auch in diesen Fällen eine endgültige Entscheidung zu treffen, können wir das Ergebnis noch mit der Funktion <code>TentativeRoughFix()</code> bearbeiten um ein finales Ergebnis zu bekommen.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb184-1"></a>my.boruta.final &lt;-<span class="st"> </span><span class="kw">TentativeRoughFix</span>(my.boruta)</span></code></pre></div>
+<pre><code>## Warning in TentativeRoughFix(my.boruta): There are no Tentative attributes!
+## Returning original object.</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-1"></a>my.boruta.final</span></code></pre></div>
+<pre><code>## Boruta performed 76 iterations in 2.421193 secs.
+##  5 attributes confirmed important: feature_09, feature_26, feature_27,
+## feature_28, feature_29;
+##  21 attributes confirmed unimportant: feature_01, feature_02,
+## feature_03, feature_04, feature_05 and 16 more;</code></pre>
+<p>Da der Boruta-Algorithmus die Variablen in zufälliger Reihenfolge bearbeitet, kann es gelegentlich zu leicht unterschiedlichen Ergebnissen kommen. In unserem Fall sollte der Algorithmus aber vier relevante Features identifizieren: feature_26, feature_27, feature_28 und feature_29. Die Relevanz der jeweiligen Features können wir uns auch leicht visualisieren, indem wir aus dem Ergebnisobjekt <code>my.boruta.final</code> das Element <code>ImpHistory</code> untersuchen.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-1"></a>my.boruta.final<span class="op">$</span>ImpHistory <span class="op">%&gt;%</span></span>
+<span id="cb188-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-2"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb188-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st"> </span><span class="kw">starts_with</span>(<span class="st">&quot;shadow&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb188-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-4"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>(), <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb188-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> feature, <span class="dt">y =</span> value)) <span class="op">+</span></span>
+<span id="cb188-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-6"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
+<span id="cb188-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-7"></a><span class="st">    </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="go_for_it_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<p>Wir können leicht erkennen, dass <code>feature_26</code> am wichtigsten zu sein scheint, d.h. die beste Trennschärfe zwischen den Gruppen bietet, die übrigen drei wichtigen Feature sind relativ nah beieinander. Für die weiteren Analysen können wir nun die als wichtig bestätigten Features aus unserem Trainingsdatensatz selektieren. Die relevanten Features finden wir in dem Element <code>finalDecision</code> innerhalb des Ergebnisobjektes <code>my.boruta.final</code>.</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-1"></a><span class="co"># es ist etwas komfortabler die unwichtigen Features in einer Variable zu speichern und</span></span>
+<span id="cb189-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-2"></a><span class="co"># diese dann zu nutzen um sie aus dem Trainingsdatensatz zu entfernen, daher hier der Umweg</span></span>
+<span id="cb189-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-3"></a>features.nonrelevant &lt;-<span class="st"> </span>my.boruta.final<span class="op">$</span>finalDecision <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-4"></a><span class="st">  </span><span class="kw">enframe</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-5"></a><span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> &quot;Confirmed&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-6"></a><span class="st">  </span><span class="kw">pull</span>(name)</span>
+<span id="cb189-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-7"></a></span>
+<span id="cb189-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-8"></a>radiomics_daten.reproducible.norm.train.boruta.relevant &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.train.boruta <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-9"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st"> </span><span class="kw">all_of</span>(features.nonrelevant))</span></code></pre></div>
+<p>An dieser Stelle kann es sich lohnen einmal die als relevant identifizierten Features einmal in Abhängigkeit der jeweiligen Gruppe zu visualisieren (siehe Grafik in <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-howto">7.1</a>).</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-1"></a>radiomics_daten.reproducible.norm.train.boruta.relevant <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>histo, <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb190-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> feature, <span class="dt">y =</span> value, <span class="dt">fill =</span> histo)) <span class="op">+</span></span>
+<span id="cb190-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-4"></a><span class="st">    </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="go_for_it_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p>Wir sehen, dass in der Tat vier Features identifiziert wurden, die offenbar relevante Unterschiede zwischen den beiden Gruppen (benigne vs. maligne) aufweisen. Bevor wir aber nun zum finalen Schritte, dem Training eines Klassifizierungsmodells schreiten, bleibt noch ein wichtiger Zwischenschritt.</p>
+</div>
+<div id="korrelationsanalyse" class="section level2" number="7.6">
+<h2><span class="header-section-number">7.6</span> Korrelationsanalyse</h2>
+<p>In der vorangegangenen Grafik erkennen wir, dass <code>feature_26</code> und <code>feature_27</code> sich in etwa ähnlich verhalten, d.h. höhere Werte bei benigner Histologie haben. Gleiches in etwa gilt mit umgekehrten Vorzeichen für <code>feature_28</code> und <code>feature_29</code>, hier haben Fälle mit maligner Histologie höhere Werte. Es wäre also nun zu prüfen, ob die Werte der Features innerhalb der jeweiligen Feature-Paare korrelieren oder nicht. Sollte sich hier eine starke Korrelation ergeben, wäre es sinnvoll in dem finalen nur jeweils eines der Features des jeweiligen Paares einzuschließen, da sich in eng miteinander korrelierten Features kein relevanter Zugewinn an Informationen ergibt (siehe Grafik in <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-howto">7.1</a>).</p>
+<p>Hierzu können wir die Funktion <code>cor()</code> aus Basis-R nutzen, um die <a href="https://de.wikipedia.org/wiki/Korrelationskoeffizient">Korrelationskoeffizienten</a> für alle Kombinationen von Features zu berechnen. Das Ergebnis dieser Funktion ist eine <a href="https://de.wikipedia.org/wiki/Korrelationsmatrix">Korrelationsmatrix</a>, die wir mithilfe der Funktion <code>corrplot()</code> aus dem gleichnamigen Paket <code>corrplot</code> einfach visualisieren können.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-1"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb191-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-2"></a></span>
+<span id="cb191-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-3"></a>radiomics_daten.reproducible.norm.train.boruta.relevant <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb191-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-4"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>histo) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb191-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-5"></a><span class="st">  </span><span class="kw">cor</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb191-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-6"></a><span class="st">  </span><span class="kw">corrplot</span>()</span></code></pre></div>
+<p><img src="go_for_it_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<p>Die Vermutung, dass die Werte der Features innerhalb der beiden oben genannten Feature-Paare stark korrelieren bestätigen sich. In einem Fall mit derart wenigen Fällen, können wir das geeignetste Feature der jeweiligen “Cluster” händisch selbst wählen. Gemessen an den “Wichtigkeiten”, die wir als Ergebnis des Boruta-Algorithmus erhalten hatten (siehe <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-boruta">7.5</a>), fällt die Entscheidung recht leicht auf <code>feature_26</code> und <code>feature_28</code>.</p>
+<p>In Föllen mit mehr relevanten Features können natürlich auch kompliziertere Verfahren zur Auswahl der Features aus den jeweiligen Clustern nötig sein. Diese behandeln wir an dieser Stelle nicht. Im Allgemeinen kann aber grob gesagt werden, dass in ein finales Modell nicht mehr als etwa 10 Features eingehen sollten.</p>
+</div>
+<div id="fitten-und-testen-des-modells" class="section level2" number="7.7">
+<h2><span class="header-section-number">7.7</span> Fitten und Testen des Modells</h2>
+<p>Nun kommt der interessanteste aller Schritte, der aber letztlich nach der ganzen Vorarbeit vermutlich der einfachste von allen sein dürfte.</p>
+<p>Da aufgrund der überschaubaren Anzahl an letztlich relevanten Features kein besonders komplexer Machine Learning-Algorithmus nötig sein dürfte, verwenden wir an dieser Stelle eine einfache logistische Regression (siehe <a href="see-one-do-one-teach-one-machine-learning-in-r.html#log-regression">6.5</a>). Der entsprechende Code ist einfach: der Funktion <code>glm()</code> übergeben wir als Parameter die Formel mit unseren beiden wichtigsten Features (<code>feature_26</code> und <code>feature_28</code>) und der Zielvariable (<code>histo</code>) sowie die normalisierten Trainingsdaten als Grundlage für das Fitting.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-1"></a>fitted.model &lt;-<span class="st"> </span><span class="kw">glm</span>(histo <span class="op">~</span><span class="st"> </span>feature_<span class="dv">26</span> <span class="op">+</span><span class="st"> </span>feature_<span class="dv">28</span>, <span class="dt">data =</span> radiomics_daten.reproducible.norm.train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb192-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-2"></a><span class="kw">summary</span>(fitted.model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = histo ~ feature_26 + feature_28, family = &quot;binomial&quot;, 
+##     data = radiomics_daten.reproducible.norm.train)
+## 
+## Deviance Residuals: 
+##        Min          1Q      Median          3Q         Max  
+## -1.840e-04  -2.100e-08  -2.100e-08   2.100e-08   1.388e-04  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)    314.34   65650.50   0.005    0.996
+## feature_26    -805.91  153344.69  -0.005    0.996
+## feature_28     -78.53   49941.79  -0.002    0.999
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 3.0553e+02  on 239  degrees of freedom
+## Residual deviance: 6.4825e-08  on 237  degrees of freedom
+## AIC: 6
+## 
+## Number of Fisher Scoring iterations: 25</code></pre>
+<p>An dieser Stelle sollte man sich nicht über das etwas seltsame Ergebnis des Fitting wundern. In diesen fiktiven Daten war die Trennschärfe der relevanten Features bewusst absolut gesetzt, weshalb sich hier ein perfekt trennendes Modell ergibt. Und das natürlich auch in den Testdaten, was wir uns dann hier auch noch als ROC-Kurve visualisieren können (siehe auch <a href="see-one-do-one-teach-one-machine-learning-in-r.html#roc-analysis">6.5.1</a>).</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-1"></a>radiomics_daten.reproducible.norm.test.predict &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.test <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb194-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-2"></a><span class="st">  </span><span class="kw">add_column</span>(<span class="dt">prediction_value =</span> <span class="kw">predict</span>(fitted.model, radiomics_daten.reproducible.norm.test))</span>
+<span id="cb194-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-3"></a></span>
+<span id="cb194-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-4"></a>radiomics_daten.reproducible.norm.test.predict <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb194-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-5"></a><span class="st">  </span><span class="kw">roc</span>(histo, prediction_value) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb194-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-6"></a><span class="st">  </span><span class="kw">ggroc</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb194-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-7"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">xend =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>),</span>
+<span id="cb194-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-8"></a>                 <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
+<span id="cb194-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-9"></a><span class="st">    </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
+<p><img src="go_for_it_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p>Ein so perfektes Ergebnis findet sich natürlich in Realität selten und sollte hier nur zur Veranschaulichung der verschiedenen Schritte einer Radiomics-Analyse dienen.</p>
+</div>
+<div id="das-ende.-vielen-dank" class="section level2" number="7.8">
+<h2><span class="header-section-number">7.8</span> Das Ende. Vielen Dank!</h2>
+<p>Wir hoffen, das Begleitbuch und unsere Webinare haben den einen oder anderen dazu bewogen sich intensiver mit den vielfältigen Möglichkeiten in R und RStudio zu beschäftigen. Natürlich könnte man noch viele anderen Themen bearbeiten und etwas realistischere und kompliziertere Radiomics- bzw. Machine Learning Anwendungen diskutieren. Wir haben aber versucht einigermaßen ein Gleichgewicht zwischen Praktikabilität und Praxisnähe zu finden und hoffen wir haben das einigermaßen erfolgreich gemacht.</p>
+<p>Über Kommentare, Rückfragen, Wünsche und Verbesserungsvorschläge freuen wir und sehr! Und sollte sich jemand in ähnlicher Weise engagieren wollen, vielleicht ja sogar mit einem ähnlichen Format zu Programmierung in <a href="https://de.wikipedia.org/wiki/Python_(Programmiersprache)">Python</a>, kann er sich gerne bei uns (<a href="https://bettinabaessler.netlify.app">Bettina Baeßler</a> und <a href="https://pintodossantos.github.io">Daniel Pinto dos Santos</a>), der <a href="https://www.drg.de">DRG</a> oder der <a href="https://www.agit.drg.de">AGIT</a> melden.</p>
+<p>In diesem Sinne beste Grüße und vielleicht bis bald!</p>
+
+</div>
+</div>
+<div id="disqus_thread"></div>
+<script>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://go-for-it.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the
+<a href="https://disqus.com/?ref_noscript">
+  comments powered by Disqus.</a></noscript>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="see-one-do-one-teach-one-machine-learning-in-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
