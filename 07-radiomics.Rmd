@@ -144,27 +144,50 @@ plot_grid(
 Wir sehen also, dass die Werte alle Features erfolgreich auf einen Bereich zwischen 0 und 1 normalisiert wurden. Als nächstes können wir das Dataframe mit den reproduzierbaren und normalisierten Daten in Trainings und Testdaten aufteilen.
 
 ```{r message=FALSE, warning=FALSE}
-index.training <- createDataPartition(radiomics_daten.reproducible.norm$histo, p = 0.8, list = FALSE)
+index.training <- createDataPartition(radiomics_daten.reproducible.norm$histo, p = 0.8, list = FALSE) %>% as.vector()
 
 radiomics_daten.reproducible.norm.train <- radiomics_daten.reproducible.norm[index.training, ]
 radiomics_daten.reproducible.norm.test  <- radiomics_daten.reproducible.norm[-index.training, ]
 ```
 
-## Feature Reduction
+## Feature Reduction {#radiomics-boruta}
 
-XXX hier weiter XXX
+Als nächstes können wir uns nun einem der wichtigsten Schritte in unserem Workflow widmen. Der [Auswahl der Features](https://de.wikipedia.org/wiki/Feature_Subset_Selection), die potentiell relevant für die Unterscheidung der zwei Gruppen (benigne vs. maligne) sein könnten (siehe Grafik in \@ref(radiomics-howto)). Schließlich wäre es ja wenig hilfreich alle Features in ein Modell zu werfen, denn es kommt nicht selten vor, dass eine Vielzahl von Features keinen echten Informationsgehalt besitzen und in beiden Gruppen annähernd ähnlich verteilt sind.
+
+Hierzu gibt es eine Vielzahl von Möglichkeiten. Ein oft benutzter Algorithmus in vielen Radiomics-Publikationen ist der sogenannte ["least absolute shrinkage ans selection operator (LASSO)"](https://en.wikipedia.org/wiki/Lasso_(statistics)) (zu dem es [hier](https://rstatisticsblog.com/data-science-in-action/machine-learning/lasso-regression/) auch ein schönes Tutorial gibt - verwendet das Paket `glmnet`). Wir wollten hier einen anderen verwenden, nämlich den sogenannten [Boruta Algorithmus](https://www.listendata.com/2017/05/feature-selection-boruta-package.html). Hierzu nutzen wir das Paket `Boruta`, das die Anwendung recht simpel macht.
+
+Zunächst laden wir das entsprechende Paket und entfernen alle nicht benötigten Spalten aus unserem Trainings-Dataframe, sodass nur noch unsere Features und die Gruppenvariable (in unserem Fall als `histo`) übrig bleiben.
 
 ```{r}
 library(Boruta)
 
-radiomics_daten.reproducible.norm.train <- radiomics_daten.reproducible.norm.train %>% 
+radiomics_daten.reproducible.norm.train.boruta <- radiomics_daten.reproducible.norm.train %>% 
   select(-PatID, -reader)
+```
 
-my.boruta <- Boruta(histo ~ ., data = radiomics_daten.reproducible.norm.train)
+Als nächtes wenden wir die Funktion `Boruta()` an und übergeben auch hier wieder eine Formel als ersten Parameter, die definiert welche Variable durch welche anderen Variablen erklärt werden soll (in diesem Fall also `histo ~ .`).
+
+```{r eval=FALSE}
+my.boruta <- Boruta(histo ~ ., data = radiomics_daten.reproducible.norm.train.boruta)
+my.boruta
+```
+
+```{r echo=FALSE}
+set.seed(1)
+my.boruta <- Boruta(histo ~ ., data = radiomics_daten.reproducible.norm.train.boruta)
+my.boruta
+```
+
+Der Boruta-Algorithmus gibt uns nun an welche Features wichtig zur Unterscheidung zwischen den Gruppen zu sein scheinen. Gelegentlich gibt der Algorithmus auch noch an, dass eine oder mehrere Variablen nicht final entschieden werden konnten. Um auch in diesen Fällen eine endgültige Entscheidung zu treffen, können wir das Ergebnis noch mit der Funktion `TentativeRoughFix()` bearbeiten um ein finales Ergebnis zu bekommen.
+
+```{r}
 my.boruta.final <- TentativeRoughFix(my.boruta)
-
 my.boruta.final
+```
 
+Da der Boruta-Algorithmus die Variablen in zufälliger Reihenfolge bearbeitet, kann es gelegentlich zu leicht unterschiedlichen Ergebnissen kommen. In unserem Fall sollte der Algorithmus aber vier relevante Features identifizieren: feature_26, feature_27, feature_28 und feature_29. Die Relevanz der jeweiligen Features können wir uns auch leicht visualisieren, indem wir aus dem Ergebnisobjekt `my.boruta.final` das Element `ImpHistory` untersuchen.
+
+```{r message=FALSE, warning=FALSE}
 my.boruta.final$ImpHistory %>%
   as_tibble() %>% 
   select(- starts_with("shadow")) %>% 
@@ -172,65 +195,83 @@ my.boruta.final$ImpHistory %>%
   ggplot(aes(x = feature, y = value)) +
     geom_boxplot() +
     coord_flip()
+```
 
+Wir können leicht erkennen, dass `feature_26` am wichtigsten zu sein scheint, d.h. die beste Trennschärfe zwischen den Gruppen bietet, die übrigen drei wichtigen Feature sind relativ nah beieinander. Für die weiteren Analysen können wir nun die als wichtig bestätigten Features aus unserem Trainingsdatensatz selektieren. Die relevanten Features finden wir in dem Element `finalDecision` innerhalb des Ergebnisobjektes `my.boruta.final`.
+
+```{r}
+# es ist etwas komfortabler die unwichtigen Features in einer Variable zu speichern und
+# diese dann zu nutzen um sie aus dem Trainingsdatensatz zu entfernen, daher hier der Umweg
 features.nonrelevant <- my.boruta.final$finalDecision %>% 
   enframe() %>% 
   filter(value != "Confirmed") %>% 
   pull(name)
 
-features.relevant <- my.boruta.final$finalDecision %>% 
-  enframe() %>% 
-  filter(value == "Confirmed") %>% 
-  pull(name)
-
-radiomics_daten.reproducible.norm.train.relevant <- radiomics_daten.reproducible.norm.train %>% 
+radiomics_daten.reproducible.norm.train.boruta.relevant <- radiomics_daten.reproducible.norm.train.boruta %>% 
   select(- all_of(features.nonrelevant))
 ```
 
+An dieser Stelle kann es sich lohnen einmal die als relevant identifizierten Features einmal in Abhängigkeit der jeweiligen Gruppe zu visualisieren (siehe Grafik in \@ref(radiomics-howto)).
+
 ```{r}
-radiomics_daten.reproducible.norm.train.relevant %>% 
+radiomics_daten.reproducible.norm.train.boruta.relevant %>% 
   pivot_longer(-histo, names_to = "feature") %>% 
   ggplot(aes(x = feature, y = value, fill = histo)) +
     geom_boxplot()
 ```
 
+Wir sehen, dass in der Tat vier Features identifiziert wurden, die offenbar relevante Unterschiede zwischen den beiden Gruppen (benigne vs. maligne) aufweisen. Bevor wir aber nun zum finalen Schritte, dem Training eines Klassifizierungsmodells schreiten, bleibt noch ein wichtiger Zwischenschritt.
+
 ## Korrelationsanalyse
 
-```{r}
+In der vorangegangenen Grafik erkennen wir, dass `feature_26` und `feature_27` sich in etwa ähnlich verhalten, d.h. höhere Werte bei benigner Histologie haben. Gleiches in etwa gilt mit umgekehrten Vorzeichen für `feature_28` und `feature_29`, hier haben Fälle mit maligner Histologie höhere Werte. Es wäre also nun zu prüfen, ob die Werte der Features innerhalb der jeweiligen Feature-Paare korrelieren oder nicht. Sollte sich hier eine starke Korrelation ergeben, wäre es sinnvoll in dem finalen nur jeweils eines der Features des jeweiligen Paares einzuschließen, da sich in eng miteinander korrelierten Features kein relevanter Zugewinn an Informationen ergibt (siehe Grafik in \@ref(radiomics-howto)).
+
+Hierzu können wir die Funktion `cor()` aus Basis-R nutzen, um die [Korrelationskoeffizienten](https://de.wikipedia.org/wiki/Korrelationskoeffizient) für alle Kombinationen von Features zu berechnen. Das Ergebnis dieser Funktion ist eine [Korrelationsmatrix](https://de.wikipedia.org/wiki/Korrelationsmatrix), die wir mithilfe der Funktion `corrplot()` aus dem gleichnamigen Paket `corrplot` einfach visualisieren können.
+
+```{r message=FALSE, warning=FALSE}
 library(corrplot)
 
-radiomics_daten.reproducible.norm.train.relevant %>% 
+radiomics_daten.reproducible.norm.train.boruta.relevant %>% 
   select(-histo) %>% 
   cor() %>% 
   corrplot()
 ```
 
-## Welches Feature funktioniert am besten?
+Die Vermutung, dass die Werte der Features innerhalb der beiden oben genannten Feature-Paare stark korrelieren bestätigen sich. In einem Fall mit derart wenigen Fällen, können wir das geeignetste Feature der jeweiligen "Cluster" händisch selbst wählen. Gemessen an den "Wichtigkeiten", die wir als Ergebnis des Boruta-Algorithmus erhalten hatten (siehe \@ref(radiomics-boruta)), fällt die Entscheidung recht leicht auf `feature_26` und `feature_28`.
 
-```{r}
-glm(histo ~ ., data = radiomics_daten.reproducible.norm.train.relevant, family = "binomial") %>% AIC()
+In Föllen mit mehr relevanten Features können natürlich auch kompliziertere Verfahren zur Auswahl der Features aus den jeweiligen Clustern nötig sein. Diese behandeln wir an dieser Stelle nicht. Im Allgemeinen kann aber grob gesagt werden, dass in ein finales Modell nicht mehr als etwa 10 Features eingehen sollten.
 
-model.performance.train <- radiomics_daten.reproducible.norm.train.relevant %>% 
-  pivot_longer(-histo, names_to = "feature") %>% 
-  split(.$feature) %>% 
-  map_df(~ glm(histo ~ value, data = ., family = "binomial") %>% AIC()) %>% 
-  pivot_longer(everything(), names_to = "model.variables", values_to = "model.aic") %>% 
-  arrange(model.aic)
+## Fitten und Testen des Modells
+
+Nun kommt der interessanteste aller Schritte, der aber letztlich nach der ganzen Vorarbeit vermutlich der einfachste von allen sein dürfte.
+
+Da aufgrund der überschaubaren Anzahl an letztlich relevanten Features kein besonders komplexer Machine Learning-Algorithmus nötig sein dürfte, verwenden wir an dieser Stelle eine einfache logistische Regression (siehe \@ref(log-regression)). Der entsprechende Code ist einfach: der Funktion `glm()` übergeben wir als Parameter die Formel mit unseren beiden wichtigsten Features (`feature_26` und `feature_28`) und der Zielvariable (`histo`) sowie die normalisierten Trainingsdaten als Grundlage für das Fitting.
+
+```{r message=FALSE, warning=FALSE}
+fitted.model <- glm(histo ~ feature_26 + feature_28, data = radiomics_daten.reproducible.norm.train, family = "binomial")
+summary(fitted.model)
 ```
 
+An dieser Stelle sollte man sich nicht über das etwas seltsame Ergebnis des Fitting wundern. In diesen fiktiven Daten war die Trennschärfe der relevanten Features bewusst absolut gesetzt, weshalb sich hier ein perfekt trennendes Modell ergibt. Und das natürlich auch in den Testdaten, was wir uns dann hier auch noch als ROC-Kurve visualisieren können (siehe auch \@ref(roc-analysis)).
 
+```{r message=FALSE, warning=FALSE}
+radiomics_daten.reproducible.norm.test.predict <- radiomics_daten.reproducible.norm.test %>% 
+  add_column(prediction_value = predict(fitted.model, radiomics_daten.reproducible.norm.test))
 
-
-
-## ROC-Analysen
-
-```{r}
-radiomics_daten.reproducible.norm.test
-
-model.performance.train
-
-library(pROC)
-
-roc(histo ~ feature_26 + feature_27 + feature_28 + feature_29, data = radiomics_daten.reproducible.norm.test) %>% ggroc()
+radiomics_daten.reproducible.norm.test.predict %>% 
+  roc(histo, prediction_value) %>% 
+  ggroc(color = "steelblue", size = 1) +
+    geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1),
+                 color="grey", linetype="dashed") +
+    coord_fixed()
 ```
 
+Ein so perfektes Ergebnis findet sich natürlich in Realität selten und sollte hier nur zur Veranschaulichung der verschiedenen Schritte einer Radiomics-Analyse dienen.
+
+## Das Ende. Vielen Dank!
+
+Wir hoffen, das Begleitbuch und unsere Webinare haben den einen oder anderen dazu bewogen sich intensiver mit den vielfältigen Möglichkeiten in R und RStudio zu beschäftigen. Natürlich könnte man noch viele anderen Themen bearbeiten und etwas realistischere und kompliziertere Radiomics- bzw. Machine Learning Anwendungen diskutieren. Wir haben aber versucht einigermaßen ein Gleichgewicht zwischen Praktikabilität und Praxisnähe zu finden und hoffen wir haben das einigermaßen erfolgreich gemacht.
+
+Über Kommentare, Rückfragen, Wünsche und Verbesserungsvorschläge freuen wir und sehr! Und sollte sich jemand in ähnlicher Weise engagieren wollen, vielleicht ja sogar mit einem ähnlichen Format zu Programmierung in [Python](https://de.wikipedia.org/wiki/Python_(Programmiersprache)), kann er sich gerne bei uns ([Bettina Baeßler](https://bettinabaessler.netlify.app) und [Daniel Pinto dos Santos](https://pintodossantos.github.io)), der [DRG](https://www.drg.de) oder der [AGIT](https://www.agit.drg.de) melden.
+
+In diesem Sinne beste Grüße und vielleicht bis bald!

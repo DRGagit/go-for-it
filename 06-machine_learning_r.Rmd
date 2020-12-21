@@ -126,7 +126,7 @@ iris_binominal_predictions %>%
 ```
 Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausgabe der logistischen Regression eher für Schwertlilien der Art `virginica` zu sprechen, negative Werte für die Art `versicolor`. Nur in je einem Fall liegt dieses Modell für beide Arten liegt das Modell falsch.
 
-### Ein kurzer Ausflug in ROC-Analysen.
+### Ein kurzer Ausflug in ROC-Analysen {#roc-analysis}
 
 Ohne zu sehr darauf eingehen zu wollen, an dieser Stelle ein kurzer Exkurs zu [ROC-Analysen](https://de.wikipedia.org/wiki/ROC-Kurve). In einer ROC-Kurve wird sozusagen jede Kombination von Sensitivität und Spezifität aufgetragen, die sich in Abhängigkeit von der Variation eines Parameters (in unserem Fall also bspw. der Ausgabewert der logistischen Regression) ergibt. Je näher die Fläche unterhalb der ROC-Kurve am Wert 1 ist, desto besser die diagnostische oder prädiktive Performance eines Modells.
 
