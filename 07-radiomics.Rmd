@@ -231,7 +231,7 @@ radiomics_daten.reproducible.norm.train.boruta.relevant %>%
   corrplot()
 ```
 
-Die Vermutung, dass die Werte der Features innerhalb der beiden oben genannten Feature-Paare stark korrelieren bestätigen sich. In einem Fall mit derart wenigen Fällen, können wir das geeignetste Feature der jeweiligen "Cluster" händisch selbst wählen. Gemessen an den "Wichtigkeiten", die wir als Ergebnis des Boruta-Algorithmus erhalten hatten (siehe \@ref(radiomics-boruta)), fällt die Entscheidung recht leicht auf `feature_26` und `feature_28`.
+Die Vermutung, dass die Werte der Features innerhalb der beiden oben genannten Feature-Paare stark korrelieren bestätigen sich. In einem Fall mit derart wenigen Fällen, können wir das geeignetste Feature der jeweiligen "Cluster" händisch selbst wählen. Gemessen an den "Wichtigkeiten", die wir als Ergebnis des Boruta-Algorithmus erhalten hatten (siehe \@ref(radiomics-boruta)), fällt die Entscheidung recht leicht auf `feature_26` und `feature_29`.
 
 In Föllen mit mehr relevanten Features können natürlich auch kompliziertere Verfahren zur Auswahl der Features aus den jeweiligen Clustern nötig sein. Diese behandeln wir an dieser Stelle nicht. Im Allgemeinen kann aber grob gesagt werden, dass in ein finales Modell nicht mehr als etwa 10 Features eingehen sollten.
 
@@ -242,7 +242,7 @@ Nun kommt der interessanteste aller Schritte, der aber letztlich nach der ganzen
 Da aufgrund der überschaubaren Anzahl an letztlich relevanten Features kein besonders komplexer Machine Learning-Algorithmus nötig sein dürfte, verwenden wir an dieser Stelle eine einfache logistische Regression (siehe \@ref(log-regression)). Der entsprechende Code ist einfach: der Funktion `glm()` übergeben wir als Parameter die Formel mit unseren beiden wichtigsten Features (`feature_26` und `feature_28`) und der Zielvariable (`histo`) sowie die normalisierten Trainingsdaten als Grundlage für das Fitting.
 
 ```{r message=FALSE, warning=FALSE}
-fitted.model <- glm(histo ~ feature_26 + feature_28, data = radiomics_daten.reproducible.norm.train, family = "binomial")
+fitted.model <- glm(histo ~ feature_26 + feature_29, data = radiomics_daten.reproducible.norm.train, family = "binomial")
 summary(fitted.model)
 ```
 
@@ -251,6 +251,8 @@ An dieser Stelle sollte man sich nicht über das etwas seltsame Ergebnis des Fit
 ```{r message=FALSE, warning=FALSE}
 radiomics_daten.reproducible.norm.test.predict <- radiomics_daten.reproducible.norm.test %>% 
   add_column(prediction_value = predict(fitted.model, radiomics_daten.reproducible.norm.test))
+
+library(pROC)
 
 radiomics_daten.reproducible.norm.test.predict %>% 
   roc(histo, prediction_value) %>% 
