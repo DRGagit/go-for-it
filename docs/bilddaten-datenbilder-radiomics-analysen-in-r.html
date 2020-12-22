@@ -387,10 +387,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb181-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb181-2"></a></span>
 <span id="cb181-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb181-3"></a>radiomics_daten.reproducible.norm.train.boruta &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.train <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb181-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb181-4"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>PatID, <span class="op">-</span>reader)</span></code></pre></div>
-<p>Als nächtes wenden wir die Funktion <code>Boruta()</code> an und übergeben auch hier wieder eine Formel als ersten Parameter, die definiert welche Variable durch welche anderen Variablen erklärt werden soll (in diesem Fall also <code>histo ~ .</code>).</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb182-1"></a>my.boruta &lt;-<span class="st"> </span><span class="kw">Boruta</span>(histo <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> radiomics_daten.reproducible.norm.train.boruta)</span>
+<p>Als nächtes wenden wir die Funktion <code>Boruta()</code> an und übergeben auch hier wieder eine Formel als ersten Parameter, die definiert welche Variable durch welche anderen Variablen erklärt werden soll (in diesem Fall also <code>histo ~ .</code>). Mit dem Parameter <code>maxRuns</code> können wir dem Boruta-Algorithmus noch mitteilen, wieviele Durchgänge gemacht werden sollen, um die wichtigsten Features zu identifizieren.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb182-1"></a>my.boruta &lt;-<span class="st"> </span><span class="kw">Boruta</span>(histo <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> radiomics_daten.reproducible.norm.train.boruta, <span class="dt">maxRuns =</span> <span class="dv">1000</span>)</span>
 <span id="cb182-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb182-2"></a>my.boruta</span></code></pre></div>
-<pre><code>## Boruta performed 86 iterations in 2.856993 secs.
+<pre><code>## Boruta performed 54 iterations in 1.823692 secs.
 ##  4 attributes confirmed important: feature_26, feature_27, feature_28,
 ## feature_29;
 ##  21 attributes confirmed unimportant: feature_01, feature_02,
@@ -400,7 +400,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning in TentativeRoughFix(my.boruta): There are no Tentative attributes!
 ## Returning original object.</code></pre>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-1"></a>my.boruta.final</span></code></pre></div>
-<pre><code>## Boruta performed 86 iterations in 2.856993 secs.
+<pre><code>## Boruta performed 54 iterations in 1.823692 secs.
 ##  4 attributes confirmed important: feature_26, feature_27, feature_28,
 ## feature_29;
 ##  21 attributes confirmed unimportant: feature_01, feature_02,
@@ -459,18 +459,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Deviance Residuals: 
 ##        Min          1Q      Median          3Q         Max  
-## -1.382e-04  -2.100e-08  -2.100e-08   2.100e-08   9.587e-05  
+## -7.147e-05  -2.100e-08  -2.100e-08   2.100e-08   8.078e-05  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)
-## (Intercept)    130.1    46269.2   0.003    0.998
-## feature_26    -495.2   123677.0  -0.004    0.997
-## feature_28     131.7    94736.4   0.001    0.999
+## (Intercept)     20.2    40705.7   0.000    1.000
+## feature_26    -224.0    91208.4  -0.002    0.998
+## feature_28     142.5    89432.2   0.002    0.999
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 3.0553e+02  on 239  degrees of freedom
-## Residual deviance: 3.4827e-08  on 237  degrees of freedom
+## Residual deviance: 1.3755e-08  on 237  degrees of freedom
 ## AIC: 6
 ## 
 ## Number of Fisher Scoring iterations: 25</code></pre>
@@ -478,12 +478,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-1"></a>radiomics_daten.reproducible.norm.test.predict &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.test <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb194-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-2"></a><span class="st">  </span><span class="kw">add_column</span>(<span class="dt">prediction_value =</span> <span class="kw">predict</span>(fitted.model, radiomics_daten.reproducible.norm.test))</span>
 <span id="cb194-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-3"></a></span>
-<span id="cb194-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-4"></a>radiomics_daten.reproducible.norm.test.predict <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb194-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-5"></a><span class="st">  </span><span class="kw">roc</span>(histo, prediction_value) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb194-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-6"></a><span class="st">  </span><span class="kw">ggroc</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb194-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-7"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">xend =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>),</span>
-<span id="cb194-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-8"></a>                 <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
-<span id="cb194-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-9"></a><span class="st">    </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
+<span id="cb194-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-4"></a><span class="kw">library</span>(pROC)</span>
+<span id="cb194-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-5"></a></span>
+<span id="cb194-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-6"></a>radiomics_daten.reproducible.norm.test.predict <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb194-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-7"></a><span class="st">  </span><span class="kw">roc</span>(histo, prediction_value) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb194-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-8"></a><span class="st">  </span><span class="kw">ggroc</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb194-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-9"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">xend =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>),</span>
+<span id="cb194-10"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-10"></a>                 <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
+<span id="cb194-11"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-11"></a><span class="st">    </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
 <p>Ein so perfektes Ergebnis findet sich natürlich in Realität selten und sollte hier nur zur Veranschaulichung der verschiedenen Schritte einer Radiomics-Analyse dienen.</p>
 </div>
