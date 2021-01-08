@@ -39,7 +39,7 @@ Doch was steht eigentlich hinter solchen Begriffen wie „Big Data“ oder „Ra
 06.07.2020   R         15 - Bilddaten, Datenbilder: Radiomics-Analysen in R
 --------     -------   ------------------
 
-Mehr Informationen gibt es auf den [Webseiten der Akademie Online](https://www.drgakademie.de/de-DE/5166/go-for-it/).
+Mehr Informationen gibt es auf den [Webseiten der Akademie Online](https://www.drgakademie.de/de-DE/7598/big-data-und-co-webinar-reihe-bdquo-go-for-it-ldquo-ab-sofort-on-demand-verfuegbar/).
 
 ## Zum Nachschauen {-}
 

@@ -172,7 +172,7 @@ my.boruta <- Boruta(histo ~ ., data = radiomics_daten.reproducible.norm.train.bo
 my.boruta
 ```
 
-Der Boruta-Algorithmus gibt uns nun an welche Features wichtig zur Unterscheidung zwischen den Gruppen zu sein scheinen. Gelegentlich gibt der Algorithmus auch noch an, dass eine oder mehrere Variablen nicht final entschieden werden konnten. Falls dies einmal der Fall sein sollte, können wir das Ergebnis noch mit der Funktion `TentativeRoughFix()` bearbeiten um ein finales Ergebnis zu bekommen. In unserem konkreten Beispiel ist dies nicht der Fall, entsprechend gibt uns die Funktion einen Hinweis, das Ergebnisobjekt enthält dann einfach das unveränderte Ergebnis der `Boruta()`-Funktion.
+Der Boruta-Algorithmus gibt uns nun an welche Features wichtig zur Unterscheidung zwischen den Gruppen zu sein scheinen. Gelegentlich gibt der Algorithmus auch noch an, dass eine oder mehrere Variablen nicht final entschieden werden konnten. Falls dies einmal der Fall sein sollte, können wir das Ergebnis noch mit der Funktion `TentativeRoughFix()` bearbeiten um ein finales Ergebnis zu bekommen. Existieren keine unentschiedenen Variablen, gibt uns die Funktion einen Hinweis und das Ergebnisobjekt enthält dann einfach das unveränderte Ergebnis der `Boruta()`-Funktion.
 
 ```{r}
 my.boruta.final <- TentativeRoughFix(my.boruta)

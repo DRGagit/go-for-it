@@ -24,7 +24,7 @@
 <meta name="author" content="Bettina Baeßler &amp; Daniel Pinto dos Santos" />
 
 
-<meta name="date" content="2020-12-22" />
+<meta name="date" content="2021-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="see-one-do-one-teach-one-machine-learning-in-r.html"/>
 
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,8 +52,6 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119151357-2"></script>
 <script>
@@ -390,45 +388,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Als nächtes wenden wir die Funktion <code>Boruta()</code> an und übergeben auch hier wieder eine Formel als ersten Parameter, die definiert welche Variable durch welche anderen Variablen erklärt werden soll (in diesem Fall also <code>histo ~ .</code>). Mit dem Parameter <code>maxRuns</code> können wir dem Boruta-Algorithmus noch mitteilen, wieviele Durchgänge gemacht werden sollen, um die wichtigsten Features zu identifizieren.</p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb182-1"></a>my.boruta &lt;-<span class="st"> </span><span class="kw">Boruta</span>(histo <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> radiomics_daten.reproducible.norm.train.boruta, <span class="dt">maxRuns =</span> <span class="dv">1000</span>)</span>
 <span id="cb182-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb182-2"></a>my.boruta</span></code></pre></div>
-<pre><code>## Boruta performed 54 iterations in 1.823692 secs.
+<pre><code>## Boruta performed 999 iterations in 30.41573 secs.
 ##  4 attributes confirmed important: feature_26, feature_27, feature_28,
 ## feature_29;
-##  21 attributes confirmed unimportant: feature_01, feature_02,
-## feature_03, feature_04, feature_05 and 16 more;</code></pre>
-<p>Der Boruta-Algorithmus gibt uns nun an welche Features wichtig zur Unterscheidung zwischen den Gruppen zu sein scheinen. Gelegentlich gibt der Algorithmus auch noch an, dass eine oder mehrere Variablen nicht final entschieden werden konnten. Falls dies einmal der Fall sein sollte, können wir das Ergebnis noch mit der Funktion <code>TentativeRoughFix()</code> bearbeiten um ein finales Ergebnis zu bekommen. In unserem konkreten Beispiel ist dies nicht der Fall, entsprechend gibt uns die Funktion einen Hinweis, das Ergebnisobjekt enthält dann einfach das unveränderte Ergebnis der <code>Boruta()</code>-Funktion.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb184-1"></a>my.boruta.final &lt;-<span class="st"> </span><span class="kw">TentativeRoughFix</span>(my.boruta)</span></code></pre></div>
-<pre><code>## Warning in TentativeRoughFix(my.boruta): There are no Tentative attributes!
-## Returning original object.</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-1"></a>my.boruta.final</span></code></pre></div>
-<pre><code>## Boruta performed 54 iterations in 1.823692 secs.
+##  19 attributes confirmed unimportant: feature_01, feature_02,
+## feature_03, feature_04, feature_05 and 14 more;
+##  2 tentative attributes left: feature_06, feature_15;</code></pre>
+<p>Der Boruta-Algorithmus gibt uns nun an welche Features wichtig zur Unterscheidung zwischen den Gruppen zu sein scheinen. Gelegentlich gibt der Algorithmus auch noch an, dass eine oder mehrere Variablen nicht final entschieden werden konnten. Falls dies einmal der Fall sein sollte, können wir das Ergebnis noch mit der Funktion <code>TentativeRoughFix()</code> bearbeiten um ein finales Ergebnis zu bekommen. Existieren keine unentschiedenen Variablen, gibt uns die Funktion einen Hinweis und das Ergebnisobjekt enthält dann einfach das unveränderte Ergebnis der <code>Boruta()</code>-Funktion.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb184-1"></a>my.boruta.final &lt;-<span class="st"> </span><span class="kw">TentativeRoughFix</span>(my.boruta)</span>
+<span id="cb184-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb184-2"></a>my.boruta.final</span></code></pre></div>
+<pre><code>## Boruta performed 999 iterations in 30.41573 secs.
+## Tentatives roughfixed over the last 999 iterations.
 ##  4 attributes confirmed important: feature_26, feature_27, feature_28,
 ## feature_29;
 ##  21 attributes confirmed unimportant: feature_01, feature_02,
 ## feature_03, feature_04, feature_05 and 16 more;</code></pre>
 <p>Da der Boruta-Algorithmus die Variablen in zufälliger Reihenfolge bearbeitet, kann es gelegentlich zu leicht unterschiedlichen Ergebnissen kommen. In unserem Fall sollte der Algorithmus aber vier relevante Features identifizieren: feature_26, feature_27, feature_28 und feature_29. Die Relevanz der jeweiligen Features können wir uns auch leicht visualisieren, indem wir aus dem Ergebnisobjekt <code>my.boruta.final</code> das Element <code>ImpHistory</code> untersuchen.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-1"></a>my.boruta.final<span class="op">$</span>ImpHistory <span class="op">%&gt;%</span></span>
-<span id="cb188-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-2"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb188-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st"> </span><span class="kw">starts_with</span>(<span class="st">&quot;shadow&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb188-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-4"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>(), <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb188-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> feature, <span class="dt">y =</span> value)) <span class="op">+</span></span>
-<span id="cb188-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-6"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
-<span id="cb188-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-7"></a><span class="st">    </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-1"></a>my.boruta.final<span class="op">$</span>ImpHistory <span class="op">%&gt;%</span></span>
+<span id="cb186-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-2"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb186-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st"> </span><span class="kw">starts_with</span>(<span class="st">&quot;shadow&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb186-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-4"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>(), <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb186-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> feature, <span class="dt">y =</span> value)) <span class="op">+</span></span>
+<span id="cb186-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-6"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
+<span id="cb186-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb186-7"></a><span class="st">    </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <p>Wir können leicht erkennen, dass <code>feature_26</code> am wichtigsten zu sein scheint, d.h. die beste Trennschärfe zwischen den Gruppen bietet, die übrigen drei wichtigen Feature sind relativ nah beieinander. Für die weiteren Analysen können wir nun die als wichtig bestätigten Features aus unserem Trainingsdatensatz selektieren. Die relevanten Features finden wir in dem Element <code>finalDecision</code> innerhalb des Ergebnisobjektes <code>my.boruta.final</code>.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-1"></a><span class="co"># es ist etwas komfortabler die unwichtigen Features in einer Variable zu speichern und</span></span>
-<span id="cb189-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-2"></a><span class="co"># diese dann zu nutzen um sie aus dem Trainingsdatensatz zu entfernen, daher hier der Umweg</span></span>
-<span id="cb189-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-3"></a>features.nonrelevant &lt;-<span class="st"> </span>my.boruta.final<span class="op">$</span>finalDecision <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb189-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-4"></a><span class="st">  </span><span class="kw">enframe</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb189-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-5"></a><span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> &quot;Confirmed&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb189-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-6"></a><span class="st">  </span><span class="kw">pull</span>(name)</span>
-<span id="cb189-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-7"></a></span>
-<span id="cb189-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-8"></a>radiomics_daten.reproducible.norm.train.boruta.relevant &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.train.boruta <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb189-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-9"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st"> </span><span class="kw">all_of</span>(features.nonrelevant))</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-1"></a><span class="co"># es ist etwas komfortabler die unwichtigen Features in einer Variable zu speichern und</span></span>
+<span id="cb187-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-2"></a><span class="co"># diese dann zu nutzen um sie aus dem Trainingsdatensatz zu entfernen, daher hier der Umweg</span></span>
+<span id="cb187-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-3"></a>features.nonrelevant &lt;-<span class="st"> </span>my.boruta.final<span class="op">$</span>finalDecision <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb187-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-4"></a><span class="st">  </span><span class="kw">enframe</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb187-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-5"></a><span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> &quot;Confirmed&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb187-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-6"></a><span class="st">  </span><span class="kw">pull</span>(name)</span>
+<span id="cb187-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-7"></a></span>
+<span id="cb187-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-8"></a>radiomics_daten.reproducible.norm.train.boruta.relevant &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.train.boruta <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb187-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb187-9"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st"> </span><span class="kw">all_of</span>(features.nonrelevant))</span></code></pre></div>
 <p>An dieser Stelle kann es sich lohnen einmal die als relevant identifizierten Features einmal in Abhängigkeit der jeweiligen Gruppe zu visualisieren (siehe Grafik in <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-howto">7.1</a>).</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-1"></a>radiomics_daten.reproducible.norm.train.boruta.relevant <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb190-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>histo, <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb190-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> feature, <span class="dt">y =</span> value, <span class="dt">fill =</span> histo)) <span class="op">+</span></span>
-<span id="cb190-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-4"></a><span class="st">    </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-1"></a>radiomics_daten.reproducible.norm.train.boruta.relevant <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb188-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>histo, <span class="dt">names_to =</span> <span class="st">&quot;feature&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb188-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> feature, <span class="dt">y =</span> value, <span class="dt">fill =</span> histo)) <span class="op">+</span></span>
+<span id="cb188-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb188-4"></a><span class="st">    </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 <p>Wir sehen, dass in der Tat vier Features identifiziert wurden, die offenbar relevante Unterschiede zwischen den beiden Gruppen (benigne vs. maligne) aufweisen. Bevor wir aber nun zum finalen Schritte, dem Training eines Klassifizierungsmodells schreiten, bleibt noch ein wichtiger Zwischenschritt.</p>
 </div>
@@ -436,12 +434,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.6</span> Korrelationsanalyse</h2>
 <p>In der vorangegangenen Grafik erkennen wir, dass <code>feature_26</code> und <code>feature_27</code> sich in etwa ähnlich verhalten, d.h. höhere Werte bei benigner Histologie haben. Gleiches in etwa gilt mit umgekehrten Vorzeichen für <code>feature_28</code> und <code>feature_29</code>, hier haben Fälle mit maligner Histologie höhere Werte. Es wäre also nun zu prüfen, ob die Werte der Features innerhalb der jeweiligen Feature-Paare korrelieren oder nicht. Sollte sich hier eine starke Korrelation ergeben, wäre es sinnvoll in dem finalen nur jeweils eines der Features des jeweiligen Paares einzuschließen, da sich in eng miteinander korrelierten Features kein relevanter Zugewinn an Informationen ergibt (siehe Grafik in <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-howto">7.1</a>).</p>
 <p>Hierzu können wir die Funktion <code>cor()</code> aus Basis-R nutzen, um die <a href="https://de.wikipedia.org/wiki/Korrelationskoeffizient">Korrelationskoeffizienten</a> für alle Kombinationen von Features zu berechnen. Das Ergebnis dieser Funktion ist eine <a href="https://de.wikipedia.org/wiki/Korrelationsmatrix">Korrelationsmatrix</a>, die wir mithilfe der Funktion <code>corrplot()</code> aus dem gleichnamigen Paket <code>corrplot</code> einfach visualisieren können.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-1"></a><span class="kw">library</span>(corrplot)</span>
-<span id="cb191-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-2"></a></span>
-<span id="cb191-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-3"></a>radiomics_daten.reproducible.norm.train.boruta.relevant <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb191-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-4"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>histo) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb191-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-5"></a><span class="st">  </span><span class="kw">cor</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb191-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb191-6"></a><span class="st">  </span><span class="kw">corrplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-1"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb189-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-2"></a></span>
+<span id="cb189-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-3"></a>radiomics_daten.reproducible.norm.train.boruta.relevant <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-4"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>histo) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-5"></a><span class="st">  </span><span class="kw">cor</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb189-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb189-6"></a><span class="st">  </span><span class="kw">corrplot</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
 <p>Die Vermutung, dass die Werte der Features innerhalb der beiden oben genannten Feature-Paare stark korrelieren bestätigen sich. In einem Fall mit derart wenigen Fällen, können wir das geeignetste Feature der jeweiligen “Cluster” händisch selbst wählen. Gemessen an den “Wichtigkeiten”, die wir als Ergebnis des Boruta-Algorithmus erhalten hatten (siehe <a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#radiomics-boruta">7.5</a>), fällt die Entscheidung recht leicht auf <code>feature_26</code> und <code>feature_28</code>.</p>
 <p>In Föllen mit mehr relevanten Features können natürlich auch kompliziertere Verfahren zur Auswahl der Features aus den jeweiligen Clustern nötig sein. Diese behandeln wir an dieser Stelle nicht. Im Allgemeinen kann aber grob gesagt werden, dass in ein finales Modell nicht mehr als etwa 10 Features eingehen sollten.</p>
@@ -450,8 +448,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.7</span> Fitten und Testen des Modells</h2>
 <p>Nun kommt der interessanteste aller Schritte, der aber letztlich nach der ganzen Vorarbeit vermutlich der einfachste von allen sein dürfte.</p>
 <p>Da aufgrund der überschaubaren Anzahl an letztlich relevanten Features kein besonders komplexer Machine Learning-Algorithmus nötig sein dürfte, verwenden wir an dieser Stelle eine einfache logistische Regression (siehe <a href="see-one-do-one-teach-one-machine-learning-in-r.html#log-regression">6.5</a>). Der entsprechende Code ist einfach: der Funktion <code>glm()</code> übergeben wir als Parameter die Formel mit unseren beiden wichtigsten Features (<code>feature_26</code> und <code>feature_28</code>) und der Zielvariable (<code>histo</code>) sowie die normalisierten Trainingsdaten als Grundlage für das Fitting.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-1"></a>fitted.model &lt;-<span class="st"> </span><span class="kw">glm</span>(histo <span class="op">~</span><span class="st"> </span>feature_<span class="dv">26</span> <span class="op">+</span><span class="st"> </span>feature_<span class="dv">28</span>, <span class="dt">data =</span> radiomics_daten.reproducible.norm.train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb192-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-2"></a><span class="kw">summary</span>(fitted.model)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-1"></a>fitted.model &lt;-<span class="st"> </span><span class="kw">glm</span>(histo <span class="op">~</span><span class="st"> </span>feature_<span class="dv">26</span> <span class="op">+</span><span class="st"> </span>feature_<span class="dv">28</span>, <span class="dt">data =</span> radiomics_daten.reproducible.norm.train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb190-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb190-2"></a><span class="kw">summary</span>(fitted.model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = histo ~ feature_26 + feature_28, family = &quot;binomial&quot;, 
@@ -459,33 +457,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Deviance Residuals: 
 ##        Min          1Q      Median          3Q         Max  
-## -7.147e-05  -2.100e-08  -2.100e-08   2.100e-08   8.078e-05  
+## -7.325e-05  -2.100e-08  -2.100e-08   2.100e-08   8.282e-05  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)
-## (Intercept)     20.2    40705.7   0.000    1.000
-## feature_26    -224.0    91208.4  -0.002    0.998
-## feature_28     142.5    89432.2   0.002    0.999
+## (Intercept)    13.08   35780.03   0.000    1.000
+## feature_26   -231.40   88740.47  -0.003    0.998
+## feature_28    164.77   86991.20   0.002    0.998
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 3.0553e+02  on 239  degrees of freedom
-## Residual deviance: 1.3755e-08  on 237  degrees of freedom
+## Residual deviance: 1.4876e-08  on 237  degrees of freedom
 ## AIC: 6
 ## 
 ## Number of Fisher Scoring iterations: 25</code></pre>
 <p>An dieser Stelle sollte man sich nicht über das etwas seltsame Ergebnis des Fitting wundern. In diesen fiktiven Daten war die Trennschärfe der relevanten Features bewusst absolut gesetzt, weshalb sich hier ein perfekt trennendes Modell ergibt. Und das natürlich auch in den Testdaten, was wir uns dann hier auch noch als ROC-Kurve visualisieren können (siehe auch <a href="see-one-do-one-teach-one-machine-learning-in-r.html#roc-analysis">6.5.1</a>).</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-1"></a>radiomics_daten.reproducible.norm.test.predict &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.test <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb194-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-2"></a><span class="st">  </span><span class="kw">add_column</span>(<span class="dt">prediction_value =</span> <span class="kw">predict</span>(fitted.model, radiomics_daten.reproducible.norm.test))</span>
-<span id="cb194-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-3"></a></span>
-<span id="cb194-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-4"></a><span class="kw">library</span>(pROC)</span>
-<span id="cb194-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-5"></a></span>
-<span id="cb194-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-6"></a>radiomics_daten.reproducible.norm.test.predict <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb194-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-7"></a><span class="st">  </span><span class="kw">roc</span>(histo, prediction_value) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb194-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-8"></a><span class="st">  </span><span class="kw">ggroc</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb194-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-9"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">xend =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>),</span>
-<span id="cb194-10"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-10"></a>                 <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
-<span id="cb194-11"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb194-11"></a><span class="st">    </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-1"></a>radiomics_daten.reproducible.norm.test.predict &lt;-<span class="st"> </span>radiomics_daten.reproducible.norm.test <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb192-2"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-2"></a><span class="st">  </span><span class="kw">add_column</span>(<span class="dt">prediction_value =</span> <span class="kw">predict</span>(fitted.model, radiomics_daten.reproducible.norm.test))</span>
+<span id="cb192-3"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-3"></a></span>
+<span id="cb192-4"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-4"></a><span class="kw">library</span>(pROC)</span>
+<span id="cb192-5"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-5"></a></span>
+<span id="cb192-6"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-6"></a>radiomics_daten.reproducible.norm.test.predict <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb192-7"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-7"></a><span class="st">  </span><span class="kw">roc</span>(histo, prediction_value) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb192-8"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-8"></a><span class="st">  </span><span class="kw">ggroc</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb192-9"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-9"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">xend =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>),</span>
+<span id="cb192-10"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-10"></a>                 <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
+<span id="cb192-11"><a href="bilddaten-datenbilder-radiomics-analysen-in-r.html#cb192-11"></a><span class="st">    </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
 <p>Ein so perfektes Ergebnis findet sich natürlich in Realität selten und sollte hier nur zur Veranschaulichung der verschiedenen Schritte einer Radiomics-Analyse dienen.</p>
 </div>

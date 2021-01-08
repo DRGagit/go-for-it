@@ -24,7 +24,7 @@
 <meta name="author" content="Bettina Baeßler &amp; Daniel Pinto dos Santos" />
 
 
-<meta name="date" content="2020-12-22" />
+<meta name="date" content="2021-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="diverse-tipps-tricks-für-r.html"/>
 <link rel="next" href="bilddaten-datenbilder-radiomics-analysen-in-r.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,8 +52,6 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119151357-2"></script>
 <script>
@@ -520,9 +518,9 @@ Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausga
 ##  SVM-Kernel:  radial 
 ##        cost:  1 
 ## 
-## Number of Support Vectors:  47
+## Number of Support Vectors:  44
 ## 
-##  ( 8 20 19 )
+##  ( 8 19 17 )
 ## 
 ## 
 ## Number of Classes:  3 
@@ -541,31 +539,31 @@ Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausga
 ##             
 ##              setosa versicolor virginica
 ##   setosa         10          0         0
-##   versicolor      0         10         0
+##   versicolor      0          9         1
 ##   virginica       0          0        10
 ## 
 ## Overall Statistics
-##                                      
-##                Accuracy : 1          
-##                  95% CI : (0.8843, 1)
-##     No Information Rate : 0.3333     
-##     P-Value [Acc &gt; NIR] : 4.857e-15  
-##                                      
-##                   Kappa : 1          
-##                                      
-##  Mcnemar&#39;s Test P-Value : NA         
+##                                           
+##                Accuracy : 0.9667          
+##                  95% CI : (0.8278, 0.9992)
+##     No Information Rate : 0.3667          
+##     P-Value [Acc &gt; NIR] : 4.476e-12       
+##                                           
+##                   Kappa : 0.95            
+##                                           
+##  Mcnemar&#39;s Test P-Value : NA              
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: setosa Class: versicolor Class: virginica
-## Sensitivity                 1.0000            1.0000           1.0000
-## Specificity                 1.0000            1.0000           1.0000
-## Pos Pred Value              1.0000            1.0000           1.0000
-## Neg Pred Value              1.0000            1.0000           1.0000
-## Prevalence                  0.3333            0.3333           0.3333
-## Detection Rate              0.3333            0.3333           0.3333
+## Sensitivity                 1.0000            1.0000           0.9091
+## Specificity                 1.0000            0.9524           1.0000
+## Pos Pred Value              1.0000            0.9000           1.0000
+## Neg Pred Value              1.0000            1.0000           0.9500
+## Prevalence                  0.3333            0.3000           0.3667
+## Detection Rate              0.3333            0.3000           0.3333
 ## Detection Prevalence        0.3333            0.3333           0.3333
-## Balanced Accuracy           1.0000            1.0000           1.0000</code></pre>
+## Balanced Accuracy           1.0000            0.9762           0.9545</code></pre>
 <p>Die Funktion <code>confusionMatrix()</code> gibt erfreulicherweise auch gleich die Kreuztabelle mit aus. Dabei entsprechen die Zeilen dem “wahren” Label oder Wert und die Spalten der Vorhersage des Algorithmus. Wir sehen also nun, dass sich der Algorithmus nur in zwei Fällen im Testdatensatz vertan hat (beide Male gab der Algorithmus Art <code>versicolor</code> aus, obwohl es sich um Schwertlilien der Art <code>virginica</code> handelte).</p>
 </div>
 <div id="weitere-informationen-zu-machine-learning-in-r" class="section level2" number="6.8">
