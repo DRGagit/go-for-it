@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Deskriptive Statistik in R | DRG/AGIT - Go for IT</title>
   <meta name="description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Deskriptive Statistik in R | DRG/AGIT - Go for IT" />
   <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="./assets/img/banner.png" />
+  <meta property="og:image" content="/./assets/img/banner.png" />
   <meta property="og:description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
   
 
@@ -19,12 +18,12 @@
   <meta name="twitter:title" content="3 Deskriptive Statistik in R | DRG/AGIT - Go for IT" />
   
   <meta name="twitter:description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
-  <meta name="twitter:image" content="./assets/img/banner.png" />
+  <meta name="twitter:image" content="/./assets/img/banner.png" />
 
 <meta name="author" content="Bettina Baeßler &amp; Daniel Pinto dos Santos" />
 
 
-<meta name="date" content="2021-01-08" />
+<meta name="date" content="2022-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="nächste-schritte-in-r-bunte-bilder-und-mehr.html"/>
 <link rel="next" href="tests-in-r.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,16 +49,17 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119151357-2"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4Y1LV796L"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-119151357-2');
+  gtag('config', 'G-Z4Y1LV796L');
 </script>
 
 
@@ -67,6 +67,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -126,6 +127,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -259,11 +261,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="deskriptive-statistik-in-r" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Deskriptive Statistik in R</h1>
+<div id="deskriptive-statistik-in-r" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Deskriptive Statistik in R<a href="deskriptive-statistik-in-r.html#deskriptive-statistik-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Visualisierung ist natürlich schon gut um einen ersten schnellen Überblick über Daten zu bekommen, aber früher oder später geht es ans Eingemachte und es müssen harte und genaue Zahlen her. Einige der wichtigen Zahlen, die unsere Daten beschreiben sind sogenannte <a href="https://de.wikipedia.org/wiki/Deskriptive_Statistik">deskriptive Statistiken</a>. Darunter fallen so einfache Dinge wie der Mittelwert, aber auch andere Werte wie Standardabweichung, Median, Minimum, Maximum und Quartile oder auch seltener gebrauchte Werte wie der Modus, Kurtosis und Varianz.</p>
-<div id="lernziele-2" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Lernziele</h2>
+<div id="lernziele-2" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Lernziele<a href="deskriptive-statistik-in-r.html#lernziele-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In diesem Kapitel werden folgende Themen besprochen:</p>
 <ul>
 <li>deskriptive Statistiken in R erstellen</li>
@@ -273,19 +275,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>nach Gruppen getrennte Grafiken erstellen</li>
 </ul>
 </div>
-<div id="deskriptive-statistiken-mit-basis-r" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Deskriptive Statistiken mit Basis R</h2>
+<div id="deskriptive-statistiken-mit-basis-r" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Deskriptive Statistiken mit Basis R<a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-mit-basis-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Erfreulicherweise lassen sich die meisten der Werte für einfache deskriptive Statistiken mit Basis R Funktionen berechnen. Die entsprechenden Funktionen sind nach dem zu berechnenden Wert benannt und im Grunde selbsterklärend.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="deskriptive-statistik-in-r.html#cb85-1"></a><span class="kw">min</span>(daten<span class="op">$</span>dlp)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="deskriptive-statistik-in-r.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(daten<span class="sc">$</span>dlp)</span></code></pre></div>
 <pre><code>## [1] 1.2</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="deskriptive-statistik-in-r.html#cb87-1"></a><span class="kw">mean</span>(daten<span class="op">$</span>dlp)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="deskriptive-statistik-in-r.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(daten<span class="sc">$</span>dlp)</span></code></pre></div>
 <pre><code>## [1] 1126.547</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="deskriptive-statistik-in-r.html#cb89-1"></a><span class="kw">median</span>(daten<span class="op">$</span>dlp)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="deskriptive-statistik-in-r.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(daten<span class="sc">$</span>dlp)</span></code></pre></div>
 <pre><code>## [1] 576</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="deskriptive-statistik-in-r.html#cb91-1"></a><span class="kw">max</span>(daten<span class="op">$</span>dlp)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="deskriptive-statistik-in-r.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(daten<span class="sc">$</span>dlp)</span></code></pre></div>
 <pre><code>## [1] 5979.3</code></pre>
 <p>Es wäre natürlich insbesondere in großen Tabellen müßig, jede Spalte einzeln aufzurufen. Die Funktion <code>summary()</code> hilft hier und berechnet diese Werte und einige mehr gleich für alle Spalten eines Dataframes. Besonders praktisch hieran: für Spalten, die keine numerischen Werte enthalten, erhält man trotzdem einige praktische quantitative Werte.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="deskriptive-statistik-in-r.html#cb93-1"></a><span class="kw">summary</span>(daten)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="deskriptive-statistik-in-r.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(daten)</span></code></pre></div>
 <pre><code>##       tag             untersuchung             kv             mas        
 ##  Min.   :2018-01-01   Length:2441        Min.   : 12.0   Min.   :   2.0  
 ##  1st Qu.:2018-02-24   Class :character   1st Qu.:120.0   1st Qu.:  92.0  
@@ -302,10 +304,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Max.   :39.60   Max.   :5979.3</code></pre>
 <p>Mit den zwei Funktionen <code>str()</code>, die uns einen Überblick über die Struktur eines Dataframes gibt, und der <code>summary()</code> Funktion ergibt sich in den meisten Fällen ein recht guter Eindruck der vorliegenden Daten.</p>
 <p>Aber oftmals ist nicht so sehr der Überblick über die gesamten Daten gefragt, vielmehr wären nach Gruppen getrennte deskriptive Statistiken von Interesse. Hierzu bietet Basis R die Funktion <code>by</code>, die in der Benutzung zwar etwas unintuitiv ist, aber genau diese Funktionsweise abbildet. Als ersten Parameter erwartet <code>by()</code> einen Vektor (meist also eine Spalte eines Dataframes), auf den nach dem als zweiten Parameter übergebenen Gruppenvektor die als dritter Parameter übergebene Funktion angewandt wird.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="deskriptive-statistik-in-r.html#cb95-1"></a><span class="co"># erster Parameter: die zu untersuchenden Werte</span></span>
-<span id="cb95-2"><a href="deskriptive-statistik-in-r.html#cb95-2"></a><span class="co"># zweiter Parameter: die Gruppenvariable</span></span>
-<span id="cb95-3"><a href="deskriptive-statistik-in-r.html#cb95-3"></a><span class="co"># dritter Parameter: die anzuwendende Funktion (ohne runde Klammern!)</span></span>
-<span id="cb95-4"><a href="deskriptive-statistik-in-r.html#cb95-4"></a><span class="kw">by</span>(daten<span class="op">$</span>dlp, daten<span class="op">$</span>untersuchung, median)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="deskriptive-statistik-in-r.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># erster Parameter: die zu untersuchenden Werte</span></span>
+<span id="cb95-2"><a href="deskriptive-statistik-in-r.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co"># zweiter Parameter: die Gruppenvariable</span></span>
+<span id="cb95-3"><a href="deskriptive-statistik-in-r.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dritter Parameter: die anzuwendende Funktion (ohne runde Klammern!)</span></span>
+<span id="cb95-4"><a href="deskriptive-statistik-in-r.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(daten<span class="sc">$</span>dlp, daten<span class="sc">$</span>untersuchung, median)</span></code></pre></div>
 <pre><code>## daten$untersuchung: Abdomen
 ## [1] 714.85
 ## ------------------------------------------------------------ 
@@ -323,28 +325,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ------------------------------------------------------------ 
 ## daten$untersuchung: Traumaspirale
 ## [1] 2674.9</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="deskriptive-statistik-in-r.html#cb97-1"></a><span class="co"># die Ausgabe kann bei vielen Gruppen und Funktionen, die lange</span></span>
-<span id="cb97-2"><a href="deskriptive-statistik-in-r.html#cb97-2"></a><span class="co"># Ausgaben produzieren mitunter recht unübersichtlich werden.</span></span>
-<span id="cb97-3"><a href="deskriptive-statistik-in-r.html#cb97-3"></a><span class="co"># Die Ausgabe dieses Befehls wird deshalb hier nicht gezeigt.</span></span>
-<span id="cb97-4"><a href="deskriptive-statistik-in-r.html#cb97-4"></a><span class="kw">by</span>(daten, daten<span class="op">$</span>untersuchung, summary)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="deskriptive-statistik-in-r.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># die Ausgabe kann bei vielen Gruppen und Funktionen, die lange</span></span>
+<span id="cb97-2"><a href="deskriptive-statistik-in-r.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ausgaben produzieren mitunter recht unübersichtlich werden.</span></span>
+<span id="cb97-3"><a href="deskriptive-statistik-in-r.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Die Ausgabe dieses Befehls wird deshalb hier nicht gezeigt.</span></span>
+<span id="cb97-4"><a href="deskriptive-statistik-in-r.html#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(daten, daten<span class="sc">$</span>untersuchung, summary)</span></code></pre></div>
 </div>
-<div id="deskriptive-statistiken-im-tidyverse" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Deskriptive Statistiken im Tidyverse</h2>
+<div id="deskriptive-statistiken-im-tidyverse" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Deskriptive Statistiken im Tidyverse<a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-im-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Das Berechnen deskriptiver Statistiken ist keine Aufgabe, für die im Tidyverse per se spezielle Funktionen bereitstehen. Trotzdem bieten einige Funktionen umfangreiche Möglichkeiten fast spielerisch mit den Daten zu interagieren und einfach und schnell Daten zu selektieren, zu gruppieren und auszuwerten.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="deskriptive-statistik-in-r.html#cb98-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="deskriptive-statistik-in-r.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Die wichtigsten Funktionen sind hierfür die Funktionen <code>select()</code> (wählt Spalten aus), <code>filter()</code> (wählt Zeilen aus), <code>group_by()</code> (bildet Gruppen) und <code>summarise()</code> (führt Berechnungen für Gruppen aus). Mithilfe von <code>arrange()</code> können wir die entstehende Ausgabe auch noch nach einer Spalte sortieren. Diese Funktionen lassen sich in nahezu beliebiger Weise mit <code>%&gt;%</code> verketten und sind trotzdem relativ einfach zu lesen.</p>
 <p>Für ein erstes Beispiel wollen wir zum Beispiel unsere Daten nach Untersuchungsbeschreibung gruppieren, dann den Median von CTDI (in mGy wie in der ursprünglichen Tabelle und direkt auch durch 10 geteilt in cGy) und DLP berechnen, sowie die Anzahl der jeweiligen Untersuchungen. Und um die Daten noch leichter fassbar zu machen, soll die Ausgabe nach dem Median des CTDI sortiert werden. Der Übersichtlichkeit halber lohnt es sich statt lange Zeilen zu schreiben, die einzelnen Teile der Befehle auf mehrere Zeilen aufzuteilen.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="deskriptive-statistik-in-r.html#cb99-1"></a>daten <span class="op">%&gt;%</span></span>
-<span id="cb99-2"><a href="deskriptive-statistik-in-r.html#cb99-2"></a><span class="st">  </span><span class="kw">group_by</span>(untersuchung) <span class="op">%&gt;%</span></span>
-<span id="cb99-3"><a href="deskriptive-statistik-in-r.html#cb99-3"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
-<span id="cb99-4"><a href="deskriptive-statistik-in-r.html#cb99-4"></a>    <span class="dt">median_ctdi_mGy =</span> <span class="kw">median</span>(ctdi.vol),</span>
-<span id="cb99-5"><a href="deskriptive-statistik-in-r.html#cb99-5"></a>    <span class="dt">median_ctdi_cGy =</span> <span class="kw">median</span>(ctdi.vol) <span class="op">/</span><span class="st"> </span><span class="dv">10</span>,</span>
-<span id="cb99-6"><a href="deskriptive-statistik-in-r.html#cb99-6"></a>    <span class="dt">median_dlp =</span> <span class="kw">median</span>(dlp),</span>
-<span id="cb99-7"><a href="deskriptive-statistik-in-r.html#cb99-7"></a>    <span class="dt">anzahl =</span> <span class="kw">n</span>()</span>
-<span id="cb99-8"><a href="deskriptive-statistik-in-r.html#cb99-8"></a>    ) <span class="op">%&gt;%</span></span>
-<span id="cb99-9"><a href="deskriptive-statistik-in-r.html#cb99-9"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>median_ctdi_mGy)</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre><code>## # A tibble: 6 x 5
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="deskriptive-statistik-in-r.html#cb99-1" aria-hidden="true" tabindex="-1"></a>daten <span class="sc">%&gt;%</span></span>
+<span id="cb99-2"><a href="deskriptive-statistik-in-r.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(untersuchung) <span class="sc">%&gt;%</span></span>
+<span id="cb99-3"><a href="deskriptive-statistik-in-r.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb99-4"><a href="deskriptive-statistik-in-r.html#cb99-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_ctdi_mGy =</span> <span class="fu">median</span>(ctdi.vol),</span>
+<span id="cb99-5"><a href="deskriptive-statistik-in-r.html#cb99-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_ctdi_cGy =</span> <span class="fu">median</span>(ctdi.vol) <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb99-6"><a href="deskriptive-statistik-in-r.html#cb99-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_dlp =</span> <span class="fu">median</span>(dlp),</span>
+<span id="cb99-7"><a href="deskriptive-statistik-in-r.html#cb99-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">anzahl =</span> <span class="fu">n</span>()</span>
+<span id="cb99-8"><a href="deskriptive-statistik-in-r.html#cb99-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb99-9"><a href="deskriptive-statistik-in-r.html#cb99-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>median_ctdi_mGy)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
 ##   untersuchung  median_ctdi_mGy median_ctdi_cGy median_dlp anzahl
 ##   &lt;chr&gt;                   &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;  &lt;int&gt;
 ## 1 Traumaspirale            16.9            1.69      2675.    273
@@ -354,18 +355,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 Kopf                      7.7            0.77      1433     523
 ## 6 Thorax                    4.8            0.48       219     817</code></pre>
 <p>In ähnlicher Weise könnten wir auch bspw. zunächst die Daten nach Untersuchungen filtern, bei denen genau 100kV am Gerät eingestellt waren, dann einige der Werte aus dem letzten Beispiel berechnen und zuletzt in der Ausgabe nur diejenigen Untersuchungensbezeichnungen auflisten, die weniger als 100 mal mit 100kV durchgeführt wurden. Zu guter letzt könnte man auch noch die Spalte Anzahl aus der Ausgabe entfernen, sodass nur die berechneten Werte bleiben.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="deskriptive-statistik-in-r.html#cb102-1"></a>daten <span class="op">%&gt;%</span></span>
-<span id="cb102-2"><a href="deskriptive-statistik-in-r.html#cb102-2"></a><span class="st">  </span><span class="kw">filter</span>(kv <span class="op">==</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span></span>
-<span id="cb102-3"><a href="deskriptive-statistik-in-r.html#cb102-3"></a><span class="st">  </span><span class="kw">group_by</span>(untersuchung) <span class="op">%&gt;%</span></span>
-<span id="cb102-4"><a href="deskriptive-statistik-in-r.html#cb102-4"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
-<span id="cb102-5"><a href="deskriptive-statistik-in-r.html#cb102-5"></a>    <span class="dt">median_ctdi_mGy =</span> <span class="kw">median</span>(ctdi.vol),</span>
-<span id="cb102-6"><a href="deskriptive-statistik-in-r.html#cb102-6"></a>    <span class="dt">median_dlp =</span> <span class="kw">median</span>(dlp),</span>
-<span id="cb102-7"><a href="deskriptive-statistik-in-r.html#cb102-7"></a>    <span class="dt">anzahl =</span> <span class="kw">n</span>()</span>
-<span id="cb102-8"><a href="deskriptive-statistik-in-r.html#cb102-8"></a>    ) <span class="op">%&gt;%</span></span>
-<span id="cb102-9"><a href="deskriptive-statistik-in-r.html#cb102-9"></a><span class="st">  </span><span class="kw">filter</span>(anzahl <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span></span>
-<span id="cb102-10"><a href="deskriptive-statistik-in-r.html#cb102-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>anzahl)</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre><code>## # A tibble: 4 x 3
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="deskriptive-statistik-in-r.html#cb101-1" aria-hidden="true" tabindex="-1"></a>daten <span class="sc">%&gt;%</span></span>
+<span id="cb101-2"><a href="deskriptive-statistik-in-r.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(kv <span class="sc">==</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb101-3"><a href="deskriptive-statistik-in-r.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(untersuchung) <span class="sc">%&gt;%</span></span>
+<span id="cb101-4"><a href="deskriptive-statistik-in-r.html#cb101-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb101-5"><a href="deskriptive-statistik-in-r.html#cb101-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_ctdi_mGy =</span> <span class="fu">median</span>(ctdi.vol),</span>
+<span id="cb101-6"><a href="deskriptive-statistik-in-r.html#cb101-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_dlp =</span> <span class="fu">median</span>(dlp),</span>
+<span id="cb101-7"><a href="deskriptive-statistik-in-r.html#cb101-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">anzahl =</span> <span class="fu">n</span>()</span>
+<span id="cb101-8"><a href="deskriptive-statistik-in-r.html#cb101-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb101-9"><a href="deskriptive-statistik-in-r.html#cb101-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anzahl <span class="sc">&lt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb101-10"><a href="deskriptive-statistik-in-r.html#cb101-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>anzahl)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
 ##   untersuchung  median_ctdi_mGy median_dlp
 ##   &lt;chr&gt;                   &lt;dbl&gt;      &lt;dbl&gt;
 ## 1 Abdomen                  5.95       796.
@@ -374,14 +374,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 Traumaspirale           10.7       2448.</code></pre>
 <p>Die Stärke des Tidyverse liegt hier sicher in der Möglichkeit, interaktiv Befehle zu verketten. Man schreibt einige Befehle auf, von denen man glaubt, dass sie das gewünschte Ergebnis bringen könnten oder den Weg dorthin darstellen, führt diese aus und betrachtet die Ausgabe. Dann passt man die Befehle an oder erweitert die Kette um weitere bis man schließlich das gewünschte Ergebnis erhält.</p>
 </div>
-<div id="deskriptive-statistiken-mit-anderen-paketen" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Deskriptive Statistiken mit anderen Paketen</h2>
+<div id="deskriptive-statistiken-mit-anderen-paketen" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Deskriptive Statistiken mit anderen Paketen<a href="deskriptive-statistik-in-r.html#deskriptive-statistiken-mit-anderen-paketen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Wie bereits erwähnt, ist eine der herausragenden Eigenschaften von R, dass unzählige Pakte existieren, die verschiedene Funktionen bereitstellen und so das Arbeiten vereinfachen. Zwei sehr gute Pakete für deskriptive Statisiken sind <code>psych</code> und <code>summarytools</code>. Diese können, wie Tidyverse im vorherigen Kapitel, über die entsprechenden Funktionen von RStudio oder über die Konsole installiert werden.</p>
-<div id="psych" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Psych</h3>
+<div id="psych" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Psych<a href="deskriptive-statistik-in-r.html#psych" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Aus dem Paket <code>psych</code> können wir die Funktion <code>describe()</code> benutzen, um eine Vielzahl von Maßzahlen zu berechnen.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="deskriptive-statistik-in-r.html#cb105-1"></a><span class="kw">library</span>(psych)</span>
-<span id="cb105-2"><a href="deskriptive-statistik-in-r.html#cb105-2"></a><span class="kw">describe</span>(daten)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="deskriptive-statistik-in-r.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb103-2"><a href="deskriptive-statistik-in-r.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(daten)</span></code></pre></div>
 <pre><code>##               vars    n    mean      sd median trimmed    mad   min    max
 ## tag              1 2441     NaN      NA     NA     NaN     NA   Inf   -Inf
 ## untersuchung*    2 2441    3.64    1.81      4    3.68   1.48  1.00    6.0
@@ -397,7 +397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ctdi.vol        39.55  1.21     1.40  0.14
 ## dlp           5978.10  1.18     0.51 23.13</code></pre>
 <p>Die üblichen Quartile erhält man, wenn man der <code>describe()</code>-Funktion einen entsprechenden zusätzlichen Parameter übergibt. Ebenfalls kann man <code>describe()</code> mitteilen, dass nicht-numerische Werte übersprungen werden sollen.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="deskriptive-statistik-in-r.html#cb107-1"></a><span class="kw">describe</span>(daten, <span class="dt">quant=</span><span class="kw">c</span>(.<span class="dv">25</span>,.<span class="dv">75</span>), <span class="dt">omit =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="deskriptive-statistik-in-r.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(daten, <span class="at">quant=</span><span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">75</span>), <span class="at">omit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##          vars    n    mean      sd median trimmed    mad   min    max   range
 ## kv          3 2441  114.47   18.77    120  117.36   0.00 12.00  801.0  789.00
 ## mas         4 2441  156.93   92.65    150  150.06  85.99  2.00 1231.0 1229.00
@@ -409,14 +409,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ctdi.vol  1.21     1.40  0.14   5.5   14.3
 ## dlp       1.18     0.51 23.13 244.6 1795.3</code></pre>
 <p>Eine ebenfalls sehr praktische Funktion ist die der Base-R Funktion <code>by()</code> (s.o.) nachempfundenen <code>describe.by()</code> Funktion. Dieser können die selben Parameter mitgegeben werden, wie der einfachen <code>describe()</code> Funktion.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="deskriptive-statistik-in-r.html#cb109-1"></a><span class="co"># Da auch hier die Ausgabe sehr lang würde, wird sie hier nicht abgebildet.</span></span>
-<span id="cb109-2"><a href="deskriptive-statistik-in-r.html#cb109-2"></a><span class="kw">describe.by</span>(daten, daten<span class="op">$</span>untersuchung, <span class="dt">quant=</span><span class="kw">c</span>(.<span class="dv">25</span>,.<span class="dv">75</span>), <span class="dt">omit =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="deskriptive-statistik-in-r.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Da auch hier die Ausgabe sehr lang würde, wird sie hier nicht abgebildet.</span></span>
+<span id="cb107-2"><a href="deskriptive-statistik-in-r.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describe.by</span>(daten, daten<span class="sc">$</span>untersuchung, <span class="at">quant=</span><span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">75</span>), <span class="at">omit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
-<div id="summarytools" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Summarytools</h3>
+<div id="summarytools" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Summarytools<a href="deskriptive-statistik-in-r.html#summarytools" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Auch im Paket <code>summarytools</code> existieren Funktionen, die ähnliche Ausgaben erzeugen wie die Funktion <code>describe()</code> aus dem <code>psych</code> Paket. Welche Pakete man letztenendes benutzen will, ist Frage des persönlichen Geschmacks. Die entsprechenden Funktionen in <code>summarytools</code> sind <code>dscr()</code> bzw. <code>stby()</code></p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="deskriptive-statistik-in-r.html#cb110-1"></a><span class="kw">library</span>(summarytools)</span>
-<span id="cb110-2"><a href="deskriptive-statistik-in-r.html#cb110-2"></a><span class="kw">descr</span>(daten)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="deskriptive-statistik-in-r.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span>
+<span id="cb108-2"><a href="deskriptive-statistik-in-r.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">descr</span>(daten)</span></code></pre></div>
 <pre><code>## Descriptive Statistics  
 ## daten  
 ## N: 2441  
@@ -438,57 +438,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##          Kurtosis       1.40      0.51    731.66     13.34
 ##           N.Valid    2441.00   2441.00   2441.00   2441.00
 ##         Pct.Valid     100.00    100.00    100.00    100.00</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="deskriptive-statistik-in-r.html#cb112-1"></a><span class="co"># Da auch hier die Ausgabe sehr lang würde, wird sie hier nicht abgebildet.</span></span>
-<span id="cb112-2"><a href="deskriptive-statistik-in-r.html#cb112-2"></a><span class="kw">stby</span>(daten, daten<span class="op">$</span>untersuchung, descr)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="deskriptive-statistik-in-r.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Da auch hier die Ausgabe sehr lang würde, wird sie hier nicht abgebildet.</span></span>
+<span id="cb110-2"><a href="deskriptive-statistik-in-r.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stby</span>(daten, daten<span class="sc">$</span>untersuchung, descr)</span></code></pre></div>
 <p>Noch viel praktischer, aber leider nicht nach Gruppen aufgetrennt durchführbar, ist die Funktion <code>dfSummary()</code>, insbesondere wenn man ihre Ausgabe weiterleitet an die Funktion <code>view()</code> aus dem <code>summarytools</code> Paket. Diese produziert dann eine ansprechend formatierte HTML-Datei, in der verschiedene Maßzahlen aufgeführt werden.</p>
 <p>Um nach Gruppen getrennte Ausgaben zu bekommen, kann man beispielsweise die tidyverse <code>filter()</code> Funktion benutzen, muss dann aber die Befehle für jede Gruppe erneut ausführen.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="deskriptive-statistik-in-r.html#cb113-1"></a><span class="co"># die Ausgaben dieser Funktionen erscheinen nicht auf der Konsole,</span></span>
-<span id="cb113-2"><a href="deskriptive-statistik-in-r.html#cb113-2"></a><span class="co"># sondern im Viewer-Pane von RStudio. Dort findet man auch einen Button,</span></span>
-<span id="cb113-3"><a href="deskriptive-statistik-in-r.html#cb113-3"></a><span class="co"># um die Datei in einem Internetbrowser zu öffnen.</span></span>
-<span id="cb113-4"><a href="deskriptive-statistik-in-r.html#cb113-4"></a></span>
-<span id="cb113-5"><a href="deskriptive-statistik-in-r.html#cb113-5"></a><span class="co"># einfacher Fall, um einen Überblick über alle Daten zu erhalten</span></span>
-<span id="cb113-6"><a href="deskriptive-statistik-in-r.html#cb113-6"></a><span class="kw">dfSummary</span>(daten) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">view</span>()</span>
-<span id="cb113-7"><a href="deskriptive-statistik-in-r.html#cb113-7"></a></span>
-<span id="cb113-8"><a href="deskriptive-statistik-in-r.html#cb113-8"></a><span class="co"># innerhalb einer tidyverse-Kette  um bspw. einen Überblick über</span></span>
-<span id="cb113-9"><a href="deskriptive-statistik-in-r.html#cb113-9"></a><span class="co"># die Traumaspiralen zu erhalten</span></span>
-<span id="cb113-10"><a href="deskriptive-statistik-in-r.html#cb113-10"></a>daten <span class="op">%&gt;%</span></span>
-<span id="cb113-11"><a href="deskriptive-statistik-in-r.html#cb113-11"></a><span class="st">  </span><span class="kw">filter</span>(untersuchung <span class="op">==</span><span class="st"> &quot;Traumaspirale&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb113-12"><a href="deskriptive-statistik-in-r.html#cb113-12"></a><span class="st">  </span><span class="kw">dfSummary</span>() <span class="op">%&gt;%</span></span>
-<span id="cb113-13"><a href="deskriptive-statistik-in-r.html#cb113-13"></a><span class="st">  </span><span class="kw">view</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="deskriptive-statistik-in-r.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># die Ausgaben dieser Funktionen erscheinen nicht auf der Konsole,</span></span>
+<span id="cb111-2"><a href="deskriptive-statistik-in-r.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sondern im Viewer-Pane von RStudio. Dort findet man auch einen Button,</span></span>
+<span id="cb111-3"><a href="deskriptive-statistik-in-r.html#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="co"># um die Datei in einem Internetbrowser zu öffnen.</span></span>
+<span id="cb111-4"><a href="deskriptive-statistik-in-r.html#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-5"><a href="deskriptive-statistik-in-r.html#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="co"># einfacher Fall, um einen Überblick über alle Daten zu erhalten</span></span>
+<span id="cb111-6"><a href="deskriptive-statistik-in-r.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dfSummary</span>(daten) <span class="sc">%&gt;%</span> <span class="fu">view</span>()</span>
+<span id="cb111-7"><a href="deskriptive-statistik-in-r.html#cb111-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-8"><a href="deskriptive-statistik-in-r.html#cb111-8" aria-hidden="true" tabindex="-1"></a><span class="co"># innerhalb einer tidyverse-Kette  um bspw. einen Überblick über</span></span>
+<span id="cb111-9"><a href="deskriptive-statistik-in-r.html#cb111-9" aria-hidden="true" tabindex="-1"></a><span class="co"># die Traumaspiralen zu erhalten</span></span>
+<span id="cb111-10"><a href="deskriptive-statistik-in-r.html#cb111-10" aria-hidden="true" tabindex="-1"></a>daten <span class="sc">%&gt;%</span></span>
+<span id="cb111-11"><a href="deskriptive-statistik-in-r.html#cb111-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(untersuchung <span class="sc">==</span> <span class="st">&quot;Traumaspirale&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb111-12"><a href="deskriptive-statistik-in-r.html#cb111-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfSummary</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb111-13"><a href="deskriptive-statistik-in-r.html#cb111-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">view</span>()</span></code></pre></div>
 </div>
 </div>
-<div id="mehr-bunte-bilder" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Mehr bunte Bilder</h2>
+<div id="mehr-bunte-bilder" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Mehr bunte Bilder<a href="deskriptive-statistik-in-r.html#mehr-bunte-bilder" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Um deskriptive Statistiken auch grafisch nach Gruppen zu trennen, bietet sich die Funktion <code>facet_wrap()</code> an, die ebenfalls Teil von ggplot2 ist. Im Prinzip kann man sich die Funktionsweise ähnlich wie die <code>by()</code> Funktion vorstelen, wobei die Handhabung noch etwas simpler ist. Man definiert einfach wie gewohnt die Grafik die man mit <code>ggplot()</code> erstellen möchte, und fügt <code>facet_wrap()</code> einfach mit <code>+</code> in die Kette der Grafikfunktionen. Innerhalb von <code>facet_wrap()</code> muss noch etwas umständlich die entsprechende Gruppenvariable in die Funktion <code>vars()</code> eingeschlossen werden, aber die Ergebnisse sind sehr ansprechend.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="deskriptive-statistik-in-r.html#cb114-1"></a><span class="co"># ähnliche Grafik wie am Ende des letzten Kapitels, aber mit</span></span>
-<span id="cb114-2"><a href="deskriptive-statistik-in-r.html#cb114-2"></a><span class="co"># nach Untersuchung getrennten Ausgaben, damit die Punkte</span></span>
-<span id="cb114-3"><a href="deskriptive-statistik-in-r.html#cb114-3"></a><span class="co"># weniger überlappen.</span></span>
-<span id="cb114-4"><a href="deskriptive-statistik-in-r.html#cb114-4"></a>daten <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb114-5"><a href="deskriptive-statistik-in-r.html#cb114-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> ctdi.vol, <span class="dt">y =</span> dlp, <span class="dt">color =</span> untersuchung)) <span class="op">+</span></span>
-<span id="cb114-6"><a href="deskriptive-statistik-in-r.html#cb114-6"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb114-7"><a href="deskriptive-statistik-in-r.html#cb114-7"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(untersuchung)) <span class="op">+</span></span>
-<span id="cb114-8"><a href="deskriptive-statistik-in-r.html#cb114-8"></a><span class="st">    </span><span class="kw">labs</span>(</span>
-<span id="cb114-9"><a href="deskriptive-statistik-in-r.html#cb114-9"></a>      <span class="dt">x =</span> <span class="st">&quot;CTDIvol in mGy&quot;</span>,</span>
-<span id="cb114-10"><a href="deskriptive-statistik-in-r.html#cb114-10"></a>      <span class="dt">y =</span> <span class="st">&quot;DLP in mGy*cm&quot;</span>,</span>
-<span id="cb114-11"><a href="deskriptive-statistik-in-r.html#cb114-11"></a>      <span class="dt">title =</span> <span class="st">&quot;Zusammenhang CTDIvol / DLP&quot;</span>,</span>
-<span id="cb114-12"><a href="deskriptive-statistik-in-r.html#cb114-12"></a>      <span class="dt">color =</span> <span class="st">&quot;Untersuchungsart&quot;</span></span>
-<span id="cb114-13"><a href="deskriptive-statistik-in-r.html#cb114-13"></a>    ) <span class="op">+</span></span>
-<span id="cb114-14"><a href="deskriptive-statistik-in-r.html#cb114-14"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="deskriptive-statistik-in-r.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ähnliche Grafik wie am Ende des letzten Kapitels, aber mit</span></span>
+<span id="cb112-2"><a href="deskriptive-statistik-in-r.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nach Untersuchung getrennten Ausgaben, damit die Punkte</span></span>
+<span id="cb112-3"><a href="deskriptive-statistik-in-r.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="co"># weniger überlappen.</span></span>
+<span id="cb112-4"><a href="deskriptive-statistik-in-r.html#cb112-4" aria-hidden="true" tabindex="-1"></a>daten <span class="sc">%&gt;%</span> </span>
+<span id="cb112-5"><a href="deskriptive-statistik-in-r.html#cb112-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ctdi.vol, <span class="at">y =</span> dlp, <span class="at">color =</span> untersuchung)) <span class="sc">+</span></span>
+<span id="cb112-6"><a href="deskriptive-statistik-in-r.html#cb112-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb112-7"><a href="deskriptive-statistik-in-r.html#cb112-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(untersuchung)) <span class="sc">+</span></span>
+<span id="cb112-8"><a href="deskriptive-statistik-in-r.html#cb112-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb112-9"><a href="deskriptive-statistik-in-r.html#cb112-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;CTDIvol in mGy&quot;</span>,</span>
+<span id="cb112-10"><a href="deskriptive-statistik-in-r.html#cb112-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">&quot;DLP in mGy*cm&quot;</span>,</span>
+<span id="cb112-11"><a href="deskriptive-statistik-in-r.html#cb112-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;Zusammenhang CTDIvol / DLP&quot;</span>,</span>
+<span id="cb112-12"><a href="deskriptive-statistik-in-r.html#cb112-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;Untersuchungsart&quot;</span></span>
+<span id="cb112-13"><a href="deskriptive-statistik-in-r.html#cb112-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb112-14"><a href="deskriptive-statistik-in-r.html#cb112-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>Natürlich funktioniert <code>facet_wrap()</code> nicht nur mit Punktwolken, sondern letztlich mit beliebigen Grafiken. Da sich für deskriptive Statistiken <a href="https://de.wikipedia.org/wiki/Box-Plot">insbesondere Boxplots anbieten</a>, im nachfolgenden Beispiel eine etwas komplexere Grafik. In dem Fall wird zunächst die Variable <code>kv</code> mithilfe der Funktion <code>mutate()</code> statt als numerische Variable als ordinale Variable definiert. Zur besseren Übersichtlichkeit werden nur die Fälle betrachtet mit 80kV, 100kV und 120kV. Der Rest ist dann wie gewohnt die Definition der Grafik und das Aufteilen mittels <code>facet_wrap()</code>.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="deskriptive-statistik-in-r.html#cb115-1"></a>daten <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb115-2"><a href="deskriptive-statistik-in-r.html#cb115-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">kv =</span> <span class="kw">as.factor</span>(kv)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb115-3"><a href="deskriptive-statistik-in-r.html#cb115-3"></a><span class="st">  </span><span class="kw">filter</span>(kv <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb115-4"><a href="deskriptive-statistik-in-r.html#cb115-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> kv, <span class="dt">y =</span> dlp, <span class="dt">fill =</span> kv)) <span class="op">+</span></span>
-<span id="cb115-5"><a href="deskriptive-statistik-in-r.html#cb115-5"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
-<span id="cb115-6"><a href="deskriptive-statistik-in-r.html#cb115-6"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(untersuchung)) <span class="op">+</span></span>
-<span id="cb115-7"><a href="deskriptive-statistik-in-r.html#cb115-7"></a><span class="st">    </span><span class="kw">labs</span>(</span>
-<span id="cb115-8"><a href="deskriptive-statistik-in-r.html#cb115-8"></a>      <span class="dt">x =</span> <span class="st">&quot;kV-Einstellung&quot;</span>,</span>
-<span id="cb115-9"><a href="deskriptive-statistik-in-r.html#cb115-9"></a>      <span class="dt">y =</span> <span class="st">&quot;DLP in mGy*cm&quot;</span>,</span>
-<span id="cb115-10"><a href="deskriptive-statistik-in-r.html#cb115-10"></a>      <span class="dt">title =</span> <span class="st">&quot;DLP in Abhängigkeit von kV-Einstellung&quot;</span>,</span>
-<span id="cb115-11"><a href="deskriptive-statistik-in-r.html#cb115-11"></a>      <span class="dt">fill =</span> <span class="st">&quot;kV-Einstellung&quot;</span></span>
-<span id="cb115-12"><a href="deskriptive-statistik-in-r.html#cb115-12"></a>    ) <span class="op">+</span></span>
-<span id="cb115-13"><a href="deskriptive-statistik-in-r.html#cb115-13"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="deskriptive-statistik-in-r.html#cb113-1" aria-hidden="true" tabindex="-1"></a>daten <span class="sc">%&gt;%</span> </span>
+<span id="cb113-2"><a href="deskriptive-statistik-in-r.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kv =</span> <span class="fu">as.factor</span>(kv)) <span class="sc">%&gt;%</span> </span>
+<span id="cb113-3"><a href="deskriptive-statistik-in-r.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(kv <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">120</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb113-4"><a href="deskriptive-statistik-in-r.html#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> kv, <span class="at">y =</span> dlp, <span class="at">fill =</span> kv)) <span class="sc">+</span></span>
+<span id="cb113-5"><a href="deskriptive-statistik-in-r.html#cb113-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb113-6"><a href="deskriptive-statistik-in-r.html#cb113-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(untersuchung)) <span class="sc">+</span></span>
+<span id="cb113-7"><a href="deskriptive-statistik-in-r.html#cb113-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb113-8"><a href="deskriptive-statistik-in-r.html#cb113-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;kV-Einstellung&quot;</span>,</span>
+<span id="cb113-9"><a href="deskriptive-statistik-in-r.html#cb113-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">&quot;DLP in mGy*cm&quot;</span>,</span>
+<span id="cb113-10"><a href="deskriptive-statistik-in-r.html#cb113-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;DLP in Abhängigkeit von kV-Einstellung&quot;</span>,</span>
+<span id="cb113-11"><a href="deskriptive-statistik-in-r.html#cb113-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">&quot;kV-Einstellung&quot;</span></span>
+<span id="cb113-12"><a href="deskriptive-statistik-in-r.html#cb113-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb113-13"><a href="deskriptive-statistik-in-r.html#cb113-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 
 </div>
@@ -515,7 +515,6 @@ s.setAttribute('data-timestamp', +new Date());
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -534,6 +533,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -554,6 +554,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

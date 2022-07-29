@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 See one, do one, teach one! Machine Learning in R | DRG/AGIT - Go for IT</title>
   <meta name="description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 See one, do one, teach one! Machine Learning in R | DRG/AGIT - Go for IT" />
   <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="./assets/img/banner.png" />
+  <meta property="og:image" content="/./assets/img/banner.png" />
   <meta property="og:description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
   
 
@@ -19,12 +18,12 @@
   <meta name="twitter:title" content="6 See one, do one, teach one! Machine Learning in R | DRG/AGIT - Go for IT" />
   
   <meta name="twitter:description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
-  <meta name="twitter:image" content="./assets/img/banner.png" />
+  <meta name="twitter:image" content="/./assets/img/banner.png" />
 
 <meta name="author" content="Bettina Baeßler &amp; Daniel Pinto dos Santos" />
 
 
-<meta name="date" content="2021-01-08" />
+<meta name="date" content="2022-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="diverse-tipps-tricks-für-r.html"/>
 <link rel="next" href="bilddaten-datenbilder-radiomics-analysen-in-r.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,16 +49,17 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119151357-2"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4Y1LV796L"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-119151357-2');
+  gtag('config', 'G-Z4Y1LV796L');
 </script>
 
 
@@ -67,6 +67,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -126,6 +127,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -259,16 +261,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="see-one-do-one-teach-one-machine-learning-in-r" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> See one, do one, teach one! Machine Learning in R</h1>
+<div id="see-one-do-one-teach-one-machine-learning-in-r" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> See one, do one, teach one! Machine Learning in R<a href="see-one-do-one-teach-one-machine-learning-in-r.html#see-one-do-one-teach-one-machine-learning-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Nachdem wir uns nun bereits in deskriptive Statistiken und statistische Tests eingearbeitet haben, können wir einen Schritt weiter gehen und kommen zu dem Thema, das aktuell mehr denn je in aller Munde ist - <a href="https://de.wikipedia.org/wiki/Maschinelles_Lernen">Maschinelles Lernen bzw. Machine Learning</a>. In seinen einfacheren Ausprägungen ist maschinelles Lernen nichts anderes als die Erarbeitung eines statistischen Modells, welches dann wiederum auf neue Daten angewandt werden kann, um bspw. Vorhersagen zu treffen.</p>
 <div class="figure">
 <img src="assets/img/circles_of_ai.png" alt="" />
 <p class="caption">Künstliche Intelligenz, Maschinelles Lernen und Neuronale Netze</p>
 </div>
 <p>Heute werden die Begriffe “Künstliche Intelligenz”, “Maschinelles Lernen” und “Neuronale Netzwerke” teils synonym verwandt. Korrekterweise kann man jedoch sagen, dass die neuronalen Netze ledigliche ein Teilgebiet des maschinellen Lernens sind, das wiederum ein Teil von dem bezeichnet was unter künstlicher Intelligenz verstanden wird. Im folgenden werden wir einige einfachere Algorithmen kennenlernen und in R ausprobiern. Wer danach noch Hunger auf mehr Machine Learning Algorithmen und deren Anwendung in R hat, dem sei die Webseite <a href="https://blog.datasciencedojo.com/machine-learning-algorithms/">101 Machine Learning Algorithms</a> ans Herz gelegt.</p>
-<div id="lernziele-5" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Lernziele</h2>
+<div id="lernziele-5" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Lernziele<a href="see-one-do-one-teach-one-machine-learning-in-r.html#lernziele-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li>Verschiedene Machine Learning Algorithmen in R nutzen</li>
 <li>Daten in Training- und Testdaten unterteilen</li>
@@ -276,11 +278,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Klassifikationsgüte berechnen</li>
 </ol>
 </div>
-<div id="das-iris-dataset" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Das Iris Dataset</h2>
+<div id="das-iris-dataset" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Das Iris Dataset<a href="see-one-do-one-teach-one-machine-learning-in-r.html#das-iris-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In vielen Beipsielen wird online auf das sogenannte <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Iris Dataset</a> Bezug genommen. Der Datensatz hat deshalb einige Berühmtheit erlangt, der Einfachheit halber verwenden wir ihn deshalb auch für dieses Webinar.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb147-1"></a><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
-<span id="cb147-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb147-2"></a><span class="kw">str</span>(iris)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
+<span id="cb143-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(iris)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
 ##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
 ##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
@@ -289,23 +291,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 <p>In dem Datensatz enthalten sind Beobachtungen zu 150 verschiedenen Schwertlilien enthalten, jede Beobachtung enthält Angaben zu Länge und Breite der Kelch- und Kronblätter sowie zur Zugehörigkeit zu einer von drei Schwertlilienarten. Die übliche Aufgabe ist es dann anhand dieses Datensatzes einen Algorithmus zu trainieren, der aus den Angaben zur Länge und Breite der Kelch- und Kronblätter Vorhersagen über die Artzugehörigkeit trifft.</p>
 </div>
-<div id="explorative-datenvisualisierung" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> Explorative Datenvisualisierung</h2>
+<div id="explorative-datenvisualisierung" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Explorative Datenvisualisierung<a href="see-one-do-one-teach-one-machine-learning-in-r.html#explorative-datenvisualisierung" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ein guter Anfang ist meist sich einen visuellen Überblick über die Daten zu verschaffen. Man könnte beispielsweise die Verteilung der Messwerte als gruppierte Punktwolken darstellen.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb149-1"></a>iris <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb149-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb149-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>Species, <span class="dt">names_to =</span> <span class="st">&quot;variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb149-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb149-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> value, <span class="dt">color =</span> Species)) <span class="op">+</span></span>
-<span id="cb149-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb149-4"></a><span class="st">    </span><span class="kw">geom_jitter</span>() <span class="op">+</span></span>
-<span id="cb149-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb149-5"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(variable))</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb145-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb145-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>Species, <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb145-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb145-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> value, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb145-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb145-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb145-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb145-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable))</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <p>Wie man sieht, müsste es möglich sein anhand der Daten die Artzugehörigkeit abzuschätzen. Rein visuell könnte man vermuten, dass sich dafür insbesondere die Länge der Kronblätter (<code>Petal-Length</code>) eignen müsste.</p>
 </div>
-<div id="lin-regression" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> Lineare Regression</h2>
+<div id="lin-regression" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Lineare Regression<a href="see-one-do-one-teach-one-machine-learning-in-r.html#lin-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Einer der einfachsten Machine Learning Algorithmen, die <a href="https://de.wikipedia.org/wiki/Lineare_Regression">Lineare Regression</a> eignet sich zwar nicht zur Vorhersage eines kategorialen Variable, wie sie die Artzugehörigkeit ist, sollte aber hier trotzdem nicht unerwähnt bleiben. Üblicherweise versucht eine lineare Regression einen kontinuierlichen Zahlenwert für eine abhängige Variable aus einer oder mehreren unabhängigen Variablen zu berechnen. In unserem Fall könnten wir beispielsweise versuchen die Breite der Kronblätter (<code>Petal.Width</code>) aus den übrigen Variablen abzuschätzen.</p>
 <p>Hierzu nutzen wir die Funktion <code>lm()</code>. Erster Parameter dieser Funktion ist eine Formel, wie wir sie bereits im Kapitel zu den statistischen Tests benutzt haben (Abschnitt <a href="tests-in-r.html#formulas-in-r">4.3.1</a>). In Formeln kann der Punkt <code>.</code> genutzt werden, um alle Variablen (bzw. Spalten) außer der links der Tilde <code>~</code> angegebenen zu referenzieren. Der zweite Parameter der Funktion ist das Dataframe, das genutzt werden soll. Da es hier keinen Sinn machen würde die Art einzuschließen, nutzen wir innerhalb der <code>lm()</code>-Funktion ein <code>select()</code>, um die Variable <code>Species</code> auszuschließen.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Petal.Width <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>Species))</span>
-<span id="cb150-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-2"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb146-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> Petal.Width <span class="sc">~</span> ., <span class="at">data =</span> iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Species))</span>
+<span id="cb146-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Petal.Width ~ ., data = iris %&gt;% select(-Species))
@@ -328,45 +330,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic: 734.4 on 3 and 146 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Die Ausgabe ist auf den ersten Blick nicht besonders eingängig, zeigt aber im Wesentlichen schon, dass signifikante Zusammenhänge zwischen Kronblattbreite und allen anderen Variablen existieren.</p>
 <p>Natürlich können auch die Ergebnisobjekte von Machine Learning Algorithmen für die weitere Nutzung mit Tidyverse-Paketen aufbereitet werden (siehe Abschnitt <a href="tests-in-r.html#broom-return-objects">4.4.1</a>).</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb152-1"></a><span class="kw">library</span>(broom)</span>
-<span id="cb152-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb152-2"></a><span class="kw">tidy</span>(fit)</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 5
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb148-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
 ##   term         estimate std.error statistic  p.value
 ##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)    -0.240    0.178      -1.35 1.80e- 1
 ## 2 Sepal.Length   -0.207    0.0475     -4.36 2.41e- 5
 ## 3 Sepal.Width     0.223    0.0489      4.55 1.10e- 5
 ## 4 Petal.Length    0.524    0.0245     21.4  7.33e-47</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-1"></a>fit <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb154-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-2"></a><span class="st">  </span><span class="kw">tidy</span>(<span class="dt">conf.int =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb154-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-3"></a><span class="st">  </span><span class="kw">filter</span>(term <span class="op">!=</span><span class="st"> &quot;(Intercept)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb154-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">p.value.chr =</span> <span class="kw">format.pval</span>(p.value, <span class="dt">digits =</span> <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb154-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> estimate, <span class="dt">y =</span> <span class="kw">fct_reorder</span>(term, estimate))) <span class="op">+</span></span>
-<span id="cb154-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-6"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb154-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-7"></a><span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">xmin =</span> conf.low, <span class="dt">xmax =</span> conf.high), <span class="dt">width =</span> <span class="fl">0.15</span>) <span class="op">+</span></span>
-<span id="cb154-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-8"></a><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
-<span id="cb154-9"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-9"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;p-value =&quot;</span>, p.value.chr)), <span class="dt">nudge_y =</span> <span class="fl">0.2</span>) <span class="op">+</span></span>
-<span id="cb154-10"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-10"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.8</span>, <span class="fl">0.8</span>)) <span class="op">+</span></span>
-<span id="cb154-11"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-11"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb154-12"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-12"></a>         <span class="dt">x =</span> <span class="st">&quot;Estimate&quot;</span>,</span>
-<span id="cb154-13"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb154-13"></a>         <span class="dt">title =</span> <span class="st">&quot;Linear regression coefficients for Petal.Width&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> </span>
+<span id="cb150-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb150-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">&quot;(Intercept)&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb150-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.value.chr =</span> <span class="fu">format.pval</span>(p.value, <span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb150-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> <span class="fu">fct_reorder</span>(term, estimate))) <span class="sc">+</span></span>
+<span id="cb150-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb150-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high), <span class="at">width =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb150-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb150-9"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;p-value =&quot;</span>, p.value.chr)), <span class="at">nudge_y =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb150-10"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.8</span>, <span class="fl">0.8</span>)) <span class="sc">+</span></span>
+<span id="cb150-11"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb150-12"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Estimate&quot;</span>,</span>
+<span id="cb150-13"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb150-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">&quot;Linear regression coefficients for Petal.Width&quot;</span>)</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 </div>
-<div id="log-regression" class="section level2" number="6.5">
-<h2><span class="header-section-number">6.5</span> Logistische Regression</h2>
+<div id="log-regression" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Logistische Regression<a href="see-one-do-one-teach-one-machine-learning-in-r.html#log-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Einer der einfachtsten Machine Learning Algorithmen zur Vorhersage einer binären Entscheidung (wie bspw. benigne vs. maligne) ist die <a href="https://de.wikipedia.org/wiki/Logistische_Regression">Logistische Regression</a>. Das Vorgehen in R ist hierbei weitestgehend gleich zu dem bei der linearen Regression, nur dass wir in diesem Fall eben als abhängige Variable eine Variable nehmen müssen, die entweder als <code>Character</code> oder als <code>Factor</code> vorliegt und nur zwei Ausprägungen hat.</p>
 <p>Im Iris-Datensatz könnten wir also beispeilsweise versuchen anhand von Blattlängen und -breiten zwischen den Arten <code>virginica</code> und <code>versicolor</code> zu unterscheiden. Dazu nutzen wir die Funktion <code>glm()</code> und geben dieser als Parameter <code>family = "binomial</code> mit.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-1"></a><span class="co"># Erstellen einer Teilmenge des Datensatzes mit nur zwei Spezies</span></span>
-<span id="cb155-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-2"></a>iris_binominal &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
-<span id="cb155-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-3"></a><span class="st">  </span><span class="kw">filter</span>(Species <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;virginica&quot;</span>, <span class="st">&quot;versicolor&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb155-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-4"></a><span class="st">  </span><span class="co"># da die Variable Species weiterhin als Factor mit drei Level</span></span>
-<span id="cb155-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-5"></a><span class="st">  </span><span class="co"># angelegt wäre, nutzen wir die droplevels()-Funktion, um</span></span>
-<span id="cb155-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-6"></a><span class="st">  </span><span class="co"># Fehler zu vermeiden.</span></span>
-<span id="cb155-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-7"></a><span class="st">  </span><span class="kw">droplevels</span>()</span>
-<span id="cb155-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-8"></a></span>
-<span id="cb155-9"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-9"></a><span class="co"># family = &quot;binomial&quot; gibt hier an, dass nur eine binäre Entscheidung zu treffen ist</span></span>
-<span id="cb155-10"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-10"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris_binominal, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb155-11"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-11"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Erstellen einer Teilmenge des Datensatzes mit nur zwei Spezies</span></span>
+<span id="cb151-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-2" aria-hidden="true" tabindex="-1"></a>iris_binominal <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb151-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;virginica&quot;</span>, <span class="st">&quot;versicolor&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb151-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># da die Variable Species weiterhin als Factor mit drei Level</span></span>
+<span id="cb151-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># angelegt wäre, nutzen wir die droplevels()-Funktion, um</span></span>
+<span id="cb151-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Fehler zu vermeiden.</span></span>
+<span id="cb151-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">droplevels</span>()</span>
+<span id="cb151-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-9"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-9" aria-hidden="true" tabindex="-1"></a><span class="co"># family = &quot;binomial&quot; gibt hier an, dass nur eine binäre Entscheidung zu treffen ist</span></span>
+<span id="cb151-10"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-10" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species <span class="sc">~</span> ., <span class="at">data =</span> iris_binominal, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb151-11"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb151-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Species ~ ., family = &quot;binomial&quot;, data = iris_binominal)
@@ -394,14 +396,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of Fisher Scoring iterations: 10</code></pre>
 <p>In diesem konkreten Beispiel erscheint es so, dass lediglich die Kronblattlänge (<code>Petal.Length</code>) signifikant mit der Artzugehörigkeit zusammenhängt. In einem “echten” Projekt könnte man jetzt versuchen das Modell zu optimieren und nicht signifikante Faktoren entfernen, für unsere Zwecke arbeiten wir aber jetzt mit diesem (sicher nicht idealen) Modell weiter.</p>
 <p>Wir können nun das in der Variablen <code>fit</code> gespeicherte Modell mithilfe der Funktion <code>predict()</code> nutzen, und uns die Vorhersagewerte des Modells zu ausgeben. Mit einigen praktischen Befehlen können wir die Vorhersagen auch gleich als neue Spalte dem ursprünglichen Dataframe hinzufügen.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb157-1"></a><span class="co"># wir nutzen hier die add_column()-Funktion aus dem tidyverse</span></span>
-<span id="cb157-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb157-2"></a><span class="co"># und die predict()-Funktion um Werte mithilfe eines Modells</span></span>
-<span id="cb157-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb157-3"></a><span class="co"># zu berechnen</span></span>
-<span id="cb157-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb157-4"></a>iris_binominal_predictions &lt;-<span class="st"> </span>iris_binominal <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb157-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb157-5"></a><span class="st">  </span><span class="kw">add_column</span>(<span class="dt">prediction_value =</span> <span class="kw">predict</span>(fit))</span>
-<span id="cb157-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb157-6"></a></span>
-<span id="cb157-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb157-7"></a><span class="co"># ein Blick in die ersten Zeilen der Daten</span></span>
-<span id="cb157-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb157-8"></a><span class="kw">head</span>(iris_binominal_predictions)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># wir nutzen hier die add_column()-Funktion aus dem tidyverse</span></span>
+<span id="cb153-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="co"># und die predict()-Funktion um Werte mithilfe eines Modells</span></span>
+<span id="cb153-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="co"># zu berechnen</span></span>
+<span id="cb153-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb153-4" aria-hidden="true" tabindex="-1"></a>iris_binominal_predictions <span class="ot">&lt;-</span> iris_binominal <span class="sc">%&gt;%</span> </span>
+<span id="cb153-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb153-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">prediction_value =</span> <span class="fu">predict</span>(fit))</span>
+<span id="cb153-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb153-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb153-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb153-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ein Blick in die ersten Zeilen der Daten</span></span>
+<span id="cb153-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb153-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris_binominal_predictions)</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species prediction_value
 ## 1          7.0         3.2          4.7         1.4 versicolor       -11.354482
 ## 2          6.4         3.2          4.5         1.5 versicolor        -9.932613
@@ -410,23 +412,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5          6.5         2.8          4.6         1.5 versicolor        -6.563842
 ## 6          5.7         2.8          4.5         1.3 versicolor        -9.191831</code></pre>
 <p>Wie man sieht, gibt das Modell der logistischen Regression uns einen numerieschen Wert (in unserem Fall in der Spalte <code>prediction_value</code>) zurück, der in gewisser Weise aber die Zugehörigkeit zu der jeweiligen Klasse wiederspiegelt. Diese Daten könnten wir nun für eine einfache Visualisierung der Klassifikationsgenauigkeit nutzen.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-1"></a>iris_binominal_predictions <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb159-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> prediction_value, <span class="dt">x =</span> Species, <span class="dt">color =</span> Species)) <span class="op">+</span></span>
-<span id="cb159-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-3"></a><span class="st">    </span><span class="kw">geom_jitter</span>() <span class="op">+</span></span>
-<span id="cb159-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-4"></a><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
-<span id="cb159-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-5"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Spezies&quot;</span>,</span>
-<span id="cb159-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-6"></a>         <span class="dt">y =</span> <span class="st">&quot;Ausgabewert der logistischen Regression&quot;</span>,</span>
-<span id="cb159-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-7"></a>         <span class="dt">color =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span></span>
-<span id="cb159-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-8"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-1" aria-hidden="true" tabindex="-1"></a>iris_binominal_predictions <span class="sc">%&gt;%</span> </span>
+<span id="cb155-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> prediction_value, <span class="at">x =</span> Species, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb155-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb155-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb155-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Spezies&quot;</span>,</span>
+<span id="cb155-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Ausgabewert der logistischen Regression&quot;</span>,</span>
+<span id="cb155-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb155-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb155-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-64-1.png" width="672" />
 Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausgabe der logistischen Regression eher für Schwertlilien der Art <code>virginica</code> zu sprechen, negative Werte für die Art <code>versicolor</code>. Nur in je einem Fall liegt dieses Modell für beide Arten liegt das Modell falsch.</p>
-<div id="roc-analysis" class="section level3" number="6.5.1">
-<h3><span class="header-section-number">6.5.1</span> Ein kurzer Ausflug in ROC-Analysen</h3>
+<div id="roc-analysis" class="section level3 hasAnchor" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Ein kurzer Ausflug in ROC-Analysen<a href="see-one-do-one-teach-one-machine-learning-in-r.html#roc-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Ohne zu sehr darauf eingehen zu wollen, an dieser Stelle ein kurzer Exkurs zu <a href="https://de.wikipedia.org/wiki/ROC-Kurve">ROC-Analysen</a>. In einer ROC-Kurve wird sozusagen jede Kombination von Sensitivität und Spezifität aufgetragen, die sich in Abhängigkeit von der Variation eines Parameters (in unserem Fall also bspw. der Ausgabewert der logistischen Regression) ergibt. Je näher die Fläche unterhalb der ROC-Kurve am Wert 1 ist, desto besser die diagnostische oder prädiktive Performance eines Modells.</p>
 <p>In R können ROC-Kurven und dazugehörige Berechnungen sehr einfach mit dem Paket <code>pROC</code> vorgenommen werden. Im Folgenden nehmen wir das Dataframe mit den ergänzten Vorhersagewerten und teilen der Funktion <code>roc()</code> als ersten Parameter den wahren Wert (hier also <code>Species</code>) und als zweiten Parameter den vorhersagenden Wert (hier also <code>prediction_value</code>) mit.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-1"></a><span class="kw">library</span>(pROC)</span>
-<span id="cb160-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-2"></a>iris_binominal_predictions <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb160-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-3"></a><span class="st">  </span><span class="kw">roc</span>(Species, prediction_value)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb156-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb156-2" aria-hidden="true" tabindex="-1"></a>iris_binominal_predictions <span class="sc">%&gt;%</span> </span>
+<span id="cb156-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb156-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">roc</span>(Species, prediction_value)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## roc.data.frame(data = ., response = Species, predictor = prediction_value)
@@ -435,79 +437,79 @@ Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausga
 ## Area under the curve: 0.9972</code></pre>
 <p>Wie wir erwartet hätte funktioniert unser Modell sehr gut und erreicht eine AUC von 0.99.</p>
 <p>Noch eingängiger wäre nun auch eine entsprechende grafische Darstellung der Kurve. Erfreulicherweise enthält das Paket <code>pROC</code> auch hierfür Funktionen, insbesondere die Funktion <code>ggroc()</code>, die direkt eine in <code>ggplot</code> weiter modifizierbare Grafik erzeugt.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-1"></a>iris_binominal_predictions <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb162-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-2"></a><span class="st">  </span><span class="kw">roc</span>(Species, prediction_value) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb162-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-3"></a><span class="st">  </span><span class="kw">ggroc</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb162-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-4"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">xend =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>),</span>
-<span id="cb162-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-5"></a>                 <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
-<span id="cb162-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-6"></a><span class="st">    </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a>iris_binominal_predictions <span class="sc">%&gt;%</span> </span>
+<span id="cb158-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb158-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">roc</span>(Species, prediction_value) <span class="sc">%&gt;%</span> </span>
+<span id="cb158-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb158-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggroc</span>(<span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb158-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb158-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">xend =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> <span class="dv">1</span>),</span>
+<span id="cb158-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb158-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb158-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb158-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_fixed</span>()</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <p>Wollen wir diese Grafik dann noch bspw. um weitere wichtige Informationen ergänzen, können wir auch ganz das einfach erreichen.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-1"></a><span class="co"># zunächst speichern wir unsere ROC-Analyse in einer Variablen</span></span>
-<span id="cb163-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-2"></a>roc_result &lt;-<span class="st"> </span>iris_binominal_predictions <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb163-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-3"></a><span class="st">  </span><span class="kw">roc</span>(Species, prediction_value)</span>
-<span id="cb163-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-4"></a></span>
-<span id="cb163-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-5"></a><span class="co"># AUC und optimaler threshold werden berechnet und in Variablen gespeichert</span></span>
-<span id="cb163-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-6"></a>roc_auc &lt;-<span class="st"> </span><span class="kw">auc</span>(roc_result)</span>
-<span id="cb163-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-7"></a>roc_optimal_point &lt;-<span class="st"> </span><span class="kw">coords</span>(roc_result, <span class="st">&quot;best&quot;</span>, <span class="dt">transpose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb163-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-8"></a></span>
-<span id="cb163-9"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-9"></a><span class="co"># ROC-Kurve mit Anmerkungen</span></span>
-<span id="cb163-10"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-10"></a>roc_result <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb163-11"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-11"></a><span class="st">  </span><span class="kw">ggroc</span>(<span class="dt">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb163-12"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-12"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">xend =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>),</span>
-<span id="cb163-13"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-13"></a>                 <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
-<span id="cb163-14"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-14"></a><span class="st">    </span><span class="kw">coord_fixed</span>() <span class="op">+</span></span>
-<span id="cb163-15"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-15"></a><span class="st">    </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">0.05</span>, <span class="dt">y =</span> <span class="fl">0.1</span>, <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;AUC =&quot;</span>, roc_auc), <span class="dt">hjust =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb163-16"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-16"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="dt">data =</span> roc_optimal_point,</span>
-<span id="cb163-17"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-17"></a>              <span class="kw">aes</span>(<span class="dt">x =</span> specificity, <span class="dt">y =</span> sensitivity, <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;Best operating point =&quot;</span>, <span class="kw">round</span>(threshold, <span class="dv">2</span>),</span>
-<span id="cb163-18"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-18"></a>                                                                  <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Sensitivity:&quot;</span>, <span class="kw">round</span>(sensitivity, <span class="dv">2</span>),</span>
-<span id="cb163-19"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-19"></a>                                                                  <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Specificity:&quot;</span>, <span class="kw">round</span>(specificity, <span class="dv">2</span>)</span>
-<span id="cb163-20"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-20"></a>                                                                  )),</span>
-<span id="cb163-21"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-21"></a>              <span class="dt">hjust =</span> <span class="dv">0</span>, <span class="dt">vjust =</span> <span class="dv">1</span>,</span>
-<span id="cb163-22"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-22"></a>              <span class="dt">nudge_x =</span> <span class="fl">0.02</span>, <span class="dt">nudge_y =</span> <span class="fl">-0.02</span>,</span>
-<span id="cb163-23"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-23"></a>              <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
-<span id="cb163-24"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-24"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> roc_optimal_point<span class="op">$</span>specificity, <span class="dt">y =</span> roc_optimal_point<span class="op">$</span>sensitivity), <span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">shape =</span> <span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zunächst speichern wir unsere ROC-Analyse in einer Variablen</span></span>
+<span id="cb159-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-2" aria-hidden="true" tabindex="-1"></a>roc_result <span class="ot">&lt;-</span> iris_binominal_predictions <span class="sc">%&gt;%</span> </span>
+<span id="cb159-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">roc</span>(Species, prediction_value)</span>
+<span id="cb159-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-5" aria-hidden="true" tabindex="-1"></a><span class="co"># AUC und optimaler threshold werden berechnet und in Variablen gespeichert</span></span>
+<span id="cb159-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-6" aria-hidden="true" tabindex="-1"></a>roc_auc <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_result)</span>
+<span id="cb159-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-7" aria-hidden="true" tabindex="-1"></a>roc_optimal_point <span class="ot">&lt;-</span> <span class="fu">coords</span>(roc_result, <span class="st">&quot;best&quot;</span>, <span class="at">transpose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb159-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-9"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ROC-Kurve mit Anmerkungen</span></span>
+<span id="cb159-10"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-10" aria-hidden="true" tabindex="-1"></a>roc_result <span class="sc">%&gt;%</span> </span>
+<span id="cb159-11"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggroc</span>(<span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb159-12"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">xend =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> <span class="dv">1</span>),</span>
+<span id="cb159-13"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb159-14"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb159-15"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="fl">0.05</span>, <span class="at">y =</span> <span class="fl">0.1</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;AUC =&quot;</span>, roc_auc), <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb159-16"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> roc_optimal_point,</span>
+<span id="cb159-17"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-17" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> specificity, <span class="at">y =</span> sensitivity, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">&quot;Best operating point =&quot;</span>, <span class="fu">round</span>(threshold, <span class="dv">2</span>),</span>
+<span id="cb159-18"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-18" aria-hidden="true" tabindex="-1"></a>                                                                  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Sensitivity:&quot;</span>, <span class="fu">round</span>(sensitivity, <span class="dv">2</span>),</span>
+<span id="cb159-19"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-19" aria-hidden="true" tabindex="-1"></a>                                                                  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Specificity:&quot;</span>, <span class="fu">round</span>(specificity, <span class="dv">2</span>)</span>
+<span id="cb159-20"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-20" aria-hidden="true" tabindex="-1"></a>                                                                  )),</span>
+<span id="cb159-21"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">1</span>,</span>
+<span id="cb159-22"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">nudge_x =</span> <span class="fl">0.02</span>, <span class="at">nudge_y =</span> <span class="sc">-</span><span class="fl">0.02</span>,</span>
+<span id="cb159-23"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-23" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb159-24"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb159-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> roc_optimal_point<span class="sc">$</span>specificity, <span class="at">y =</span> roc_optimal_point<span class="sc">$</span>sensitivity), <span class="at">color =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">shape =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
 </div>
-<div id="ml-preprocessing" class="section level2" number="6.6">
-<h2><span class="header-section-number">6.6</span> Datenaufbereitung für Machine Learning</h2>
+<div id="ml-preprocessing" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Datenaufbereitung für Machine Learning<a href="see-one-do-one-teach-one-machine-learning-in-r.html#ml-preprocessing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Für die Anwendung “komplizierterer” Machine Learning Algorithmen sollte man sich an einige wichtige Regel halten. Ohne, dass wir hier alle Details bedenken können, sind zwei wichtige Schritte sicherlich die <a href="https://en.wikipedia.org/wiki/Normalization_(statistics)">Normalisierung der Daten</a> und die Aufteilung in Trainings- und Testdaten.</p>
 <p>Für beide Arbeitsschritte können wir Funktionen aus dem Paket <code>caret</code> benutzen. Für die Normalisierung der Daten legen wir zunächst mit der Funktion <code>preProcess()</code> ein Objekt an, das die relevanten Informationen enthält, dieses wiederum wenden wir dann mit der schon bekannten Funktion <code>predict()</code> an.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-1"></a><span class="kw">library</span>(caret)</span>
-<span id="cb164-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-2"></a></span>
-<span id="cb164-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-3"></a>preprocess_object &lt;-<span class="st"> </span><span class="kw">preProcess</span>(iris, <span class="dt">method=</span><span class="kw">c</span>(<span class="st">&quot;range&quot;</span>))</span>
-<span id="cb164-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-4"></a></span>
-<span id="cb164-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-5"></a>iris_normalized &lt;-<span class="st"> </span><span class="kw">predict</span>(preprocess_object, iris)</span>
-<span id="cb164-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-6"></a></span>
-<span id="cb164-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-7"></a>iris_normalized <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb164-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-8"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>Species, <span class="dt">names_to =</span> <span class="st">&quot;variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb164-9"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-9"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> value, <span class="dt">color =</span> Species)) <span class="op">+</span></span>
-<span id="cb164-10"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-10"></a><span class="st">    </span><span class="kw">geom_jitter</span>() <span class="op">+</span></span>
-<span id="cb164-11"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-11"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(variable)) <span class="op">+</span></span>
-<span id="cb164-12"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb164-12"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;normalized value&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb160-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-3" aria-hidden="true" tabindex="-1"></a>preprocess_object <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(iris, <span class="at">method=</span><span class="fu">c</span>(<span class="st">&quot;range&quot;</span>))</span>
+<span id="cb160-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-5"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-5" aria-hidden="true" tabindex="-1"></a>iris_normalized <span class="ot">&lt;-</span> <span class="fu">predict</span>(preprocess_object, iris)</span>
+<span id="cb160-6"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-7"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-7" aria-hidden="true" tabindex="-1"></a>iris_normalized <span class="sc">%&gt;%</span> </span>
+<span id="cb160-8"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>Species, <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb160-9"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> value, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb160-10"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb160-11"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable)) <span class="sc">+</span></span>
+<span id="cb160-12"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb160-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;normalized value&quot;</span>)</span></code></pre></div>
 <p><img src="go_for_it_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 <p>Man erkennt, dass nun alle Werte auf einen Bereich zwischen 0 und 1 abgebildet wurden, was bspw. die Vergleichbarkeit (auch visuell, vgl. Abschnitt <a href="see-one-do-one-teach-one-machine-learning-in-r.html#explorative-datenvisualisierung">6.3</a>) verbessern kann.</p>
 <p>Im nächsten Schritt wollen wir die Daten aufteilen, sodass wir einen Datensatz erhalten, den wir zum Training unseres Algorithmus nutzen, und einen Datensatz, den wir zum Testen bzw. Validieren unseres Modells nutzen. Dabei sollte gewährleistet werden, dass in beiden Gruppen alle Werte annähernd ähnlich verteilt sind, die Zuordnung aber möglichst trotzdem zufällig stattfindet. Auch hier können wir uns einer Funktion des Pakets <code>caret</code> bedienen, in dem Fall die Funktion <code>createDataPartition()</code>. Dieser Funktion müssen wir als Parameter noch die Spalte mitgeben, die unsere vorherzusagende Variable enthält (in unserem Fall also <code>iris$Species</code>), welcher Prozentsatz der Daten dem Training zugeordnet werden soll (z.B.: 80%) und ob wir ein <code>list</code>-Objekt erhalten wollen (wenn wir nur <em>eine</em> Aufteilung machen wollen, sollte man hier <code>FALSE</code> wählen). Da die Funktion uns nur die Position der Zeilen des Dataframes, die zur Trainingsgruppe gehören sollen, gibt, ist es praktischer diese in einer Variablen zu speichern, die wir dann nutzen, um aus dem ursprünglichen Dataframe die entsprechenden Zeilen zu selektieren bzw. zu entfernen.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb165-1"></a>training_index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(iris<span class="op">$</span>Species, <span class="dt">p =</span> <span class="fl">.8</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb165-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb165-2"></a></span>
-<span id="cb165-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb165-3"></a>iris_training &lt;-<span class="st"> </span>iris[training_index,]</span>
-<span id="cb165-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb165-4"></a>iris_testing  &lt;-<span class="st"> </span>iris[<span class="op">-</span>training_index,]</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb161-1" aria-hidden="true" tabindex="-1"></a>training_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(iris<span class="sc">$</span>Species, <span class="at">p =</span> .<span class="dv">8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb161-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb161-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb161-3" aria-hidden="true" tabindex="-1"></a>iris_training <span class="ot">&lt;-</span> iris[training_index,]</span>
+<span id="cb161-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb161-4" aria-hidden="true" tabindex="-1"></a>iris_testing  <span class="ot">&lt;-</span> iris[<span class="sc">-</span>training_index,]</span></code></pre></div>
 <p>Um das Ergebnis zu kontrollieren, können wir bspw. die bekannten Funktionen zur Erstellung deskriptiver Statistiken nutzen (bspw. die Funktionen aus dem Paket <code>summarytools</code>, siehe auch Abschnitt <a href="deskriptive-statistik-in-r.html#summarytools">3.4.2</a>).</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb166-1"></a><span class="co"># Da der Output recht lang ist, führen wir hier nur die Befehle auf.</span></span>
-<span id="cb166-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb166-2"></a><span class="kw">library</span>(summarytools)</span>
-<span id="cb166-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb166-3"></a><span class="kw">dfSummary</span>(iris_training)</span>
-<span id="cb166-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb166-4"></a><span class="kw">dfSummary</span>(iris_testing)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Da der Output recht lang ist, führen wir hier nur die Befehle auf.</span></span>
+<span id="cb162-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span>
+<span id="cb162-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dfSummary</span>(iris_training)</span>
+<span id="cb162-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dfSummary</span>(iris_testing)</span></code></pre></div>
 <p>Sobald wir unsere Daten entsprechend aufgeteilt haben, können wir anfangen unsere Modelle zu trainieren.</p>
 </div>
-<div id="support-vector-machine" class="section level2" number="6.7">
-<h2><span class="header-section-number">6.7</span> Support Vector Machine</h2>
+<div id="support-vector-machine" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Support Vector Machine<a href="see-one-do-one-teach-one-machine-learning-in-r.html#support-vector-machine" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ein gern und häufig verwendeter, etwas komplexerer Machine Learning Algorithmus zur Klassifikation auch mehrerer Gruppen ist die <a href="https://de.wikipedia.org/wiki/Support_Vector_Machine">Support Vector Machine</a>. Der Algorithmus versucht hierbei möglichst gute Trennungen zwischen den Klassen (auch mehreren) in einem sogenannten Vektorraum zu finden.</p>
 <p>In R gibt es mehrere Pakete, die Support Vector Machines zur Verfügung stellen, ein Beispiel wäre das Paket <code>e1071</code>. Das Vorgehen ist dem bei der logistischen Regression (siehe <a href="see-one-do-one-teach-one-machine-learning-in-r.html#log-regression">6.5</a>) sehr ähnlich. Der Funktion <code>svm()</code> übergeben wir auch in diesem Falle eine Formel und den entsprechenden Datensatz. Hier ist es allerdings wichtig nur den Trainingsdatensatz zu verwenden.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb167-1"></a><span class="kw">library</span>(e1071)</span>
-<span id="cb167-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb167-2"></a></span>
-<span id="cb167-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb167-3"></a>fit &lt;-<span class="st"> </span><span class="kw">svm</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris_training)</span>
-<span id="cb167-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb167-4"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
+<span id="cb163-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-3"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">svm</span>(Species <span class="sc">~</span> ., <span class="at">data =</span> iris_training)</span>
+<span id="cb163-4"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb163-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## svm(formula = Species ~ ., data = iris_training)
@@ -518,9 +520,9 @@ Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausga
 ##  SVM-Kernel:  radial 
 ##        cost:  1 
 ## 
-## Number of Support Vectors:  44
+## Number of Support Vectors:  46
 ## 
-##  ( 8 19 17 )
+##  ( 8 20 18 )
 ## 
 ## 
 ## Number of Classes:  3 
@@ -529,11 +531,11 @@ Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausga
 ##  setosa versicolor virginica</code></pre>
 <p>Ein solches Modell erschließt sich entsprechend nicht ganz so intuitiv wie bspw. eine linieare Regression (<a href="see-one-do-one-teach-one-machine-learning-in-r.html#lin-regression">6.4</a>). Für die meisten unserer Anwendungen muss dies aber kein Nachteil sein, es sollte aber bei solchen Algorithmen in besonderem Maße darauf geachtet werden, dass letztlich nur die Ergebnisse in dem Testdatensatz bedeutend sind. Gute Ergebnisse in den Trainingsdaten können auch lediglich Ausdruck eines sogenannten <a href="https://de.wikipedia.org/wiki/Überanpassung">Overfittings</a> sein und sind nicht immer auf die Testdaten übertragbar.</p>
 <p>In einem zweiten Schritt wenden wir, wie auch schon bei den Regressionen, daher nun das trainierte Modell auf neue Daten an - in diesem Fall den Testdatensatz, der nicht Teil des Trainingsprozesses war.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb169-1"></a>iris_test &lt;-<span class="st"> </span>iris_testing <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb169-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb169-2"></a><span class="st">  </span><span class="kw">add_column</span>(<span class="dt">prediction =</span> <span class="kw">predict</span>(fit, iris_testing))</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb165-1" aria-hidden="true" tabindex="-1"></a>iris_test <span class="ot">&lt;-</span> iris_testing <span class="sc">%&gt;%</span> </span>
+<span id="cb165-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb165-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">prediction =</span> <span class="fu">predict</span>(fit, iris_testing))</span></code></pre></div>
 <p>Zur Bewertung der diagnostischen Genauigkeit des Modells sind eine Reihe Maßzahlen üblich. Erfreulicherweise enthält das o.g. Paket <code>caret</code> auch einige praktische Funktionen, um diese einfach berechnen zu lassen. Die Funktion <code>confusionMatrix()</code> benötigt dazu als Parameter eine Kreuztabelle, die wir in R wiederum mithilfe der Funktion <code>table()</code> erstellen können.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb170-1"></a><span class="kw">table</span>(iris_test<span class="op">$</span>Species, iris_test<span class="op">$</span>prediction) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb170-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb170-2"></a><span class="st">  </span><span class="kw">confusionMatrix</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris_test<span class="sc">$</span>Species, iris_test<span class="sc">$</span>prediction) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-2"><a href="see-one-do-one-teach-one-machine-learning-in-r.html#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">confusionMatrix</span>()</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##             
@@ -566,8 +568,8 @@ Wie wir aus der Grafik unschwer erkennen, scheinen positive Werte für die Ausga
 ## Balanced Accuracy           1.0000            0.9762           0.9545</code></pre>
 <p>Die Funktion <code>confusionMatrix()</code> gibt erfreulicherweise auch gleich die Kreuztabelle mit aus. Dabei entsprechen die Zeilen dem “wahren” Label oder Wert und die Spalten der Vorhersage des Algorithmus. Wir sehen also nun, dass sich der Algorithmus nur in zwei Fällen im Testdatensatz vertan hat (beide Male gab der Algorithmus Art <code>versicolor</code> aus, obwohl es sich um Schwertlilien der Art <code>virginica</code> handelte).</p>
 </div>
-<div id="weitere-informationen-zu-machine-learning-in-r" class="section level2" number="6.8">
-<h2><span class="header-section-number">6.8</span> Weitere Informationen zu Machine Learning in R</h2>
+<div id="weitere-informationen-zu-machine-learning-in-r" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> Weitere Informationen zu Machine Learning in R<a href="see-one-do-one-teach-one-machine-learning-in-r.html#weitere-informationen-zu-machine-learning-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Natürlich können wir an dieser Stelle nicht alle Machine Learning Algorithmen behandeln, die man in R nutzen kann. Eine tolle Zusammenstellung vieler Algorithmen, inkl. Tutorials in R, findet man auf der Webseite <a href="https://blog.datasciencedojo.com/machine-learning-algorithms/">DataScienceDojo</a>. Wie man schnell sieht sind die hier verwendeten nur ein kleiner Ausschnitt. Trotzdem, alleine mit diesen vier Paketen hat man viele der typischerweise in der Radiologie angewandten Techniken zur Verfügung:</p>
 <ul>
 <li><a href="https://github.com/tidymodels/broom"><code>broom</code></a> enthält etliche praktische Funktionen, um mit Modellen zu interagieren</li>
@@ -600,7 +602,6 @@ s.setAttribute('data-timestamp', +new Date());
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -619,6 +620,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -639,6 +641,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

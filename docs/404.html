@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Diverse Tipps &amp; Tricks für R | DRG/AGIT - Go for IT</title>
+  <title>Page not found | DRG/AGIT - Go for IT</title>
   <meta name="description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Diverse Tipps &amp; Tricks für R | DRG/AGIT - Go for IT" />
+  <meta property="og:title" content="Page not found | DRG/AGIT - Go for IT" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/./assets/img/banner.png" />
   <meta property="og:description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Diverse Tipps &amp; Tricks für R | DRG/AGIT - Go for IT" />
+  <meta name="twitter:title" content="Page not found | DRG/AGIT - Go for IT" />
   
   <meta name="twitter:description" content="Dies ist das Begleitbuch für die Webinarreihe ‘Go for IT’." />
   <meta name="twitter:image" content="/./assets/img/banner.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tests-in-r.html"/>
-<link rel="next" href="see-one-do-one-teach-one-machine-learning-in-r.html"/>
+
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -261,76 +261,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="diverse-tipps-tricks-für-r" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">5</span> Diverse Tipps &amp; Tricks für R<a href="diverse-tipps-tricks-für-r.html#diverse-tipps-tricks-für-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="lernziele-4" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Lernziele<a href="diverse-tipps-tricks-für-r.html#lernziele-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol style="list-style-type: decimal">
-<li>Rmarkdown-Dokumente benutzen</li>
-<li>Styleguide kennenlernen</li>
-<li>Cheatsheets für R finden und benutzen</li>
-</ol>
-</div>
-<div id="nachvollziehbare-analysen-und-rmarkdown" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Nachvollziehbare Analysen und Rmarkdown<a href="diverse-tipps-tricks-für-r.html#nachvollziehbare-analysen-und-rmarkdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Nachdem wir uns nun schon etwas in die Materie und R eingearbeitet haben, wollen wir an dieser Stelle einmal unterbrechen und noch einige nütliche Tips &amp; Tricks zusammenfassen.</p>
-<p>Bislang hatten wir uns hauptsächlich im Editor- bzw. im Konsolen-Abschnitt der RStudio-Oberfläche bewegt. Zwar bietet der Editor natürlich die Möglichkeit Code zu schreiben und auszuführen, und die Ausgabe auf der Konsole ist natürlich nicht schlecht, aber an einigen Ecken und besonders in größeren Projekten ist dieser Arbeitsablauf doch manchmal etwas wenig praktisch. Beispielsweise kann es vorkommen, dass auf Zwischenergebnisse zurückgekommen werden muss, die aber in einem längeren Ergebnisverlauf auf der Konsole versteckt sind.</p>
-<div class="figure">
-<img src="assets/img/forbes_data_science_tasks.png" alt="" />
-<p class="caption">Verteilung der Arbeitszeit in “Data Science”-Projekten</p>
-</div>
-<p>Insbesondere wenn man dann bedenkt, dass in “Data Science”-Projekten die meiste Zeit auf das Organisieren und Aufräumen von Daten verwendet wird, wäre für diese Schritte ein möglichst einfacher und gut dokumentierter Workflow hilfreich. Ein weiterer und in diesem Zusammenhang nicht weniger wichtiger Punkt ist aber auch das Teilen von Ergebnissen bspw. mit Kollegen, die R und RStudio nicht nutzen - das pure R-Skript hilft da wenig. Glücklicherweise bietet RStudio aber auch hierfür eine gute Lösung, ohne dass man etwas völlig neues lernen müsste.</p>
-<div class="figure">
-<img src="assets/img/rstudio_editor_example.png" alt="" />
-<p class="caption">Eine einfache Auswertung im Editor bzw. als einfaches R-Skript</p>
-</div>
-<p>Die für die meisten Zwecke eleganteste Lösung dürfte zweifelsohne das Arbeiten mit <a href="https://rmarkdown.rstudio.com">R Markdown</a> Dokumenten sein. Dabei handelt es sich um eine Mischung aus sogenanntem <a href="https://de.wikipedia.org/wiki/Markdown">Markdown</a>-Text (eine sehr einfache Art der Auszeichnung von Textformaten) und R-Skripten, in welchen der R-Code in sogenannten <a href="https://rmarkdown.rstudio.com/lesson-3.html">Code-Chunks</a> organisiert wird. Alles außerhalb dieser Code Chunks ist lediglich Text und wird nicht ausgeführt. Diese Bereiche außerhalb der Chunks kann man aber beispielsweise dazu nutzen seine Auswertungen zu dokumentieren, oder auch einfach nur um Notizen zu machen.</p>
-<div class="figure">
-<img src="assets/img/rstudio_rmarkdown_default.png" alt="" />
-<p class="caption">Ein neues Rmarkdown-Dokument, der Beispielinhalt kann einfach gelöscht werden</p>
-</div>
-<p>Ein neues R Markdown-Dokument kann man z.B. über <code>File -&gt; New file -&gt; R Markdown...</code> erstellen. Den daraufhin erscheinenden Dialog, kann man getrost mit <code>OK</code> bestätigen, und erhält dann nahezu leeres R Markdown-Dokument, in dem lediglich ein wenig Beispielcode enthalten ist. Den Beispielcode kann man einfach löschen, sollte dabei aber darauf achten den Kopfteil des Dokumentes, dessen Anfang und Ende mit <code>---</code> bezeichnet wird, zu belassen.</p>
-<p>Da die <a href="https://rmarkdown.rstudio.com/lesson-1.html">Dokumentation zu R Markdown</a> kaum zu schlagen ist, an dieser Stelle nur die wichtigsten Informationen. Einen neuen Chunk kann man mit <code>Strg + Alt + I</code> bzw. <code>Cmd + Option + I</code> anlegen oder über den kleinen Button überhalb des Dokumentes. Code innerhalb des Chunks kann einfach wie gewohnt mit <code>Strg + Enter</code> bzw. <code>Cmd + Enter</code> ausführen, die Ausgabe erhält man aber für gewöhnlich direkt unterhalb des Chunks, wo sie auch bestehen bleibt, bis in dem Chunk anderer Code ausgeführt wird.</p>
-<div class="figure">
-<img src="assets/img/rstudio_rmarkdown_example.png" alt="" />
-<p class="caption">Ein Beispiel für eine Auswertung innerhalb eines Rmarkdown-Dokuments. Die Ausgabe erscheint direkt unterhalb des Code-“Chunks”, die Tabellenausgabe ist etwas angenehmer formatiert.</p>
-</div>
-<p>Eine weitere sehr praktische Funktion, ist die, dass sich solche Rmarkdown-Dokumente als HTML-Datei exportieren lassen, in denen dann neben dem R-Code auch die entsprechenden Ausgaben enthalten sind. Diese HTML-Dateien, kann man dann bspw. Kollegen schicken, die R nicht installiert haben, so aber trotzdem nachvollziehen können was getan wurde.</p>
-<p>Über die Schaltfläche “Knit” lässt sich der Prozess starten, der das Rmarkdown-Dokument inkl. der R-Ausgaben in eine HTML-Datei umwandelt. Wichtig hierbei ist zu bedenken, dass dazu das gesamte Rmarkdown-Dokument ausgeführt wird, Variablen oder Funktionen, die in diesem Dokument nicht enthalten sind, aber auch nicht benutzt werden können. Was wie ein Nachteil klingt ist aber für gewöhnlich sogar eher ein Vorteil, weil man so für sich nochmal prüfen kann, ob tatsächlich alle nötigen Schritte in der richtigen Reihenfolge enthalten sind.</p>
-<div class="figure">
-<img src="assets/img/rstudio_knit_example.png" alt="" />
-<p class="caption">Das selbe Rmarkdown-Dokument als HTML-Output.</p>
-</div>
-</div>
-<div id="styleguide" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Styleguide<a href="diverse-tipps-tricks-für-r.html#styleguide" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Ein weiterer wichtiger Punkt, um Code gut lesbar und damit einfacher nachvollziehbar zu machen, ist sich an einen guten <a href="https://de.wikipedia.org/wiki/Programmierstil">Programmierstil</a> zu halten. Sicher gibt es dazu verschiedene Ansichten, und was für den einen funktioniert, mag der andere für Unsinn halten. Letztlich ist man natürlich frei in dem wie man seinen Code organisiert und schreibt, aber insbesondere wenn man mit anderen gemeinsam arbeitet, ist es sicher von Vorteil sich auf einen Stil zu einigen. Einen schönen Anhaltspunkt hierfür liefert z.B. der <a href="https://style.tidyverse.org/index.html">tidyverse style guide</a>, in dem sich zahlreiche Vorschläge finden wie R-Code möglichst einfach lesbar gehalten wird. So wird beispielsweise vorgeschlagen für die Benennung von Variablen nur Kleinbuchstaben zu verwenden und innerhalb von Namen Unterstriche zu verwenden, falls mehrere Wörter Teil des Namens sind.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="diverse-tipps-tricks-für-r.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gut</span></span>
-<span id="cb142-2"><a href="diverse-tipps-tricks-für-r.html#cb142-2" aria-hidden="true" tabindex="-1"></a>daten <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;ct_data.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb142-3"><a href="diverse-tipps-tricks-für-r.html#cb142-3" aria-hidden="true" tabindex="-1"></a>dosis_daten <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;ct_data.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb142-4"><a href="diverse-tipps-tricks-für-r.html#cb142-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-5"><a href="diverse-tipps-tricks-für-r.html#cb142-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Schlecht</span></span>
-<span id="cb142-6"><a href="diverse-tipps-tricks-für-r.html#cb142-6" aria-hidden="true" tabindex="-1"></a>DaTeN <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;ct_data.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb142-7"><a href="diverse-tipps-tricks-für-r.html#cb142-7" aria-hidden="true" tabindex="-1"></a>meineDosisDaten <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;ct_data.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
-<p>Trotzdem, die Vielzahl der R-Styleguides im Internet zeigt, dass es vermutlich kein zwingendes Argument für den einen und gegen einen anderen Stil gibt. Solange es funktioniert, und man sich im Code zurechtfindet ist jeder Stil erlaubt. Vermutlich wird jeder über die Zeit seinen eigenen Stil finden, aber für den Start kann ein bisschen Orientierung nicht schaden.</p>
-</div>
-<div id="cheatsheets" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> Cheatsheets<a href="diverse-tipps-tricks-für-r.html#cheatsheets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Ein weiterer Nachteil code-basierten Arbeitens gegenüber der Benutzung einer Software, die in Menüs per Klick erreichbare Befehle anbietet, ist dass man sich gelegentlich nicht mehr an den richtigen Befehl oder dessen Parameter erinnert, bzw. dass man eine bestimmte Funktion bräuchte, ihren Namen aber nicht kennt. Wie bereits in der Einleitung gesagt, ist das zwar in den meisten Fällen mit einer schnellen Google-Suche zu erledigen, aber es gibt auch noch eine andere hilfreiche Möglichkeit.</p>
-<p>Die sogenannten <a href="https://rstudio.com/resources/cheatsheets/">Cheatsheets</a>, also quasi Spickzetteln, bieten meist zu einem Paket (bzw. einer <code>library()</code>), eine schnelle und kompakte Informationssammlung an. Dort findet man auf einen Blick bspw. eine Übersicht über die wichtigsten Funktionen und deren Nutzung, und gelegentlich noch weitere nützliche Informationen. Insbesondere zu den Tidyverse-Paketen gibt es exzellente Cheatsheets, die helfen vielleicht auch mal eine neue Funktion zu entdecken und auszuprobieren, von der man noch gar nicht wusste, dass man sie eigentlich braucht!</p>
-<div class="figure">
-<img src="assets/img/cheatsheet_example.png" alt="" />
-<p class="caption">Das <em>dplyr</em> Cheatsheet</p>
-</div>
-<p>Ein paar der nützlichsten Cheatsheets sind hier direkt verlinkt:</p>
-<ul>
-<li><a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">Datentransformation mit <em>dplyr</em></a></li>
-<li><a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">Datenvisualisierung mit <em>ggplot</em></a></li>
-<li><a href="https://github.com/rstudio/cheatsheets/raw/master/strings.pdf">Buchstabenketten manipulieren mit <em>stringr</em></a></li>
-<li><a href="https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf">Datums- und Zeitangaben mit <em>lubridate</em></a></li>
-</ul>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
 <div id="disqus_thread"></div>
 <script>
@@ -349,8 +284,8 @@ s.setAttribute('data-timestamp', +new Date());
           </div>
         </div>
       </div>
-<a href="tests-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="see-one-do-one-teach-one-machine-learning-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
